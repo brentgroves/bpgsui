@@ -2,6 +2,7 @@
 import {AwsLoginActions as AT} from './actionTypes'
 import { CognitoUserPool, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
 import config from '../../../../config'
+var jwtDecode = require('jwt-decode');
 
 export function loginRequest() {
   return {
@@ -69,6 +70,31 @@ export function login(email, password) {
     return new Promise((resolve, reject) =>
       user.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
+          var cognitoUser = userPool.getCurrentUser();
+          if(cognitoUser != null){
+              cognitoUser.getSession(function(err, session) {
+                  if (err) {
+                      console.error(err);
+                      return;
+                  }
+                  console.log('session validity: ' + session.isValid());
+                  console.log('jwtToken: ' + session.getIdToken().jwtToken);
+                  var sessionIdInfo = jwtDecode(session.getIdToken().jwtToken);
+                  console.log(sessionIdInfo['cognito:groups']);
+              });
+          }
+
+    cognitoUser.getUserAttributes(function(err, result) {
+        if (err) {
+            alert(err);
+            return;
+        }
+        var i
+        for (i = 0; i < result.length; i++) {
+            console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
+        }
+    });
+
           dispatch(loginSuccess())
           resolve('success')
         },

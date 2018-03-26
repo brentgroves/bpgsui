@@ -8,6 +8,7 @@
     "history": "^4.7.2",
     "iframe": "^1.0.0",
     "jsreport-browser-client-dist": "^1.0.4",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.19.2",
     "react": "^16.0.0",
     "react-collapsible": "^2.0.3",
