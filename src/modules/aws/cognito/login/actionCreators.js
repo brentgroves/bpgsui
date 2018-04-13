@@ -10,9 +10,13 @@ export function loginRequest() {
   }
 }
 
-export function loginSuccess() {
+export function loginSuccess(email,groups,attributes, primary) {
   return {
-    type: AT.LOGIN_SUCCESS
+    type: AT.LOGIN_SUCCESS,
+    email: email,
+    groups: groups,
+    attributes: attributes,
+    primary: primary
   }
 }
 
@@ -66,41 +70,58 @@ export function login(email, password) {
     // causing a loop of 'Unexpected batch number' errors.
     // https://github.com/facebook/react/issues/6895
    // return 1
-    
+    var groups 
+    var attributes = []
+    var primary = 'none'
     return new Promise((resolve, reject) =>
       user.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
+
           var cognitoUser = userPool.getCurrentUser();
           if(cognitoUser != null){
               cognitoUser.getSession(function(err, session) {
                   if (err) {
                       console.error(err);
+                      dispatch(loginFailure(err))
+                      resolve(err) 
                       return;
                   }
                   console.log('session validity: ' + session.isValid());
                   console.log('jwtToken: ' + session.getIdToken().jwtToken);
                   var sessionIdInfo = jwtDecode(session.getIdToken().jwtToken);
                   console.log(sessionIdInfo['cognito:groups']);
+                  groups = sessionIdInfo['cognito:groups']
+                  cognitoUser.getUserAttributes(function(err, result) {
+                      if (err) {
+                          console.error(err);
+                          dispatch(loginFailure(err))
+                          resolve(err) 
+                          return;
+                      }
+                      var i
+                      for (i = 0; i < result.length; i++) {
+                          let name = result[i].getName()
+                          let value = result[i].getValue()
+                          console.log('attribute ' + name + ' has value ' + value);
+                          attributes.push({name : name, value : value})
+                          if(name==='custom:primary'){
+                            primary = value
+                          }
+                      }
+                    dispatch(loginSuccess(email,groups,attributes, primary))
+                    resolve('success')
+                  });
               });
+          }else{
+            let errMsg = 'userPool.getCurrentUser() reports no current user.'
+            dispatch(loginFailure(errMsg))
+            resolve(errMsg)
           }
 
-    cognitoUser.getUserAttributes(function(err, result) {
-        if (err) {
-            alert(err);
-            return;
-        }
-        var i
-        for (i = 0; i < result.length; i++) {
-            console.log('attribute ' + result[i].getName() + ' has value ' + result[i].getValue());
-        }
-    });
-
-          dispatch(loginSuccess())
-          resolve('success')
         },
         onFailure:  function(err) {
-          dispatch(loginFailure(err.message))
-          resolve(err.message) 
+          dispatch(loginFailure(err))
+          resolve(err) 
           // want to use a simple await without a catch in calling program 
           // so am not using reject
         }

@@ -2,8 +2,8 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from '../../containers/Home'
 import Login from '../../containers/login/'
-import Signup from '../../containers/Signup'
-import Confirm from '../../containers/Confirm'
+import Signup from '../../containers/signup/'
+import Confirm from '../../containers/confirm/'
 import ChangePassword from '../../containers/ChangePassword'
 import NotFound from '../../containers/NotFound'
 import ToolCostSummaryByPlant from '../../containers/ToolCostSummaryByPlant'
@@ -24,6 +24,8 @@ const Routes = props => (
 :
 [
         <Route path="/error" component={ErrorModal}/>,
+        <Route path="/signup" component={Signup}/>,
+        <Route path="/confirm" component={Confirm}/>,
         <Route path="/" component={Login}/>
     ]
       }

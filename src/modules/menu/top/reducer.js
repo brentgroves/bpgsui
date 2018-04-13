@@ -1,8 +1,6 @@
-import {
-  SET_MAIN_AI,
-  SET_DEPT_AI
-} from './actionTypes'
+import {TopMenuActions as AT} from './actionTypes'
 
+import shortid from 'shortid'
 /*
 
 Handling Actions OF AsyncActions
@@ -16,20 +14,25 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 
 const initialState = {
   mainAI: '',
-  deptAI:'production'
+  signupDropdownAI: '',
+  toggleSidebarKey: shortid.generate(),
+  loginKey: shortid.generate(),
+  signupDropdownKey: shortid.generate(),
+  signupKey: shortid.generate(),
+  confirmKey: shortid.generate()
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case SET_MAIN_AI:
+  case AT.SET_MAIN_AI:
     return {
       ...state,
       mainAI: action.activeItem
     }
-  case SET_DEPT_AI:
+  case AT.SET_SIGNUP_DROPDOWN_AI:
     return {
       ...state,
-      deptAI: action.activeItem
+      signupDropdownAI: action.activeItem
     }
 
     /*

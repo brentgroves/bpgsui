@@ -5,3 +5,9 @@ https://serverless-stack.com/#table-of-contents
 https://aws.amazon.com/getting-started/projects/host-static-website/
 
 aws cognito-idp admin-update-user-attributes --user-pool-id us-east-1_c9nLoUmSS --username ec32a2f2-644d-4ca6-9bf7-631d3cf76a5c --user-attributes Name=name,Value="Brent Groves" Name=custom:role,Value=admin
+
+
+aws cognito-idp  admin-get-user --user-pool-id us-east-1_c9nLoUmSS --username ec32a2f2-644d-4ca6-9bf7-631d3cf76a5c
+
+https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html
+https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html

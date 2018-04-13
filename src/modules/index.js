@@ -4,9 +4,13 @@ import report from './report/'
 //import login from './login/'
 import leftSidebar from './sidebar/left'
 import pageview from './pageview/reducer'
-import topMenu from './menu/top'
+import topMenu from './menu/top/reducer'
 import awsLogin from './aws/cognito/login/reducer'
 import login from './login/reducer'
+import awsSignup from './aws/cognito/signup/reducer'
+import signup from './signup/reducer'
+import awsConfirm from './aws/cognito/confirm/reducer'
+import confirm from './confirm/reducer'
 import errorModal from './modal/error/reducer'
 
 //https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux
@@ -18,6 +22,10 @@ export default combineReducers({
   pageview,
   awsLogin,
   login,
+  awsSignup,
+  signup,
+  awsConfirm,
+  confirm,
   errorModal,
   report
 })

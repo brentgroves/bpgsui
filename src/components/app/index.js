@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom'
-import TopMenu from '../menu/top'
+import TopMenu from '../../containers/menu/top/'
 import LeftSidebar from '../../containers/sidebar/left/'
 import PageView from '../../containers/pageview/'
 import Login from '../../containers/login/'
@@ -17,9 +17,10 @@ import Routes from '../../containers/routes/'
 
 const App = (props) => (
 <div >
+      <TopMenu />,
+
   {props.authenticated ?
     [
-      <TopMenu />,
       <PageView />
 ]
 :

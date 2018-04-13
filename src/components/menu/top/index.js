@@ -11,25 +11,61 @@ const TopMenu = props => (
     {props.authenticated ?
       [
         <Menu.Item
-          key={shortid.generate}
+          key={props.toggleSidebarKey}
           name='toggleSidebar'
           active={props.mainAI === 'toggleSidebar'}
           onClick={(e, { name })=> {
             props.setMainAI(name)
           }}>
-          <Icon name='sidebar'/>
+          <Icon name='sign in'/>
         </Menu.Item>
       ] :
       [
         <Menu.Item
-          key={shortid.generate}
+          key={props.loginKey}
           name='login'
           active={props.mainAI === 'login'}
           onClick={(e, { name })=> {
             props.setMainAI(name)
+            if (props.history.location.pathname !== '/') {
+              props.history.push('/')
+            }
           }}>
-          <Icon name='sidebar'/>
-        </Menu.Item>
+          <Icon name='sign in'/>
+        </Menu.Item>,
+        <Dropdown
+          key={props.signupDropdownKey}
+          name='signupDropdown'
+          active={props.mainAI === 'signupDropdown'}
+          icon='add user'
+          item
+          onClick={(e, { name }) => {
+            props.setMainAI(name)
+          }}
+        >
+          <Dropdown.Menu>
+            <Dropdown.Item
+              key={props.signupKey}
+              name='signup'
+              active={props.signupDropdownAI === 'signup'}
+              onClick={(e, { name }) => {
+                props.setSignupDropdownAI(name)
+                props.history.push('/signup')
+              }} >
+              <span id='signupDropDown' className='text'>signup</span>
+            </Dropdown.Item>
+            <Dropdown.Item
+              key={props.confirmKey}
+              name='confirm'
+              active={props.signupDropdownAI === 'confirm'}
+              onClick={(e, { name }) => {
+                props.setSignupDropdownAI(name)
+                props.history.push('/confirm')
+              }} >
+              <span id='signupDropDownConfirm' className='text'>confirm</span>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       ]
 
     }

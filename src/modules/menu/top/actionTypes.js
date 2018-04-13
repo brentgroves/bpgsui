@@ -2,6 +2,7 @@
  * action types
  */
  
-
-export const SET_MAIN_AI = 'topmenu/SET_MAIN_AI'
-export const SET_DEPT_AI = 'topmenu/SET_DEPT_AI'
+export const TopMenuActions = {
+  SET_MAIN_AI: 'SET_MAIN_AI',
+  SET_SIGNUP_DROPDOWN_AI: 'SET_SIGNUP_DROPDOWN_AI'
+}

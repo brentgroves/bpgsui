@@ -1,12 +1,14 @@
+import { withRouter } from 'react-router-dom'
 import React from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Dropdown, Icon, Menu } from 'semantic-ui-react'
 import shortid from 'shortid'
-import { login } from '../../../modules/aws/cognito/login/actionCreators.js'
-import { setMainAI } from '../../../modules/menu/top/actionCreators.js'
+import * as topMenuAC from '../../../modules/menu/top/actionCreators.js'
+import * as awsLoginAC from '../../../modules/aws/cognito/login/actionCreators.js' 
 import TopMenu  from '../../../components/menu/top/'
+
 /*
 import { setVisible as setSidebarVisible } from '../../../modules/sidebar/left/'
 import { setStep } from '../../../modules/report/'
@@ -36,17 +38,27 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 */
 
 const mapStateToProps = state => ({
+  toggleSidebarKey: state.topMenu.toggleSidebarKey,
+  loginKey: state.topMenu.loginKey,
+  signupDropdownKey: state.topMenu.signupDropdownKey,
+  signupKey: state.topMenu.signupKey,
+  confirmKey: state.topMenu.confirmKey,
   mainAI: state.topMenu.mainAI,
-  authenticated: state.login.authenticated
+  signupDropdownAI: state.topMenu.signupDropdownAI,
+  authenticated: state.awsLogin.authenticated
 })
 
+
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setMainAI,
-  gotoLogin: () => push('/login')
+  ...awsLoginAC,
+  ...topMenuAC
 }, dispatch)
 
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(TopMenu)
+)(TopMenu))
+
+
+

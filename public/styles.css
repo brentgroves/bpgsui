@@ -12,3 +12,12 @@
 
 }
 
+.formButtons {
+  display: flex;
+  justify-content: center;
+
+}
+.formButtonRight {
+	margin-left: 1em !important;
+
+}

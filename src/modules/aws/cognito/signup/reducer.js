@@ -1,4 +1,4 @@
-import { AwsLoginActions as AT } from './actionTypes'
+import { AwsSignupActions as AT } from './actionTypes'
 	 
 /*
 
@@ -13,30 +13,23 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 
 const initialState = {
 	email: '',
-	groups: [],
-	attributes: [],
-  pending: false,
-  authenticated: false,
-  error: ''
+	pending: false,
+  	error: ''
 }
 
 export default (state = initialState, action) => {
   	switch (action.type) {
-	    case AT.LOGIN_REQUEST:
+	    case AT.SIGNUP_REQUEST:
 		    return Object.assign({}, initialState, {
 		      pending: true,
 		      error: ''
 		    })
-	    case AT.LOGIN_SUCCESS:
+	    case AT.SIGNUP_SUCCESS:
 		    return Object.assign({}, state, {
 		    	email: action.email,
-		    	groups: action.groups,
-		    	attributes: action.attributes,
-		    	primary: action.primary,
-		      pending: false,
-		      authenticated: true
+		      	pending: false
 		    })
-	    case AT.LOGIN_FAILURE:
+	    case AT.SIGNUP_FAILURE:
 		    return Object.assign({}, initialState, {
 		      pending: false,
 		      error: action.error

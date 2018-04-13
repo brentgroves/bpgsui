@@ -46,10 +46,8 @@ const Login = props => (
       :
       <Grid >
 
-        <Grid.Row>
-          <Grid.Column width={5} />
+        <Grid.Row centered>
           <Grid.Column width={6}>
-                    &nbsp;<br />&nbsp;
             <Segment inverted>
               <Header as='h2'>
                 <Icon name='user outline' />
@@ -115,6 +113,8 @@ const Login = props => (
                   }
                   }
                 />
+                  <div className='formButtons'>
+
                 <Button
                   type='submit'
                   key={props.submitKey}
@@ -129,11 +129,11 @@ const Login = props => (
                       props.history.push('/error')
                     } 
                   }}>Submit</Button>
+                  </div>
               </Form>
 
             </Segment>
           </Grid.Column>
-          <Grid.Column width={5} />
         </Grid.Row>
 
 
