@@ -127,8 +127,9 @@ const Signup = props =>(
                       let signupResult = await props.signup(props.email, props.password)
                       if (signupResult === 'success'){
                         alert('success')
+                        props.history.push('/confirm')
                       } else {
-                        props.initErrorModal(true, 'Signup Failed', signupResult)
+                        props.initErrorModal('Signup Failed', signupResult)
                         props.history.push('/error')
                       } 
                     }}>Submit</Button>

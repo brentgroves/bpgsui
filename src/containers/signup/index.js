@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Signup from '../../components/signup'
 import * as signup from '../../modules/signup/actionCreators'
 import * as awsSignup from '../../modules/aws/cognito/signup/actionCreators' 
-//import * as errorModal from '../../../modules/modal/error/actionCreators'
+import * as errorModal from '../../modules/modal/error/actionCreators'
 
 //react redux material design
 
@@ -12,7 +12,6 @@ import * as awsSignup from '../../modules/aws/cognito/signup/actionCreators'
 
 const mapStateToProps = state => ({
   authenticated: state.awsLogin.authenticated,
-  showErrorModal: state.errorModal.show,
   error: state.awsLogin.error,
   email: state.signup.email,
   emailStatus: state.signup.emailStatus,
@@ -32,7 +31,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   ...signup,
-  ...awsSignup
+  ...awsSignup,
+  ...errorModal
 }, dispatch)
 
 /*

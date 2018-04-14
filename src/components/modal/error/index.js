@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+//    size='small' open={props.show} >
 
 const ErrorModal = props => (
   <Modal 
-    size='small' open={props.show} >
+    size='small' open={true} >
     <Modal.Header >
     <Icon name='archive' />
 {props.messageHeader}
@@ -13,6 +14,8 @@ const ErrorModal = props => (
         </Modal.Content>
 
         <Modal.Actions>
+                  <div className='formButtons'>
+
           <Button color='green' 
             onClick={(event) => {
               props.initErrorModal(false, '', '')
@@ -24,6 +27,7 @@ const ErrorModal = props => (
             >
             <Icon name='checkmark' /> Got it
           </Button>
+          </div>
         </Modal.Actions>
 
   </Modal>

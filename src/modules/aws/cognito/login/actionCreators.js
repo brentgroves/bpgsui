@@ -82,8 +82,8 @@ export function login(email, password) {
               cognitoUser.getSession(function(err, session) {
                   if (err) {
                       console.error(err);
-                      dispatch(loginFailure(err))
-                      resolve(err) 
+                      dispatch(loginFailure(err.message))
+                      resolve(err.message) 
                       return;
                   }
                   console.log('session validity: ' + session.isValid());
@@ -93,9 +93,9 @@ export function login(email, password) {
                   groups = sessionIdInfo['cognito:groups']
                   cognitoUser.getUserAttributes(function(err, result) {
                       if (err) {
-                          console.error(err);
-                          dispatch(loginFailure(err))
-                          resolve(err) 
+                          console.error(err.message);
+                          dispatch(loginFailure(err.message))
+                          resolve(err.message) 
                           return;
                       }
                       var i
@@ -120,8 +120,8 @@ export function login(email, password) {
 
         },
         onFailure:  function(err) {
-          dispatch(loginFailure(err))
-          resolve(err) 
+          dispatch(loginFailure(err.message))
+          resolve(err.message) 
           // want to use a simple await without a catch in calling program 
           // so am not using reject
         }

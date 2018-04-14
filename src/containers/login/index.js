@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Login from '../../components/login'
 import * as login from '../../modules/login/actionCreators'
 import * as awsLogin from '../../modules/aws/cognito/login/actionCreators' 
-//import * as errorModal from '../../../modules/modal/error/actionCreators'
+import * as errorModal from '../../modules/modal/error/actionCreators'
 
 //react redux material design
 
@@ -29,7 +29,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   ...login,
-  ...awsLogin
+  ...awsLogin,
+  ...errorModal
 }, dispatch)
 
 /*
