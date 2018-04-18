@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Grid, Segment, Header, Icon, Button, Form, Message } from 'semantic-ui-react'
-import shortid from 'shortid'
-import ErrorModal from '../../containers/modal/error'
 import { validEmail } from '../../modules/aws/cognito/login/misc'
 
 /*
@@ -62,13 +60,13 @@ const Confirm = props =>(
                     label='Confirmation Code' placeholder='Check email for code'
                     onChange={(event) => {
                       let confirmationCodeStatus
-                      if (event.target.value.length > 0) {
+                      if (event.target.value.length > 3) {
                         confirmationCodeStatus = 'success'
                       } else {
                         confirmationCodeStatus = 'error'
                       }
                       let formStatus
-                      if (this.state.emailStatus === 'success' &&
+                      if (props.emailStatus === 'success' &&
                         confirmationCodeStatus === 'success') {
                         formStatus = 'success'
                       } else {
@@ -82,11 +80,11 @@ const Confirm = props =>(
                       key={props.submitKey}
                       disabled={props.formStatus === 'success' ? false : true }
                       onClick={ async (event) =>{
-                        let signupResult = await props.signup(props.email, props.password)
-                        if (signupResult === 'success'){
-                          alert('success')
+                        let confirmResult = await props.confirm(props.email, props.confirmationCode)
+                        if (confirmResult === 'success'){
+                          props.history.push('/login')
                         } else {
-                          props.initErrorModal(true, 'Signup Failed', signupResult)
+                          props.initErrorModal('Confirm Failed', confirmResult)
                           props.history.push('/error')
                         } 
                       }}>Submit</Button>
@@ -94,18 +92,33 @@ const Confirm = props =>(
                     <Button
                     className='formButtonRight'
                       key={props.resendKey}
-                      disabled={props.formStatus === 'success' ? false : true }
+                      disabled={props.emailStatus === 'success' ? false : true }
                       onClick={ async (event) =>{
-                        let signupResult = await props.signup(props.email, props.password)
-                        if (signupResult === 'success'){
-                          alert('success')
+                        let resendResult = await props.resend(props.email)
+                        if (resendResult === 'success'){
+                          props.setMessage('Confirmation sent check your email.')
                         } else {
-                          props.initErrorModal(true, 'Signup Failed', signupResult)
+                          props.initErrorModal(true, 'Signup Failed', resendResult)
                           props.history.push('/error')
                         } 
                       }}>Resend</Button>
+
                       </div>
                 </Form>
+                { props.resend ?
+                  <Message>
+                    <Message.List>
+                      <Message.Item>Submit - If you have confirmation code.</Message.Item>
+                      <Message.Item>Resend - If you have not received confirmation code within 15 minutes.</Message.Item>
+                    </Message.List>
+                  </Message>
+                  :
+                  <Message
+                    icon='inbox'
+                    header='Confirmation Code'
+                    content='Check your email for new confirmation code.'
+                  />
+                }
               </Segment>
             </Grid.Column>
           </Grid.Row>

@@ -4,7 +4,6 @@ import { CognitoUserPool, CognitoUser, CognitoUserAttribute, AuthenticationDetai
 
 
 import config from '../../../../config'
-var jwtDecode = require('jwt-decode');
 
 export function signupRequest() {
   return {
@@ -12,10 +11,9 @@ export function signupRequest() {
   }
 }
 
-export function signupSuccess(email,groups,attributes, primary) {
+export function signupSuccess() {
   return {
-    type: AT.SIGNUP_SUCCESS,
-    email: email
+    type: AT.SIGNUP_SUCCESS
   }
 }
 
@@ -89,7 +87,7 @@ https://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-u
           resolve(err.message)
           return
         }
-        dispatch(signupSuccess(email))
+        dispatch(signupSuccess())
         resolve('success')
       })
     )

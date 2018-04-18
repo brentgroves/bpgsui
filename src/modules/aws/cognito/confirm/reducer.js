@@ -12,9 +12,8 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 */
 
 const initialState = {
-	email: '',
 	pending: false,
-  	error: ''
+	resend: false
 }
 
 export default (state = initialState, action) => {
@@ -22,19 +21,32 @@ export default (state = initialState, action) => {
 	    case AT.CONFIRM_REQUEST:
 		    return Object.assign({}, initialState, {
 		      pending: true,
-		      error: ''
+		      resend: false
 		    })
 	    case AT.CONFIRM_SUCCESS:
 		    return Object.assign({}, state, {
-		    	email: action.email,
 		      	pending: false
 		    })
 	    case AT.CONFIRM_FAILURE:
-		    return Object.assign({}, initialState, {
-		      pending: false,
-		      error: action.error
+		    return Object.assign({}, state, {
+		      pending: false
 		    })
-  default:
+	    case AT.RESEND_REQUEST:
+		    return Object.assign({}, initialState, {
+		      pending: true,
+		      resend: true
+		    })
+	    case AT.RESEND_SUCCESS:
+		    return Object.assign({}, state, {
+		      	pending: false
+		    })
+	    case AT.RESEND_FAILURE:
+		    return Object.assign({}, state, {
+		      pending: false,
+		      resend: false	
+		    })
+
+  		default:
 		    return state
   	}
 }

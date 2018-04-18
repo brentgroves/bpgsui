@@ -12,7 +12,6 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 */
 
 const initialState = {
-	email: '',
 	pending: false,
   	error: ''
 }
@@ -26,7 +25,6 @@ export default (state = initialState, action) => {
 		    })
 	    case AT.SIGNUP_SUCCESS:
 		    return Object.assign({}, state, {
-		    	email: action.email,
 		      	pending: false
 		    })
 	    case AT.SIGNUP_FAILURE:

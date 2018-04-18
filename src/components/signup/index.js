@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { Grid, Segment, Header, Icon, Button, Form } from 'semantic-ui-react'
-import shortid from 'shortid'
-import ErrorModal from '../../containers/modal/error'
 import { validEmail } from '../../modules/aws/cognito/login/misc'
 
 /*

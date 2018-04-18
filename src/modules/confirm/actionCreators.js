@@ -16,17 +16,6 @@ import {
 import {ConfirmActions as AT} from './actionTypes'
 
 
-export const setWorking = (working) => {
-  return dispatch => {
-    dispatch({
-      type: AT.SET_WORKING,
-      working: working
-    })
-  }
-}
-
-
-
 export const setEmailFormStatus = (email, emailStatus, formStatus) => {
   return dispatch => {
     dispatch({
@@ -50,22 +39,3 @@ export const setConfirmationCodeFormStatus = (confirmationCode,
 }
 
 
-export const initErrorModal = (show, messageHeader, message) => {
-  return dispatch => {
-    dispatch({
-      type: AT.INIT_ERROR_MODAL,
-      show: show,
-      messageHeader: messageHeader,
-      message: message
-    })
-  }
-}
-
-export const setShow = (show) => {
-  return dispatch => {
-    dispatch({
-      type: AT.SET_SHOW,
-      show: show
-    })
-  }
-}

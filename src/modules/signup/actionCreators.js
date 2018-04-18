@@ -16,25 +16,6 @@ import {
 import {SignupActions as AT} from './actionTypes'
 
 
-export const setWorking = (working) => {
-  return dispatch => {
-    dispatch({
-      type: AT.SET_WORKING,
-      working: working
-    })
-  }
-}
-
-
-export const setEmail = (email) => {
-  return dispatch => {
-    dispatch({
-      type: AT.SET_EMAIL,
-      email: email
-    })
-  }
-}
-
 export const setEmailFormStatus = (email, emailStatus, formStatus) => {
   return dispatch => {
     dispatch({
@@ -46,12 +27,6 @@ export const setEmailFormStatus = (email, emailStatus, formStatus) => {
   }
 }
 
-export const setPassword = (password) => {
-  return {
-    type: AT.SET_PASSWORD,
-    password: password
-  }
-}
 
 export const setPasswordFormStatus = (password, passwordStatus, formStatus) => {
   return {
@@ -62,12 +37,6 @@ export const setPasswordFormStatus = (password, passwordStatus, formStatus) => {
   }
 }
 
-export const setConfirmPassword = (confirmPassword) => {
-  return {
-    type: AT.SET_CONFIRM_PASSWORD,
-    confirmPassword: confirmPassword
-  }
-}
 
 export const setConfirmPasswordFormStatus = (confirmPassword,
   confirmPasswordStatus, formStatus) => {
@@ -80,10 +49,4 @@ export const setConfirmPasswordFormStatus = (confirmPassword,
 }
 
 
-export const setFormStatus = (status) => {
-  return {
-    type: AT.SET_FORM_STATUS,
-    status: status
-  }
-}
 

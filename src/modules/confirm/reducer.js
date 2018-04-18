@@ -30,7 +30,6 @@ export default (state = initialState, action) => {
       confirmationCodeStatus: action.confirmationCodeStatus,
       formStatus: action.formStatus
     }
-    
   default:
     return state
   }

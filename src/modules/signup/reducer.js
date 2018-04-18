@@ -18,11 +18,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case AT.SET_EMAIL:
-    return {
-      ...state,
-      email: action.email
-    }
   case AT.SET_EMAIL_FORM_STATUS:
     return {
       ...state,
@@ -30,12 +25,6 @@ export default (state = initialState, action) => {
       emailStatus: action.emailStatus,
       formStatus: action.formStatus
     }
-  case AT.SET_PASSWORD:
-    return {
-      ...state,
-      password: action.password
-    }
-
   case AT.SET_PASSWORD_FORM_STATUS:
     return {
       ...state,
@@ -43,12 +32,6 @@ export default (state = initialState, action) => {
       passwordStatus: action.passwordStatus,
       formStatus: action.formStatus
     }
-  case AT.SET_CONFIRM_PASSWORD:
-    return {
-      ...state,
-      confirmPassword: action.confirmPassword
-    }
-
   case AT.SET_CONFIRM_PASSWORD_FORM_STATUS:
     return {
       ...state,
@@ -56,13 +39,6 @@ export default (state = initialState, action) => {
       confirmPasswordStatus: action.confirmPasswordStatus,
       formStatus: action.formStatus
     }
-  case AT.SET_FORM_STATUS:
-    return {
-      ...state,
-      formStatus: action.status
-    }
-
-   
   default:
     return state
   }

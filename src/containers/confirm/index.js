@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Confirm from '../../components/confirm'
 import * as confirm from '../../modules/confirm/actionCreators'
 import * as awsConfirm from '../../modules/aws/cognito/confirm/actionCreators' 
-//import * as errorModal from '../../../modules/modal/error/actionCreators'
+import * as errorModal from '../../modules/modal/error/actionCreators'
 
 //react redux material design
 
@@ -36,6 +36,7 @@ const mapStateToProps = state => ({
   confirmationStatus: state.confirm.confirmationStatus,
   formStatus: state.confirm.formStatus,
   pending: state.awsConfirm.pending,
+  resend: state.awsConfirm.resend,
   confirmationKey: state.confirm.confirmationKey,
   emailKey: state.confirm.emailKey,
   submitKey: state.confirm.submitKey,
@@ -47,7 +48,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   ...confirm,
-  ...awsConfirm
+  ...awsConfirm,
+  ...errorModal
 }, dispatch)
 
 /*

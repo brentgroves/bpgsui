@@ -4,27 +4,45 @@ import { CognitoUserPool, CognitoUser, CognitoUserAttribute, AuthenticationDetai
 
 
 import config from '../../../../config'
-var jwtDecode = require('jwt-decode');
 
-export function signupRequest() {
+export function confirmRequest() {
   return {
-    type: AT.SIGNUP_REQUEST
+    type: AT.CONFIRM_REQUEST
   }
 }
 
-export function signupSuccess(email,groups,attributes, primary) {
+export function confirmSuccess() {
   return {
-    type: AT.SIGNUP_SUCCESS,
-    email: email
+    type: AT.CONFIRM_SUCCESS
   }
 }
 
-export function signupFailure(error) {
+export function confirmFailure(error) {
   return {
-    type: AT.SIGNUP_FAILURE,
+    type: AT.CONFIRM_FAILURE,
     error: error
   }
 }
+
+export function resendRequest() {
+  return {
+    type: AT.RESEND_REQUEST
+  }
+}
+
+export function resendSuccess() {
+  return {
+    type: AT.RESEND_SUCCESS
+  }
+}
+
+export function resendFailure(error) {
+  return {
+    type: AT.RESEND_FAILURE,
+    error: error
+  }
+}
+
 
 /*
 https://redux.js.org/docs/advanced/AsyncActions.html
@@ -39,7 +57,7 @@ https://redux.js.org/docs/advanced/AsyncActions.html
 // Though its insides are different, you would use it just like any other action creator:
 // store.dispatch(fetchPosts('reactjs'))
 
-export function signup(email, password) {
+export function confirm(email, confirmationCode) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
@@ -47,27 +65,14 @@ export function signup(email, password) {
   return dispatch => {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
-    dispatch(signupRequest())
+    dispatch(confirmRequest())
 
     const userPool = new CognitoUserPool({
       UserPoolId: config.cognito.USER_POOL_ID,
       ClientId: config.cognito.APP_CLIENT_ID
     })
 
-    let attributeList = [];
-/*
-cognito add user to group api
-https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html#adminAddUserToGroup-property
-https://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-user-identity-pools-javascript-examples.html
-*/
-   
-    let dataPhoneNumber = {
-        Name : 'phone_number',
-        Value : '+15555555555'
-    };
-//    var attributePhoneNumber = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataPhoneNumber);
-    let attributePhoneNumber = new CognitoUserAttribute(dataPhoneNumber);
-    attributeList.push(attributePhoneNumber);
+    const user = new CognitoUser({ Username: email, Pool: userPool })
 
 
 
@@ -83,13 +88,59 @@ https://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-u
     // https://github.com/facebook/react/issues/6895
    // return 1
     return new Promise((resolve, reject) =>
-      userPool.signUp(email, password, attributeList, null, (err, result) => {
+      user.confirmRegistration(confirmationCode, true, (err, result) => {
         if (err) {
-          dispatch(signupFailure(err.message))
+          dispatch(confirmFailure(err.message))
           resolve(err.message)
           return
         }
-        dispatch(signupSuccess(email))
+        dispatch(confirmSuccess())
+        resolve('success')
+      })
+    )
+  }
+}
+
+
+
+export function resend(email) {
+  // Thunk middleware knows how to handle functions.
+  // It passes the dispatch method as an argument to the function,
+  // thus making it able to dispatch actions itself.
+
+  return dispatch => {
+    // First dispatch: the app state is updated to inform
+    // that the API call is starting.
+    dispatch(resendRequest())
+
+    const userPool = new CognitoUserPool({
+      UserPoolId: config.cognito.USER_POOL_ID,
+      ClientId: config.cognito.APP_CLIENT_ID
+    })
+
+    const user = new CognitoUser({ Username: email, Pool: userPool })
+
+
+
+    // The function called by the thunk middleware can return a value,
+    // that is passed on as the return value of the dispatch method.
+
+    // In this case, we return a promise to wait for.
+    // This is not required by thunk middleware, but it is convenient for us.
+
+   // Do not use catch, because that will also catch
+    // any errors in the dispatch and resulting render,
+    // causing a loop of 'Unexpected batch number' errors.
+    // https://github.com/facebook/react/issues/6895
+   // return 1
+    return new Promise((resolve, reject) =>
+      user.resendConfirmationCode((err, result) => {
+        if (err) {
+          dispatch(resendFailure(err.message))
+          resolve(err.message)
+          return
+        }
+        dispatch(resendSuccess())
         resolve('success')
       })
     )
