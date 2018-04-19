@@ -5,6 +5,7 @@ import Signup from '../../components/signup'
 import * as signup from '../../modules/signup/actionCreators'
 import * as awsSignup from '../../modules/aws/cognito/signup/actionCreators' 
 import * as errorModal from '../../modules/modal/error/actionCreators'
+import { setEmailFormStatus as confSetEmailFormStatus} from '../../modules/confirm/actionCreators'
 
 //react redux material design
 
@@ -32,6 +33,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   ...signup,
   ...awsSignup,
+  confSetEmailFormStatus,
   ...errorModal
 }, dispatch)
 

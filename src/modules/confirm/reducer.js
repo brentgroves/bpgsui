@@ -4,11 +4,11 @@ import shortid from 'shortid'
 const initialState = {
   email: '',
   emailStatus: '',
-  cofirmationCode: '',
-  cofirmationCodeStatus: '',
+  confirmationCode: '',
+  confirmationCodeStatus: '',
   formStatus: '',
   emailKey: shortid.generate(),
-  cofirmationCodeKey: shortid.generate(),
+  confirmationCodeKey: shortid.generate(),
   submitKey: shortid.generate(),
   resendKey: shortid.generate(),
   formKey: shortid.generate()

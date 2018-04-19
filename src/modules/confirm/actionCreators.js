@@ -17,13 +17,11 @@ import {ConfirmActions as AT} from './actionTypes'
 
 
 export const setEmailFormStatus = (email, emailStatus, formStatus) => {
-  return dispatch => {
-    dispatch({
+  return {
       type: AT.SET_EMAIL_FORM_STATUS,
       email: email,
       emailStatus: emailStatus,
       formStatus: formStatus
-    })
   }
 }
 

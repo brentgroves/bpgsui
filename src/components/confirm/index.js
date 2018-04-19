@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Segment, Header, Icon, Button, Form, Message } from 'semantic-ui-react'
+import { Grid, Segment, Header, Icon, Button, Form, Message,Popup } from 'semantic-ui-react'
 import { validEmail } from '../../modules/aws/cognito/login/misc'
 
 /*
@@ -76,47 +76,63 @@ const Confirm = props =>(
                     }}
                   />
                   <div className='formButtons'>
+  <Popup
+    trigger={
+      <div>
+
                     <Button
                       key={props.submitKey}
                       disabled={props.formStatus === 'success' ? false : true }
                       onClick={ async (event) =>{
                         let confirmResult = await props.confirm(props.email, props.confirmationCode)
                         if (confirmResult === 'success'){
-                          props.history.push('/login')
+                          props.history.push('/')
                         } else {
                           props.initErrorModal('Confirm Failed', confirmResult)
                           props.history.push('/error')
                         } 
                       }}>Submit</Button>
+                      </div>
+                    }
+    content='Send confirmation code.'
 
-                    <Button
+  />
+
+  <Popup
+    trigger={
+      <div>
+                    <Button   
                     className='formButtonRight'
                       key={props.resendKey}
-                      disabled={props.emailStatus === 'success' ? false : true }
+                      disabled={((props.emailStatus === 'success') && (props.formStatus !== 'success')) ? false : true }
                       onClick={ async (event) =>{
                         let resendResult = await props.resend(props.email)
                         if (resendResult === 'success'){
-                          props.setMessage('Confirmation sent check your email.')
+                          props.history.push('/')
                         } else {
                           props.initErrorModal(true, 'Signup Failed', resendResult)
                           props.history.push('/error')
                         } 
                       }}>Resend</Button>
+                      </div>
+                    }
+    content='Enter email and remove confirmation code to enable.'
+
+  />
 
                       </div>
                 </Form>
-                { props.resend ?
-                  <Message>
-                    <Message.List>
-                      <Message.Item>Submit - If you have confirmation code.</Message.Item>
-                      <Message.Item>Resend - If you have not received confirmation code within 15 minutes.</Message.Item>
-                    </Message.List>
-                  </Message>
-                  :
+                { (props.resend === true) ?
                   <Message
                     icon='inbox'
                     header='Confirmation Code'
                     content='Check your email for new confirmation code.'
+                  />
+                  :
+                  <Message
+                    icon='inbox'
+                    content='If you have not received confirmation code within 15 minutes press 
+                      resend otherwise press submit.'
                   />
                 }
               </Segment>
@@ -128,3 +144,5 @@ const Confirm = props =>(
     )
 
 export default Confirm
+/*                      disabled={((props.emailStatus === 'success') && (props.confirmationCodeStatus !== 'success')) ? false : true }
+*/
