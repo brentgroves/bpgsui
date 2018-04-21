@@ -127,7 +127,7 @@ const Signup = props =>(
                         props.confSetEmailFormStatus(props.email,'success','')  
                         props.history.push('/confirm')
                       } else {
-                        props.initErrorModal('Signup Failed', signupResult)
+                        props.initErrorModal('Signup Failed', signupResult, '/signup')
                         props.history.push('/error')
                       } 
                     }}>Submit</Button>

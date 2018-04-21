@@ -12,6 +12,7 @@ import signup from './signup/reducer'
 import awsConfirm from './aws/cognito/confirm/reducer'
 import confirm from './confirm/reducer'
 import errorModal from './modal/error/reducer'
+import infoModal from './modal/info/reducer'
 
 //https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux
 //https://github.com/reactjs/react-router-redux
@@ -27,6 +28,7 @@ export default combineReducers({
   awsConfirm,
   confirm,
   errorModal,
+  infoModal,
   report
 })
 

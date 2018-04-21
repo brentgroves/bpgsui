@@ -16,16 +16,13 @@ const ErrorModal = props => (
         <Modal.Actions>
                   <div className='formButtons'>
 
-          <Button color='green' 
+          <Button color='red' 
             onClick={(event) => {
-              props.initErrorModal(false, '', '')
-
-//              props.setShow(false)
-                props.history.goBack()
-
+              props.initErrorModal('', '', '')
+              props.history.push(props.next)
             }} 
             >
-            <Icon name='checkmark' /> Got it
+        Proceed <Icon name='right chevron' />
           </Button>
           </div>
         </Modal.Actions>

@@ -125,7 +125,7 @@ const Login = props => (
                     if (loginResult === 'success'){
                       alert('success')
                     } else {
-                      props.initErrorModal('Login Failed', loginResult)
+                      props.initErrorModal('Login Failed', loginResult, '/')
                       props.history.push('/error')
                     } 
                   }}>Submit</Button>

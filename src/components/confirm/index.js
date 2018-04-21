@@ -88,7 +88,7 @@ const Confirm = props =>(
                         if (confirmResult === 'success'){
                           props.history.push('/')
                         } else {
-                          props.initErrorModal('Confirm Failed', confirmResult)
+                          props.initErrorModal('Confirm Failed', confirmResult,'/')
                           props.history.push('/error')
                         } 
                       }}>Submit</Button>
@@ -110,7 +110,7 @@ const Confirm = props =>(
                         if (resendResult === 'success'){
                           props.history.push('/')
                         } else {
-                          props.initErrorModal(true, 'Signup Failed', resendResult)
+                          props.initErrorModal(true, 'Signup Failed', resendResult,'/')
                           props.history.push('/error')
                         } 
                       }}>Resend</Button>

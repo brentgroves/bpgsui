@@ -11,6 +11,7 @@ import Wait from '../../containers/Wait'
 import AppliedRoute from '../../components/AppliedRoute'
 import ScriptCheck from '../../containers/ScriptCheck'
 import ErrorModal from '../../containers/modal/error'
+import InfoModal from '../../containers/modal/info'
 //Use fragments (React v16.2+ only!) https://stackoverflow.com/questions/31284169/parse-error-adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag
 const Routes = props => (
 <Switch>
@@ -23,6 +24,7 @@ const Routes = props => (
         ]
 :
 [
+        <Route path="/info" component={InfoModal}/>,
         <Route path="/error" component={ErrorModal}/>,
         <Route path="/signup" component={Signup}/>,
         <Route path="/confirm" component={Confirm}/>,

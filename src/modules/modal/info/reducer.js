@@ -1,4 +1,4 @@
-import {ErrorModalActions as AT} from './actionTypes'
+import {InfoModalActions as AT} from './actionTypes'
 import shortid from 'shortid'
 
 const initialState = {
@@ -9,7 +9,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case AT.INIT_ERROR_MODAL:
+  case AT.INIT_INFO_MODAL:
     return {
       ...state,
       messageHeader: action.messageHeader,

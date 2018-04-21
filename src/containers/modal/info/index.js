@@ -2,23 +2,23 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import ErrorModal  from '../../../components/modal/error/'
-import * as errorModal from '../../../modules/modal/error/actionCreators'
+import InfoModal  from '../../../components/modal/info/'
+import * as infoModal from '../../../modules/modal/info/actionCreators'
 
 
 const mapStateToProps = state => ({
-  messageHeader: state.errorModal.messageHeader,
-  message: state.errorModal.message,
+  show: state.infoModal.show,
+  messageHeader: state.infoModal.messageHeader,
+  message: state.infoModal.message,
   next: state.errorModal.next
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
- // gotoTCSbyPlant: () => push('/tcsbyplant'),
-  ...errorModal
+  ...infoModal
 }, dispatch)
 
 
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(ErrorModal))
+)(InfoModal))
