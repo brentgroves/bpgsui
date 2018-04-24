@@ -86,9 +86,10 @@ const Confirm = props =>(
                       onClick={ async (event) =>{
                         let confirmResult = await props.confirm(props.email, props.confirmationCode)
                         if (confirmResult === 'success'){
-                          props.history.push('/')
+                          props.initInfoModal('User Verified', 'User verified. You may now login.','/')
+                          props.history.push('/info')
                         } else {
-                          props.initErrorModal('Confirm Failed', confirmResult,'/')
+                          props.initErrorModal('Confirm Failed', confirmResult,'/confirm')
                           props.history.push('/error')
                         } 
                       }}>Submit</Button>
@@ -108,9 +109,10 @@ const Confirm = props =>(
                       onClick={ async (event) =>{
                         let resendResult = await props.resend(props.email)
                         if (resendResult === 'success'){
-                          props.history.push('/')
+                          props.initInfoModal('Code Resent', 'Your confirmation code should arrive shortly.  Please check your email.','/confirm')
+                          props.history.push('/info')
                         } else {
-                          props.initErrorModal(true, 'Signup Failed', resendResult,'/')
+                          props.initErrorModal('Resend Failed', resendResult, '/confirm')
                           props.history.push('/error')
                         } 
                       }}>Resend</Button>

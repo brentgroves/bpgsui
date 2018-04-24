@@ -124,8 +124,8 @@ const Signup = props =>(
                     onClick={ async (event) =>{
                       let signupResult = await props.signup(props.email, props.password)
                       if (signupResult === 'success'){
-                        props.confSetEmailFormStatus(props.email,'success','')  
-                        props.history.push('/confirm')
+                        props.initInfoModal('Signup Succeeded', 'Your confirmation code should arrive shortly.  Please check your email.','/confirm')
+                        props.history.push('/info')
                       } else {
                         props.initErrorModal('Signup Failed', signupResult, '/signup')
                         props.history.push('/error')

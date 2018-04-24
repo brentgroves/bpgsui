@@ -15,6 +15,7 @@ const initialState = {
 	email: '',
 	groups: [],
 	attributes: [],
+	primary:'',
   pending: false,
   authenticated: false,
   error: ''

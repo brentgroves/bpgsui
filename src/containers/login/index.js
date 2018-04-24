@@ -20,6 +20,7 @@ const mapStateToProps = state => ({
   passwordStatus: state.login.passwordStatus,
   formStatus: state.login.formStatus,
   pending: state.awsLogin.pending,
+  primary: state.awsLogin.primary,
   emailKey: state.login.emailKey,
   passwordKey: state.login.passwordKey,
   submitKey: state.login.submitKey,

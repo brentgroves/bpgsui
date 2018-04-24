@@ -18,7 +18,7 @@ const InfoModal = props => (
 
           <Button primary 
             onClick={(event) => {
-              props.initErrorModal('', '', '')
+              props.initInfoModal('', '', '')
               props.history.push(props.next)
             }} 
             >

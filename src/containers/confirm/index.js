@@ -5,6 +5,7 @@ import Confirm from '../../components/confirm'
 import * as confirm from '../../modules/confirm/actionCreators'
 import * as awsConfirm from '../../modules/aws/cognito/confirm/actionCreators' 
 import * as errorModal from '../../modules/modal/error/actionCreators'
+import * as infoModal from '../../modules/modal/info/actionCreators'
 
 //react redux material design
 
@@ -49,7 +50,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   ...confirm,
   ...awsConfirm,
-  ...errorModal
+  ...errorModal,
+  ...infoModal
 }, dispatch)
 
 /*
