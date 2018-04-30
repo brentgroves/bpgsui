@@ -11,3 +11,36 @@ aws cognito-idp  admin-get-user --user-pool-id us-east-1_c9nLoUmSS --username ec
 
 https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html
 https://docs.aws.amazon.com/cli/latest/reference/cognito-idp/index.html
+
+
+yarn global add serve
+serve -s build
+
+Success! your project is now initialized with awsmobilejs
+
+   awsmobilejs\.awsmobile
+     is the workspace of awsmobile-cli, please do not modify its contents
+
+   awsmobilejs\#current-backend-info
+     contains information of the backend awsmobile project from the last
+     synchronization with the cloud
+
+   awsmobilejs\backend
+     is where you develop the codebase of the backend awsmobile project
+
+   awsmobile console
+     opens the web console of the backend awsmobile project
+
+   awsmobile run
+     pushes the latest development of the backend awsmobile project to the cloud,
+     and runs the frontend application locally
+
+   awsmobile publish
+     pushes the latest development of the backend awsmobile project to the cloud,
+     and publishes the frontend application to aws S3 for hosting
+
+Happy coding with awsmobile!
+
+http://bpgsui-hosting-mobilehub-1154681392.s3-website.us-east-1.amazonaws.com/
+https://d143w2tmimb7n3.cloudfront.net/
+https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html

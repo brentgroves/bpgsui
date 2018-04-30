@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Home from '../../containers/Home'
 import Login from '../../containers/login/'
 import Signup from '../../containers/signup/'
@@ -13,6 +13,38 @@ import ScriptCheck from '../../containers/ScriptCheck'
 import ErrorModal from '../../containers/modal/error'
 import InfoModal from '../../containers/modal/info'
 //Use fragments (React v16.2+ only!) https://stackoverflow.com/questions/31284169/parse-error-adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag
+
+
+const PrivateRoute = ({ component: Component, authenticated, ...rest}) => (
+    <Route {...rest} render={props => authenticated == false
+        ? ( <Redirect to="/login" /> ) : ( <Component {...props} /> )
+    } />
+)
+
+const PublicRoute = ({ component: Component, authenticated, ...rest}) => (
+    <Route {...rest} render={props => authenticated == false
+        ? ( <Component {...props} /> ) : (<Redirect to="/login" />)
+    } />
+)
+
+
+const Routes = props => (
+<Switch>
+  <PublicRoute authenticated={props.authenticated} path='/info' exact component={InfoModal} />
+  <PublicRoute authenticated={props.authenticated} path='/error' exact component={ErrorModal} />
+  <PublicRoute authenticated={props.authenticated} path='/signup' exact component={Signup} />
+  <PublicRoute authenticated={props.authenticated} path='/confirm' exact component={Confirm} />
+  <PublicRoute authenticated={props.authenticated} path='/login' exact component={Login} />
+  <PrivateRoute authenticated={props.authenticated} path='/info' component={InfoModal} />
+  <Route render={() => (<Redirect to="/login" />)} />
+
+</Switch>
+  )
+
+  export default Routes
+
+  /*
+
 const Routes = props => (
 <Switch>
   {props.authenticated ?
@@ -35,9 +67,6 @@ const Routes = props => (
 
   )
 
-  export default Routes
-
-  /*
 
 const Routes = props => (
   <Switch>

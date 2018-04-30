@@ -8,8 +8,7 @@ import { setLeftSidebarVisible, setLeftSidebarAI, setReportStep } from '../../mo
 
 
 const mapStateToProps = state => ({
-  authenticated: state.login.authenticated,
-  error: state.errorModal.show
+  authenticated: state.awsLogin.authenticated
 
 })
 

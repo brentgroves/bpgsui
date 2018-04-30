@@ -83,7 +83,10 @@ export function login(email, password) {
                   if (err) {
                       console.error(err);
                       dispatch(loginFailure(err.message))
-                      resolve(err.message) 
+                      resolve({
+                        return: err.message,
+                        primary: ''
+                      })
                       return;
                   }
                   console.log('session validity: ' + session.isValid());
@@ -95,7 +98,10 @@ export function login(email, password) {
                       if (err) {
                           console.error(err.message);
                           dispatch(loginFailure(err.message))
-                          resolve(err.message) 
+                          resolve({
+                            return: err.message,
+                            primary: ''
+                          })
                           return;
                       }
                       var i
@@ -109,19 +115,28 @@ export function login(email, password) {
                           }
                       }
                     dispatch(loginSuccess(email,groups,attributes, primary))
-                    resolve('success')
+                    resolve({
+                      return: 'success',
+                      primary: primary
+                    })
                   });
               });
           }else{
             let errMsg = 'userPool.getCurrentUser() reports no current user.'
             dispatch(loginFailure(errMsg))
-            resolve(errMsg)
+            resolve({
+              return: errMsg,
+              primary: ''
+            })
           }
 
         },
         onFailure:  function(err) {
           dispatch(loginFailure(err.message))
-          resolve(err.message) 
+          resolve({
+            return: err.message,
+            primary: ''
+          })
           // want to use a simple await without a catch in calling program 
           // so am not using reject
         }

@@ -122,14 +122,14 @@ const Login = props => (
                   loading={props.pending}
                   onClick={ async (event) =>{
                     let loginResult = await props.login(props.email, props.password)
-                    if (loginResult === 'success'){
-                      if(props.primary==='admin'){
+                    if (loginResult.return === 'success'){
+                      if(loginResult.primary==='admin'){
                         alert('admin')
                       }else{
                         alert('Not an Admin')
                       }
                     } else {
-                      props.initErrorModal('Login Failed', loginResult, '/')
+                      props.initErrorModal('Login Failed', loginResult.return, '/')
                       props.history.push('/error')
                     } 
                   }}>Submit</Button>
