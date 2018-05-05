@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Grid, Segment, Header, Icon, Button, Form } from 'semantic-ui-react'
-import { validEmail } from '../../modules/aws/cognito/login/misc'
+import { validEmail, validUserName, validPhoneNumber } from '../../modules/aws/cognito/misc'
+import MaskedInput from 'react-text-mask'
 
 /*
 import {
@@ -31,31 +32,36 @@ const Signup = props =>(
                 key={props.formKey}>
 
                   <Form.Input
-                    key={props.emailKey}
-                    id='email'
-                    value={props.email}
-                    label='Email' placeholder='joe@schmoe.com'
+                    key={props.userNameKey}
+                    id='userName'
+                    value={props.userName}
+                    label='Username' placeholder='Username'
                     type='text'
-                    error={props.emailStatus === 'error'}
+                    error={props.userNameStatus === 'error'}
                     onChange={(event) => {
-                      let emailStatus
+                      let userNameStatus
                       let formStatus
-                      if (validEmail(event.target.value)) {
-                        emailStatus = 'success'
+                      if (validUserName(event.target.value)) {
+                        userNameStatus = 'success'
                       } else {
-                        emailStatus = 'error'
+                        userNameStatus = 'error'
                       }
-                      if (props.passwordStatus === 'success' && 
-                          emailStatus === 'success' &&
-                          props.confirmPasswordStatus === 'success') {
+                      if ( 
+                          userNameStatus === 'success' &&
+                          props.passwordStatus === 'success' && 
+                          props.confirmPasswordStatus === 'success' &&
+                          props.emailStatus === 'success' &&
+                          props.phoneNumberStatus === 'success' 
+                      ) {
                         formStatus = 'success'
                       } else {
                         formStatus = 'error'
                       }
-                      props.setEmailFormStatus(event.target.value, emailStatus, formStatus)
+                      props.setUserNameFormStatus(event.target.value, userNameStatus, formStatus)
                     }
                     }
                   />
+
 
                   <Form.Input
                   key={props.passwordKey}
@@ -79,9 +85,13 @@ const Signup = props =>(
                         confirmPasswordStatus = 'error'
                       }
 
-                      if (props.emailStatus === 'success' && 
-                          passwordStatus === 'success'  &&
-                          confirmPasswordStatus === 'success') {
+                      if ( 
+                          props.userNameStatus === 'success' &&
+                          passwordStatus === 'success' && 
+                          confirmPasswordStatus === 'success' &&
+                          props.emailStatus === 'success' &&
+                          props.phoneNumberStatus === 'success' 
+                      ) {
                         formStatus = 'success'
                       } else {
                         formStatus = 'error'
@@ -104,9 +114,13 @@ const Signup = props =>(
                       } else {
                         confirmPasswordStatus = 'error'
                       }
-                      if (props.emailStatus === 'success' && 
-                          props.passwordStatus === 'success'  &&
-                          confirmPasswordStatus === 'success') {
+                      if ( 
+                          props.userNameStatus === 'success' &&
+                          props.passwordStatus === 'success' && 
+                          confirmPasswordStatus === 'success' &&
+                          props.emailStatus === 'success' &&
+                          props.phoneNumberStatus === 'success' 
+                      ) {
                         formStatus = 'success'
                       } else {
                         formStatus = 'error'
@@ -114,6 +128,77 @@ const Signup = props =>(
                       props.setConfirmPasswordFormStatus(event.target.value, confirmPasswordStatus, formStatus)
                     }
                   }/>
+
+                  <Form.Input
+                    key={props.emailKey}
+                    id='email'
+                    value={props.email}
+                    label='Email' placeholder='joe@schmoe.com'
+                    type='text'
+                    error={props.emailStatus === 'error'}
+                    onChange={(event) => {
+                      let emailStatus
+                      let formStatus
+                      if (validEmail(event.target.value)) {
+                        emailStatus = 'success'
+                      } else {
+                        emailStatus = 'error'
+                      }
+                      if ( 
+                          props.userNameStatus === 'success' &&
+                          props.passwordStatus === 'success' && 
+                          props.confirmPasswordStatus === 'success' &&
+                          emailStatus === 'success' &&
+                          props.phoneNumberStatus === 'success' 
+                      ) {
+                        formStatus = 'success'
+                      } else {
+                        formStatus = 'error'
+                      }
+                      props.setEmailFormStatus(event.target.value, emailStatus, formStatus)
+                    }
+                    }
+                  />
+
+                  <Form.Input
+                    key={props.phoneNumberKey}
+                    id='phoneNumber'
+                    value={props.phoneNumber}
+                    label='Phone' 
+                    type='text'
+                    error={props.phoneNumberStatus === 'error'}
+  children={
+    <MaskedInput
+      mask={['+', '1', ' ', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+      placeholder="+1(123)456-7890"
+      onChange={(event) => {
+        let phoneNumberStatus
+        let formStatus
+        let valueWithoutMaskChars = event.target.value.replace(/[^0-9+]/g, '')        
+        if (validPhoneNumber(valueWithoutMaskChars)) {
+          phoneNumberStatus = 'success'
+        } else {
+          phoneNumberStatus = 'error'
+        }
+        if ( 
+            props.userNameStatus === 'success' &&
+            props.passwordStatus === 'success' && 
+            props.confirmPasswordStatus === 'success' &&
+            props.emailStatus === 'success' &&
+            phoneNumberStatus === 'success' 
+            ) {
+          formStatus = 'success'
+        } else {
+          formStatus = 'error'
+        }
+        props.setPhoneNumberFormStatus(valueWithoutMaskChars, phoneNumberStatus, formStatus)
+      }
+      }
+    />
+  }
+
+                  />
+
                   <div className='formButtons'>
 
                   <Button
@@ -146,3 +231,16 @@ const Signup = props =>(
     )
 
 export default Signup
+/*
+<Form.Input
+  label="Phone"
+  name="phone"
+  children={
+    <MaskedInput
+      mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+      placeholder="(123) 456-7890"
+    />
+  }
+/>
+
+*/

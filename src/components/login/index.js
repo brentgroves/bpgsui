@@ -38,7 +38,7 @@ shortid.generate()
 props.showErrorModal
 */
 
-import { validEmail } from '../../modules/aws/cognito/login/misc'
+import { validEmail } from '../../modules/aws/cognito/misc'
 
 const Login = props => (
   <div className='fullPage'>

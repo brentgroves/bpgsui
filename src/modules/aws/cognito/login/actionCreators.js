@@ -1,7 +1,10 @@
 
 import {AwsLoginActions as AT} from './actionTypes'
 import { CognitoUserPool, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
-import config from '../../../../config'
+//import config from '../../../../config'
+import awsmobile from '../../../../aws-exports';
+import {Auth} from 'aws-amplify';
+
 var jwtDecode = require('jwt-decode');
 
 export function loginRequest() {
@@ -40,7 +43,7 @@ https://redux.js.org/docs/advanced/AsyncActions.html
 // Though its insides are different, you would use it just like any other action creator:
 // store.dispatch(fetchPosts('reactjs'))
 
-export function login(email, password) {
+export function login(userName, password, enableResend) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
@@ -49,16 +52,65 @@ export function login(email, password) {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
     dispatch(loginRequest())
-
-    const userPool = new CognitoUserPool({
-      UserPoolId: config.cognito.USER_POOL_ID,
-      ClientId: config.cognito.APP_CLIENT_ID
-    })
-    const user = new CognitoUser({ Username: email, Pool: userPool })
-    const authenticationData = { Username: email, Password: password }
-    const authenticationDetails = new AuthenticationDetails(authenticationData)
-
-
+    return new Promise((resolve, reject) => {
+      var groups 
+      var attributes = []
+      var primary = 'none'
+      Auth.signIn(userName, password)
+      .then(data => {
+          let cognitoUser = data
+          let t = 1
+          if (!enableResend) {
+//              dispatch(setResendMFA(false, true))
+//              countDownResendVerificationCode();
+t++
+          }
+          cognitoUser.getSession(function(err, session) {
+              if (err) {
+                  console.error(err);
+                  dispatch(loginFailure(err.message))
+                  resolve({
+                    return: err.message,
+                    primary: ''
+                  })
+                  return;
+              }
+              console.log('session validity: ' + session.isValid());
+              console.log('jwtToken: ' + session.getIdToken().jwtToken);
+              var sessionIdInfo = jwtDecode(session.getIdToken().jwtToken);
+              console.log(sessionIdInfo['cognito:groups']);
+              groups = sessionIdInfo['cognito:groups']
+                  cognitoUser.getUserAttributes(function(err, result) {
+                      if (err) {
+                          console.error(err.message);
+                          dispatch(loginFailure(err.message))
+                          resolve({
+                            return: err.message,
+                            primary: ''
+                          })
+                          return;
+                      }
+                      var i
+                      for (i = 0; i < result.length; i++) {
+                          let name = result[i].getName()
+                          let value = result[i].getValue()
+                          console.log('attribute ' + name + ' has value ' + value);
+                          attributes.push({name : name, value : value})
+                          if(name==='custom:primary'){
+                            primary = value
+                          }
+                      }
+                    dispatch(loginSuccess(userName,groups,attributes, primary))
+                    resolve({
+                      return: 'success',
+                      primary: primary
+                    })
+                  });
+              });          
+      })
+      .catch(err => console.log(err)); 
+    }
+    )
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
 
@@ -70,6 +122,8 @@ export function login(email, password) {
     // causing a loop of 'Unexpected batch number' errors.
     // https://github.com/facebook/react/issues/6895
    // return 1
+
+/*
     var groups 
     var attributes = []
     var primary = 'none'
@@ -143,7 +197,7 @@ export function login(email, password) {
 
       })
     )
-    
+   */ 
   }
 }
 

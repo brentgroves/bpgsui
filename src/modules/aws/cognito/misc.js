@@ -1,6 +1,9 @@
 // //////////////////////////////////////////////////////////
 // AWS Library functions
 // /////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////
+// AWS Library functions
+// /////////////////////////////////////////////////////////
 export function validEmail(x) {
   let atpos = x.indexOf('@')
   let dotpos = x.lastIndexOf('.')
@@ -11,3 +14,12 @@ export function validEmail(x) {
   return true
 }
 
+
+export function validUserName(userName) {
+    return userName && userName.length > 1;
+}
+
+
+export function validPhoneNumber(phoneNumber){
+        return /^\+?[1-9]\d{10}$/.test(phoneNumber);
+}

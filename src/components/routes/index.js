@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Home from '../../containers/Home'
 import Login from '../../containers/login/'
 import Signup from '../../containers/signup/'
@@ -27,7 +27,10 @@ const PublicRoute = ({ component: Component, authenticated, ...rest}) => (
     } />
 )
 
-
+/*
+CHANGE TO A COMPONENT AND ADD componentWillMount(),ETC FUNCTIONS THAT SIGNOUT WHEN LEAVING
+AFTER THAT LOOK AT /AUTH/LOGIN.JSX AND MODIFY OUR LOGIN PAGE IF BETTER
+*/
 const Routes = props => (
 <Switch>
   <PublicRoute authenticated={props.authenticated} path='/info' exact component={InfoModal} />
@@ -39,6 +42,7 @@ const Routes = props => (
   <Route render={() => (<Redirect to="/login" />)} />
 
 </Switch>
+
   )
 
   export default Routes

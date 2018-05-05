@@ -15,6 +15,28 @@ import {
 
 import {SignupActions as AT} from './actionTypes'
 
+export const setPhoneNumberFormStatus = (phoneNumber, phoneNumberStatus, formStatus) => {
+  return dispatch => {
+    dispatch({
+      type: AT.SET_PHONENUMBER_FORM_STATUS,
+      phoneNumber: phoneNumber,
+      phoneNumberStatus: phoneNumberStatus,
+      formStatus: formStatus
+    })
+  }
+}
+
+
+export const setUserNameFormStatus = (userName, userNameStatus, formStatus) => {
+  return dispatch => {
+    dispatch({
+      type: AT.SET_USERNAME_FORM_STATUS,
+      userName: userName,
+      userNameStatus: userNameStatus,
+      formStatus: formStatus
+    })
+  }
+}
 
 export const setEmailFormStatus = (email, emailStatus, formStatus) => {
   return dispatch => {

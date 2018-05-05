@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Segment, Header, Icon, Button, Form, Message,Popup } from 'semantic-ui-react'
-import { validEmail } from '../../modules/aws/cognito/login/misc'
+import { validEmail } from '../../modules/aws/cognito/misc'
 
 /*
 import {
