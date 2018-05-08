@@ -15,6 +15,27 @@ import {
 
 import {SignupActions as AT} from './actionTypes'
 
+export const setFirstNameFormStatus = (firstName, firstNameStatus, formStatus) => {
+  return dispatch => {
+    dispatch({
+      type: AT.SET_FIRSTNAME_FORM_STATUS,
+      firstName: firstName,
+      firstNameStatus: firstNameStatus,
+      formStatus: formStatus
+    })
+  }
+}
+
+export const setLastNameFormStatus = (lastName, lastNameStatus, formStatus) => {
+  return dispatch => {
+    dispatch({
+      type: AT.SET_LASTNAME_FORM_STATUS,
+      lastName: lastName,
+      lastNameStatus: lastNameStatus,
+      formStatus: formStatus
+    })
+  }
+}
 export const setPhoneNumberFormStatus = (phoneNumber, phoneNumberStatus, formStatus) => {
   return dispatch => {
     dispatch({

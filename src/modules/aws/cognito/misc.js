@@ -19,6 +19,14 @@ export function validUserName(userName) {
     return userName && userName.length > 1;
 }
 
+export function validFirstName(firstName) {
+    return firstName && firstName.length > 1;
+}
+
+export function validLastName(lastName) {
+    return lastName && lastName.length > 1;
+}
+
 
 export function validPhoneNumber(phoneNumber){
         return /^\+?[1-9]\d{10}$/.test(phoneNumber);

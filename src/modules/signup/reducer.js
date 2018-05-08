@@ -2,6 +2,10 @@ import {SignupActions as AT} from './actionTypes'
 import shortid from 'shortid'
 
 const initialState = {
+  firstName: '',
+  firstNameStatus: '',
+  lastName: '',
+  lastNameStatus: '',
   userName: '',
   userNameStatus: '',
   email: '',
@@ -13,6 +17,8 @@ const initialState = {
   cofirmPassword: '',
   confirmPasswordStatus: '',
   formStatus: '',
+  firstNameKey: shortid.generate(),
+  lastNameKey: shortid.generate(),
   userNameKey: shortid.generate(),
   emailKey: shortid.generate(),
   phoneKey: shortid.generate(),
@@ -24,6 +30,20 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+  case AT.SET_FIRSTNAME_FORM_STATUS:
+    return {
+      ...state,
+      firstName: action.firstName,
+      firstNameStatus: action.firstNameStatus,
+      formStatus: action.formStatus
+    }
+  case AT.SET_LASTNAME_FORM_STATUS:
+    return {
+      ...state,
+      lastName: action.lastName,
+      lastNameStatus: action.lastNameStatus,
+      formStatus: action.formStatus
+    }
   case AT.SET_PHONENUMBER_FORM_STATUS:
     return {
       ...state,
