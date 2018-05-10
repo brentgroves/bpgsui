@@ -1,9 +1,9 @@
 
 import {AwsSignupActions as AT} from './actionTypes'
 import { CognitoUserPool, CognitoUser, CognitoUserAttribute, AuthenticationDetails } from 'amazon-cognito-identity-js'
+import { Auth } from 'aws-amplify';
 
-
-import config from '../../../../config'
+//import config from '../../../../config'
 
 export function signupRequest() {
   return {
@@ -37,7 +37,8 @@ https://redux.js.org/docs/advanced/AsyncActions.html
 // Though its insides are different, you would use it just like any other action creator:
 // store.dispatch(fetchPosts('reactjs'))
 
-export function signup(email, password) {
+//https://github.com/aws/aws-amplify/blob/257a41a/packages/aws-amplify/src/Auth/Auth.ts#L176
+export function signup(params:object) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
@@ -46,27 +47,6 @@ export function signup(email, password) {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
     dispatch(signupRequest())
-
-    const userPool = new CognitoUserPool({
-      UserPoolId: config.cognito.USER_POOL_ID,
-      ClientId: config.cognito.APP_CLIENT_ID
-    })
-
-    let attributeList = [];
-/*
-cognito add user to group api
-https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityServiceProvider.html#adminAddUserToGroup-property
-https://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-user-identity-pools-javascript-examples.html
-*/
-   
-    let dataPhoneNumber = {
-        Name : 'phone_number',
-        Value : '+15555555555'
-    };
-//    var attributePhoneNumber = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute(dataPhoneNumber);
-    let attributePhoneNumber = new CognitoUserAttribute(dataPhoneNumber);
-    attributeList.push(attributePhoneNumber);
-
 
 
     // The function called by the thunk middleware can return a value,
@@ -81,6 +61,19 @@ https://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-u
     // https://github.com/facebook/react/issues/6895
    // return 1
     return new Promise((resolve, reject) =>
+//props.firstName,props.lastName,props.userName,props.email, props.password
+
+      Auth.signUp(params)
+      .then(data => {
+        console.log(data)
+        resolve('success')
+      })
+      .catch(err => {
+        console.log(err)
+        resolve(err.message)
+      })
+
+/*
       userPool.signUp(email, password, attributeList, null, (err, result) => {
         if (err) {
           dispatch(signupFailure(err.message))
@@ -90,6 +83,7 @@ https://docs.aws.amazon.com/cognito/latest/developerguide/using-amazon-cognito-u
         dispatch(signupSuccess())
         resolve('success')
       })
+*/    
     )
   }
 }

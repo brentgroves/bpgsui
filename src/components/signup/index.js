@@ -285,7 +285,19 @@ const Signup = props =>(
                     disabled={props.formStatus === 'success' ? false : true }
                     loading={props.pending}
                     onClick={ async (event) =>{
-                      let signupResult = await props.signup(props.email, props.password)
+
+                      let params = {
+                        'username': props.userName,
+                        'password': props.password,
+                        'attributes':{
+                          'email': props.email,
+                          'phone_number': props.phoneNumber,
+                          'custom:firstName': props.firstName,
+                          'custom:lastName': props.lastName,
+                          'custom:primary': props.primary 
+                        }
+                      }
+                      let signupResult = await props.signup(params)
                       if (signupResult === 'success'){
                         props.initInfoModal('Signup Succeeded', 'Your confirmation code should arrive shortly.  Please check your email.','/confirm')
                         props.history.push('/info')

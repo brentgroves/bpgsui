@@ -5,8 +5,8 @@ import LeftSidebar from '../../containers/sidebar/left/'
 import PageView from '../../containers/pageview/'
 import Login from '../../containers/login/'
 import Routes from '../../containers/routes/'
-import awsmobile from '../../aws-exports';
-import {Auth} from 'aws-amplify';
+import Amplify, { Auth, API } from 'aws-amplify';
+import aws_exports from '../../aws-exports';
 
 //import './App.css'
 
@@ -23,6 +23,9 @@ export default class App extends Component {
         super(props);
         this.handleWindowClose = this.handleWindowClose.bind(this);
         this.state = {authStatus: this.props.authenticated || false}
+
+        Amplify.configure(aws_exports);
+
     }
 
     handleWindowClose = async (e) => {
