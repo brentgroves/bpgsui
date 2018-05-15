@@ -2,7 +2,7 @@ import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import App from '../../components/app'
-import * as awsLogin from '../../modules/aws/cognito/login/actionCreators' 
+import * as awsLogin from '../../modules/api/aws/cognito/userpool/login/actionCreators' 
 
 const mapStateToProps = state => ({
   authenticated: state.awsLogin.authenticated

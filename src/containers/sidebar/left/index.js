@@ -4,23 +4,23 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Sidebar, Segment, Icon, Menu } from 'semantic-ui-react'
 import shortid from 'shortid'
-import Routes from '../../../Routes'
+import Routes from '../../routes'
 
 import {
   setAuthenticated
-} from '../../../modules/aws/cognito'
+} from '../../../modules/aws/cognito/userpool'
 import {
   setMainAI,
   setDeptAI
-} from '../../../modules/menu/top/actionCreators'
+} from '../../../modules/components/menu/top/actionCreators'
 import {
   setVisible, 
   setActiveItem 
-} from '../../../modules/sidebar/left/'
+} from '../../../modules/components/sidebar/left/'
 
 import {
   setStep
-} from '../../../modules/report/'
+} from '../../../modules/components/report/'
 /*
     let divStyle = {
       width: '100%',

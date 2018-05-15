@@ -3,7 +3,6 @@ import {BrowserRouter, Route, Link } from 'react-router-dom'
 import TopMenu from '../../containers/menu/top/'
 import LeftSidebar from '../../containers/sidebar/left/'
 import PageView from '../../containers/pageview/'
-import Login from '../../containers/login/'
 import Routes from '../../containers/routes/'
 import Amplify, { Auth, API } from 'aws-amplify';
 import aws_exports from '../../aws-exports';
