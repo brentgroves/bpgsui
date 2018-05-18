@@ -8,7 +8,7 @@ import Routes from '../../routes'
 
 import {
   setAuthenticated
-} from '../../../modules/components/aws/cognito/userpool/login'
+} from '../../../modules/components/aws/cognito/userpool/login/actionCreators'
 import {
   setMainAI,
   setDeptAI

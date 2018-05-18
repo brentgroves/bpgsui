@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Segment, Header, Icon, Button, Form } from 'semantic-ui-react'
-import { validEmail, validUserName, validFirstName, validLastName, validPhoneNumber } from '../../modules/aws/cognito/misc'
+import { validEmail, validUserName, validFirstName, validLastName, validPhoneNumber } from '../../../../../modules/api/aws/cognito/misc'
 import MaskedInput from 'react-text-mask'
 
 /*
@@ -46,14 +46,14 @@ const Signup = props =>(
                       } else {
                         firstNameStatus = 'error'
                       }
-                      if ( 
+                      if (
                           firstNameStatus === 'success' &&
                           props.lastNameStatus === 'success' &&
                           props.userNameStatus === 'success' &&
-                          props.passwordStatus === 'success' && 
+                          props.passwordStatus === 'success' &&
                           props.confirmPasswordStatus === 'success' &&
                           props.emailStatus === 'success' &&
-                          props.phoneNumberStatus === 'success' 
+                          props.phoneNumberStatus === 'success'
                       ) {
                         formStatus = 'success'
                       } else {
@@ -79,14 +79,14 @@ const Signup = props =>(
                       } else {
                         lastNameStatus = 'error'
                       }
-                      if ( 
+                      if (
                           props.firstNameStatus === 'success' &&
                           lastNameStatus === 'success' &&
                           props.userNameStatus === 'success' &&
-                          props.passwordStatus === 'success' && 
+                          props.passwordStatus === 'success' &&
                           props.confirmPasswordStatus === 'success' &&
                           props.emailStatus === 'success' &&
-                          props.phoneNumberStatus === 'success' 
+                          props.phoneNumberStatus === 'success'
                       ) {
                         formStatus = 'success'
                       } else {
@@ -113,14 +113,14 @@ const Signup = props =>(
                       } else {
                         userNameStatus = 'error'
                       }
-                      if ( 
+                      if (
                           props.firstNameStatus === 'success' &&
                           props.lastNameStatus === 'success' &&
                           userNameStatus === 'success' &&
-                          props.passwordStatus === 'success' && 
+                          props.passwordStatus === 'success' &&
                           props.confirmPasswordStatus === 'success' &&
                           props.emailStatus === 'success' &&
-                          props.phoneNumberStatus === 'success' 
+                          props.phoneNumberStatus === 'success'
                       ) {
                         formStatus = 'success'
                       } else {
@@ -155,14 +155,14 @@ const Signup = props =>(
                         confirmPasswordStatus = 'error'
                       }
 
-                      if ( 
+                      if (
                           props.firstNameStatus === 'success' &&
                           props.lastNameStatus === 'success' &&
                           props.userNameStatus === 'success' &&
-                          passwordStatus === 'success' && 
+                          passwordStatus === 'success' &&
                           confirmPasswordStatus === 'success' &&
                           props.emailStatus === 'success' &&
-                          props.phoneNumberStatus === 'success' 
+                          props.phoneNumberStatus === 'success'
                       ) {
                         formStatus = 'success'
                       } else {
@@ -186,14 +186,14 @@ const Signup = props =>(
                       } else {
                         confirmPasswordStatus = 'error'
                       }
-                      if ( 
+                      if (
                           props.firstNameStatus === 'success' &&
                           props.lastNameStatus === 'success' &&
                           props.userNameStatus === 'success' &&
-                          props.passwordStatus === 'success' && 
+                          props.passwordStatus === 'success' &&
                           confirmPasswordStatus === 'success' &&
                           props.emailStatus === 'success' &&
-                          props.phoneNumberStatus === 'success' 
+                          props.phoneNumberStatus === 'success'
                       ) {
                         formStatus = 'success'
                       } else {
@@ -218,14 +218,14 @@ const Signup = props =>(
                       } else {
                         emailStatus = 'error'
                       }
-                      if ( 
+                      if (
                           props.firstNameStatus === 'success' &&
                           props.lastNameStatus === 'success' &&
                           props.userNameStatus === 'success' &&
-                          props.passwordStatus === 'success' && 
+                          props.passwordStatus === 'success' &&
                           props.confirmPasswordStatus === 'success' &&
                           emailStatus === 'success' &&
-                          props.phoneNumberStatus === 'success' 
+                          props.phoneNumberStatus === 'success'
                       ) {
                         formStatus = 'success'
                       } else {
@@ -240,7 +240,7 @@ const Signup = props =>(
                     key={props.phoneNumberKey}
                     id='phoneNumber'
                     value={props.phoneNumber}
-                    label='Phone' 
+                    label='Phone'
                     type='text'
                     error={props.phoneNumberStatus === 'error'}
                     children={
@@ -250,20 +250,20 @@ const Signup = props =>(
                         onChange={(event) => {
                           let phoneNumberStatus
                           let formStatus
-                          let valueWithoutMaskChars = event.target.value.replace(/[^0-9+]/g, '')        
+                          let valueWithoutMaskChars = event.target.value.replace(/[^0-9+]/g, '')
                           if (validPhoneNumber(valueWithoutMaskChars)) {
                             phoneNumberStatus = 'success'
                           } else {
                             phoneNumberStatus = 'error'
                           }
-                          if ( 
+                          if (
                                 props.firstNameStatus === 'success' &&
                                 props.lastNameStatus === 'success' &&
                                 props.userNameStatus === 'success' &&
-                                props.passwordStatus === 'success' && 
+                                props.passwordStatus === 'success' &&
                                 props.confirmPasswordStatus === 'success' &&
                                 props.emailStatus === 'success' &&
-                                phoneNumberStatus === 'success' 
+                                phoneNumberStatus === 'success'
                               ) {
                             formStatus = 'success'
                           } else {
@@ -294,7 +294,7 @@ const Signup = props =>(
                           'phone_number': props.phoneNumber,
                           'custom:firstName': props.firstName,
                           'custom:lastName': props.lastName,
-                          'custom:primary': props.primary 
+                          'custom:primary': props.primary
                         }
                       }
                       let signupResult = await props.signup(params)
@@ -304,10 +304,10 @@ const Signup = props =>(
                       } else {
                         props.initErrorModal('Signup Failed', signupResult, '/signup')
                         props.history.push('/error')
-                      } 
+                      }
                     }}>Submit</Button>
 
-                  </div>    
+                  </div>
                 </Form>
               </Segment>
             </Grid.Column>

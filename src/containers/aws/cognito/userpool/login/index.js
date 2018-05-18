@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Login from '../../../../../components/aws/cognito/userpool/login'
 import * as login from '../../../../../modules/components/aws/cognito/userpool/login/actionCreators'
-import * as awsLogin from '../../../../../modules/aws/cognito/userpool/login/actionCreators'
+import * as awsLogin from '../../../../../modules/api/aws/cognito/userpool/login/actionCreators'
 import * as errorModal from '../../../../../modules/components/modal/error/actionCreators'
 
 //react redux material design
