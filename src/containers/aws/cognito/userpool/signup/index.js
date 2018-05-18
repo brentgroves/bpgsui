@@ -1,9 +1,9 @@
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Signup from '../../components/aws/cognito/userpool/signup'
+import Signup from '../../../../../components/aws/cognito/userpool/signup'
 import * as signup from '../../modules/components/aws/cognito/userpool/signup/actionCreators'
-import * as awsSignup from '../../modules/api/aws/cognito/signup/actionCreators' 
+import * as awsSignup from '../../modules/api/aws/cognito/signup/actionCreators'
 import * as errorModal from '../../modules/components/modal/error/actionCreators'
 import * as infoModal from '../../modules/components/modal/info/actionCreators'
 import { setEmailFormStatus as confSetEmailFormStatus} from '../../modules/components/aws/cognito/userpool/confirm/sms/actionCreators'
@@ -71,5 +71,3 @@ export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
 )(Signup))
-
-

@@ -4,13 +4,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Segment, Header, Icon, Button, Form, Message } from 'semantic-ui-react'
 import shortid from 'shortid'
-import ErrorModal from '../../containers/modal/error'
+import ErrorModal from '../../../../../containers/modal/error'
 
 /*
 follow https://redux.js.org/docs/advanced/AsyncActions.html
 https://hackernoon.com/javascript-functional-composition-for-every-day-use-22421ef65a10
 may handle button wait in containers\login or action creator
-advantage of wait in action creator would be every UI would know we are 
+advantage of wait in action creator would be every UI would know we are
 trying to login.
 https://runkit.com
 https://medium.com/javascript-scene/master-the-javascript-interview-what-is-function-composition-20dfb109a1a0
@@ -38,7 +38,7 @@ shortid.generate()
 props.showErrorModal
 */
 
-import { validEmail } from '../../modules/aws/cognito/misc'
+import { validEmail } from '../../../../../modules/api/aws/cognito/userpool/misc'
 
 const Login = props => (
   <div className='fullPage'>
@@ -131,7 +131,7 @@ const Login = props => (
                     } else {
                       props.initErrorModal('Login Failed', loginResult.return, '/')
                       props.history.push('/error')
-                    } 
+                    }
                   }}>Submit</Button>
                   </div>
               </Form>
@@ -233,7 +233,7 @@ props.showErrorModal
                       alert('success')
                     } else {
                       props.initErrorModal(true, 'Login Failed', loginResult)
-                    } 
+                    }
                   }}>Submit</Button>
               </Form>
 

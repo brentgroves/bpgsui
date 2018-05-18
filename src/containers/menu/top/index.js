@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Dropdown, Icon, Menu } from 'semantic-ui-react'
 import shortid from 'shortid'
-import * as topMenuAC from '../../../modules/menu/top/actionCreators.js'
-import * as awsLoginAC from '../../../modules/aws/cognito/login/actionCreators.js' 
+import * as topMenuAC from '../../../modules/components/menu/top/actionCreators.js'
+import * as awsLoginAC from '../../../modules/api/aws/cognito/userpool/login/actionCreators.js'
 import TopMenu  from '../../../components/menu/top/'
 
 /*
@@ -59,6 +59,3 @@ export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
 )(TopMenu))
-
-
-

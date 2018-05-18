@@ -8,14 +8,14 @@ import Routes from '../../routes'
 
 import {
   setAuthenticated
-} from '../../../modules/aws/cognito/userpool'
+} from '../../../modules/components/aws/cognito/userpool/login'
 import {
   setMainAI,
   setDeptAI
 } from '../../../modules/components/menu/top/actionCreators'
 import {
-  setVisible, 
-  setActiveItem 
+  setVisible,
+  setActiveItem
 } from '../../../modules/components/sidebar/left/'
 
 import {
@@ -48,7 +48,7 @@ const LeftSidebar = props => (
             </Sidebar>
             <Sidebar.Pusher dimmed={props.sidebarVisible} className='fullPage' >
 <p>production</p>
-              {props.reportStep === 1 ? <Routes childProps={props} /> : ''} 
+              {props.reportStep === 1 ? <Routes childProps={props} /> : ''}
               <div id='detail' className='fullPage'  />
             </Sidebar.Pusher>
           </Sidebar.Pushable>

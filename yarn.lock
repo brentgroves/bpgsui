@@ -364,16 +364,17 @@ autoprefixer@^6.3.1:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-aws-amplify-react@^0.1.43:
-  version "0.1.43"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-0.1.43.tgz#db906be3c861148a1d155a3d46abba68356130b0"
+aws-amplify-react@^0.1.46:
+  version "0.1.46"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-0.1.46.tgz#ff8b720eb41006ca52ef2910bfac62ce652ed291"
   dependencies:
+    aws-amplify "^0.4.x"
     qrcode.react "^0.8.0"
     regenerator-runtime "^0.11.1"
 
-aws-amplify@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.3.3.tgz#b12aa6c90893d716dd9691c7ff55b38cf1f1ffc6"
+aws-amplify@^0.4.0, aws-amplify@^0.4.x:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.4.0.tgz#d0fc1f86037811014c229ece0ec7fa7a16034c9f"
   dependencies:
     "@types/paho-mqtt" "^1.0.3"
     "@types/zen-observable" "^0.5.3"
@@ -381,8 +382,9 @@ aws-amplify@^0.3.3:
     amazon-cognito-identity-js "^2.0.0"
     aws-sdk "2.198.0"
     axios "^0.17.0"
-    graphql "^0.13.1"
+    graphql "0.13.0"
     paho-mqtt "^1.0.4"
+    url "^0.11.0"
     uuid "^3.2.1"
     zen-observable "^0.8.6"
 
@@ -3212,11 +3214,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
-graphql@^0.13.1:
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.2.tgz#4c740ae3c222823e7004096f832e7b93b2108270"
+graphql@0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.13.0.tgz#d1b44a282279a9ce0a6ec1037329332f4c1079b6"
   dependencies:
-    iterall "^1.2.1"
+    iterall "1.1.x"
 
 growly@^1.3.0:
   version "1.3.0"
@@ -4043,9 +4045,9 @@ istanbul-reports@^1.3.0:
   dependencies:
     handlebars "^4.0.3"
 
-iterall@^1.2.1:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.2.2.tgz#92d70deb8028e0c39ff3164fdbf4d8b088130cd7"
+iterall@1.1.x:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.4.tgz#0db40d38fdcf53ae14dc8ec674e62ab190d52cfc"
 
 jest-changed-files@^20.0.3:
   version "20.0.3"
