@@ -8,7 +8,7 @@ import Routes from '../../routes'
 
 import {
   setAuthenticated
-} from '../../../modules/components/aws/cognito/userpool/login/actionCreators'
+} from '../../../modules/api/aws/cognito/userpool/login/actionCreators'
 import {
   setMainAI,
   setDeptAI
@@ -71,7 +71,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setAuthenticated,
   setMainAI,
   setDeptAI,
   setSidebarVisible: setVisible,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Segment, Header, Icon, Button, Form } from 'semantic-ui-react'
-import { validEmail, validUserName, validFirstName, validLastName, validPhoneNumber } from '../../../../../modules/api/aws/cognito/misc'
+import { validEmail, validUserName, validFirstName, validLastName, validPhoneNumber } from '../../../../../modules/api/aws/cognito/userpool/misc'
 import MaskedInput from 'react-text-mask'
 
 /*

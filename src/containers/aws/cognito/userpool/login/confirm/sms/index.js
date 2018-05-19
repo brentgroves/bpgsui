@@ -1,11 +1,11 @@
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Confirm from '../../components/aws/cognito/userpool/confirm'
-import * as confirm from '../../modules/components/aws/cognito/userpool/confirm/sms/actionCreators'
-import * as awsConfirm from '../../modules/api/aws/cognito/userpool/confirm/sms/actionCreators' 
-import * as errorModal from '../../modules/components/modal/error/actionCreators'
-import * as infoModal from '../../modules/components/modal/info/actionCreators'
+import Confirm from '../../../../../../../components/aws/cognito/userpool/login/confirm/sms'
+import * as confirm from '../../../../../../../modules/components/aws/cognito/userpool/login/confirm/sms/actionCreators'
+import * as awsConfirm from '../../../../../../../modules/api/aws/cognito/userpool/login/confirm/sms/actionCreators' 
+import * as errorModal from '../../../../../../../modules/components/modal/error/actionCreators'
+import * as infoModal from '../../../../../../../modules/components/modal/info/actionCreators'
 
 //react redux material design
 

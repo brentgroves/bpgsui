@@ -3,7 +3,7 @@ import {AwsConfirmActions as AT} from './actionTypes'
 import { CognitoUserPool, CognitoUser, CognitoUserAttribute, AuthenticationDetails } from 'amazon-cognito-identity-js'
 
 
-import config from '../../../../config'
+import config from '../../../../../../../../config'
 
 export function confirmRequest() {
   return {
