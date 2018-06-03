@@ -45,7 +45,6 @@ const Login = props => (
     {false ? <ErrorModal />
       :
       <Grid >
-
         <Grid.Row centered>
           <Grid.Column width={6}>
             <Segment inverted>

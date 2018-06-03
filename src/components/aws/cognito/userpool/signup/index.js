@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Segment, Header, Icon, Button, Form } from 'semantic-ui-react'
+import { Grid, Radio, Label, Divider, Segment, Header, Icon, Button, Form, Checkbox } from 'semantic-ui-react'
 import { validEmail, validUserName, validFirstName, validLastName, validPhoneNumber } from '../../../../../modules/api/aws/cognito/userpool/misc'
 import MaskedInput from 'react-text-mask'
 
@@ -277,6 +277,65 @@ const Signup = props =>(
 
                   />
 
+        <Label  ribbon color='teal' >Multi-Factor Authentication</Label>
+
+        <Form.Group inline inverted>
+
+          <Form.Radio 
+            key={props.smsKey}
+            id='sms'
+            value='sms'
+            label='SMS'
+            radio
+            name='checkboxRadioGroup'
+            checked={props.mfa === 'sms'}
+            onChange={(event) => {
+              let formStatus
+              if (
+                  props.firstNameStatus === 'success' &&
+                  props.lastNameStatus === 'success' &&
+                  props.userNameStatus === 'success' &&
+                  props.passwordStatus === 'success' &&
+                  props.confirmPasswordStatus === 'success' &&
+                  props.emailStatus === 'success' &&
+                  props.phoneNumberStatus === 'success'
+              ) {
+                formStatus = 'success'
+              } else {
+                formStatus = 'error'
+              }
+              props.setMFAFormStatus('sms', formStatus)
+            }
+            }
+          />
+        <Form.Radio
+            key={props.totpKey}
+            id='totp'
+            value='totp'
+            label='TOTP'
+            radio
+            name='checkboxRadioGroup'
+            checked={props.mfa === 'totp'}
+            onChange={(event) => {
+              let formStatus
+              if (
+                  props.firstNameStatus === 'success' &&
+                  props.lastNameStatus === 'success' &&
+                  props.userNameStatus === 'success' &&
+                  props.passwordStatus === 'success' &&
+                  props.confirmPasswordStatus === 'success' &&
+                  props.emailStatus === 'success' &&
+                  props.phoneNumberStatus === 'success'
+              ) {
+                formStatus = 'success'
+              } else {
+                formStatus = 'error'
+              }
+              props.setMFAFormStatus('totp', formStatus)
+            }
+            }
+          />
+        </Form.Group>
                   <div className='formButtons'>
 
                   <Button

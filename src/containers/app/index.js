@@ -5,7 +5,7 @@ import App from '../../components/app'
 import * as awsLogin from '../../modules/api/aws/cognito/userpool/login/actionCreators' 
 
 const mapStateToProps = state => ({
-  authenticated: state.awsLogin.authenticated
+  authenticated: state.awsLoginConfirm.authenticated
 })
 
 

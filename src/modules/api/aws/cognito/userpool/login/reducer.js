@@ -16,9 +16,8 @@ const initialState = {
 	groups: [],
 	attributes: [],
 	primary:'',
-  pending: false,
-  authenticated: false,
-  error: ''
+	pending: false,
+	error: ''
 }
 
 export default (state = initialState, action) => {
@@ -34,8 +33,7 @@ export default (state = initialState, action) => {
 		    	groups: action.groups,
 		    	attributes: action.attributes,
 		    	primary: action.primary,
-		      pending: false,
-		      authenticated: true
+		      pending: false
 		    })
 	    case AT.LOGIN_FAILURE:
 		    return Object.assign({}, initialState, {

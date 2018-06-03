@@ -13,7 +13,8 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 
 const initialState = {
 	pending: false,
-	resend: false
+	resend: false,
+	authenticated: false
 }
 
 export default (state = initialState, action) => {

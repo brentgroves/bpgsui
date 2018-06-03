@@ -6,6 +6,7 @@ import leftSidebar from './components/sidebar/left'
 import pageview from './components/pageview/reducer'
 import topMenu from './components/menu/top/reducer'
 import awsLogin from './api/aws/cognito/userpool/login/reducer'
+import awsLoginConfirm from './api/aws/cognito/userpool/login/confirm/sms/reducer'
 import login from './components/aws/cognito/userpool/login/reducer'
 import awsSignup from './api/aws/cognito/userpool/signup/reducer'
 import signup from './components/aws/cognito/userpool/signup/reducer'
@@ -22,6 +23,7 @@ export default combineReducers({
   topMenu,
   pageview,
   awsLogin,
+  awsLoginConfirm,
   login,
   awsSignup,
   signup,

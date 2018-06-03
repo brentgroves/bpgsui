@@ -13,8 +13,8 @@ import { setEmailFormStatus as confSetEmailFormStatus} from '../../../../../modu
 //https://github.com/TarikHuber/react-most-wanted
 
 const mapStateToProps = state => ({
-  authenticated: state.awsLogin.authenticated,
-  error: state.awsLogin.error,
+  pending: state.awsSignup.pending,
+  error: state.awsSignup.error,
   firstName: state.signup.firstName,
   firstNameStatus: state.signup.firstNameStatus,
   lastName: state.signup.lastName,
@@ -29,8 +29,8 @@ const mapStateToProps = state => ({
   passwordStatus: state.signup.passwordStatus,
   confirmPassword: state.signup.confirmPassword,
   confirmPasswordStatus: state.signup.confirmPasswordStatus,
+  mfa: state.signup.mfa,
   formStatus: state.signup.formStatus,
-  pending: state.awsLogin.pending,
   firstNameKey: state.signup.firstNameKey,
   lastNameKey: state.signup.lastNameKey,
   userNameKey: state.signup.userNameKey,
@@ -38,6 +38,9 @@ const mapStateToProps = state => ({
   phoneNumberKey: state.signup.phoneNumberKey,
   passwordKey: state.signup.passwordKey,
   confirmPasswordKey: state.signup.confirmPasswordKey,
+  smsKey: state.signup.smsKey,
+  totpKey: state.signup.totpKey,
+  mfaKey: state.signup.mfaKey,
   submitKey: state.signup.submitKey,
   formKey: state.signup.formKey
 })

@@ -16,6 +16,7 @@ const initialState = {
   passwordStatus: '',
   cofirmPassword: '',
   confirmPasswordStatus: '',
+  mfa: 'sms',
   formStatus: '',
   firstNameKey: shortid.generate(),
   lastNameKey: shortid.generate(),
@@ -24,6 +25,8 @@ const initialState = {
   phoneKey: shortid.generate(),
   passwordKey: shortid.generate(),
   confirmPasswordKey: shortid.generate(),
+  smsKey: shortid.generate(),
+  totpKey: shortid.generate(),
   submitKey: shortid.generate(),
   formKey: shortid.generate()
 }
@@ -77,6 +80,12 @@ export default (state = initialState, action) => {
       ...state,
       confirmPassword: action.confirmPassword,
       confirmPasswordStatus: action.confirmPasswordStatus,
+      formStatus: action.formStatus
+    }
+  case AT.SET_MFA_FORM_STATUS:
+    return {
+      ...state,
+      mfa: action.mfa,
       formStatus: action.formStatus
     }
   default:

@@ -91,5 +91,12 @@ export const setConfirmPasswordFormStatus = (confirmPassword,
   }
 }
 
+export const setMFAFormStatus = (mfa, formStatus) => {
+  return {
+    type: AT.SET_MFA_FORM_STATUS,
+    mfa: mfa,
+    formStatus: formStatus
+  }
+}
 
 
