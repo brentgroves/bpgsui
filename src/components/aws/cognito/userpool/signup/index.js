@@ -144,7 +144,7 @@ const Signup = props =>(
                       let passwordStatus
                       let confirmPasswordStatus
                       let formStatus
-                      if (event.target.value.length > 0) {
+                      if (event.target.value.length > 1) {
                         passwordStatus = 'success'
                       } else {
                         passwordStatus = 'error'

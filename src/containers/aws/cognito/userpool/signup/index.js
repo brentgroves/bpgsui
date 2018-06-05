@@ -40,7 +40,6 @@ const mapStateToProps = state => ({
   confirmPasswordKey: state.signup.confirmPasswordKey,
   smsKey: state.signup.smsKey,
   totpKey: state.signup.totpKey,
-  mfaKey: state.signup.mfaKey,
   submitKey: state.signup.submitKey,
   formKey: state.signup.formKey
 })
@@ -49,7 +48,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   ...signup,
   ...awsSignup,
-  confSetEmailFormStatus,
   ...errorModal,
   ...infoModal
 }, dispatch)

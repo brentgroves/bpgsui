@@ -14,7 +14,7 @@ const initialState = {
   phoneNumberStatus: '',
   password: '',
   passwordStatus: '',
-  cofirmPassword: '',
+  confirmPassword: '',
   confirmPasswordStatus: '',
   mfa: 'sms',
   formStatus: '',

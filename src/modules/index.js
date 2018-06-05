@@ -9,9 +9,9 @@ import awsLogin from './api/aws/cognito/userpool/login/reducer'
 import awsLoginConfirm from './api/aws/cognito/userpool/login/confirm/sms/reducer'
 import login from './components/aws/cognito/userpool/login/reducer'
 import awsSignup from './api/aws/cognito/userpool/signup/reducer'
+import awsSignupSmsConfirm from './api/aws/cognito/userpool/signup/confirm/sms/reducer'
+import awsSignupTotpConfirm from './api/aws/cognito/userpool/signup/confirm/totp/reducer'
 import signup from './components/aws/cognito/userpool/signup/reducer'
-import awsConfirm from './api/aws/cognito/userpool/signup/confirm/sms/reducer'
-import confirm from './components/aws/cognito/userpool/signup/reducer'
 import errorModal from './components/modal/error/reducer'
 import infoModal from './components/modal/info/reducer'
 
@@ -26,9 +26,9 @@ export default combineReducers({
   awsLoginConfirm,
   login,
   awsSignup,
+  awsSignupSmsConfirm,
+  awsSignupTotpConfirm,
   signup,
-  awsConfirm,
-  confirm,
   errorModal,
   infoModal,
   report
