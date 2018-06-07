@@ -357,12 +357,16 @@ const Signup = props =>(
                         }
                       }
                       let signupResult = await props.signup(params)
-                      if (signupResult === 'success'){
-                        props.initInfoModal('Signup Succeeded', 'Your confirmation code should arrive shortly.  Please check your email.','/confirm')
-                        props.history.push('/info')
-                      } else {
-                        props.initErrorModal('Signup Failed', signupResult, '/signup')
-                        props.history.push('/error')
+                      if(props.mfa ==='sms'){
+                        if (signupResult === 'success'){
+                          props.initInfoModal('Signup Succeeded', 'Your confirmation code should arrive shortly.  Please check your email.','/confirm')
+                          props.history.push('/info')
+                        } else {
+                          props.initErrorModal('Signup Failed', signupResult, '/signup')
+                          props.history.push('/error')
+                        }
+                      }else{ //totp
+                        props.history.push('/getACode')
                       }
                     }}>Submit</Button>
 

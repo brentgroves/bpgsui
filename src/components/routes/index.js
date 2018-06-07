@@ -2,8 +2,9 @@ import React from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Home from '../../containers/Home'
 import Login from '../../containers/aws/cognito/userpool/login/'
-import Signup from '../../containers/aws/cognito/userpool/signup/'
 import Confirm from '../../containers/aws/cognito/userpool/login/confirm/sms/'
+import Signup from '../../containers/aws/cognito/userpool/signup/'
+import GetACode from '../../containers/aws/cognito/userpool/signup/getacode/'
 import ChangePassword from '../../containers/ChangePassword'
 import NotFound from '../../containers/NotFound'
 import ToolCostSummaryByPlant from '../../containers/ToolCostSummaryByPlant'
@@ -36,6 +37,7 @@ const Routes = props => (
   <PublicRoute authenticated={props.authenticated} path='/info' exact component={InfoModal} />
   <PublicRoute authenticated={props.authenticated} path='/error' exact component={ErrorModal} />
   <PublicRoute authenticated={props.authenticated} path='/signup' exact component={Signup} />
+  <PublicRoute authenticated={props.authenticated} path='/getACode' exact component={GetACode} />
   <PublicRoute authenticated={props.authenticated} path='/confirm' exact component={Confirm} />
   <PublicRoute authenticated={props.authenticated} path='/login' exact component={Login} />
   <PrivateRoute authenticated={props.authenticated} path='/info' component={InfoModal} />

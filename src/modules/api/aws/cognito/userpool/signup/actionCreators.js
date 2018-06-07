@@ -62,17 +62,15 @@ export function signup(params:object) {
    // return 1
     return new Promise((resolve, reject) =>
 //props.firstName,props.lastName,props.userName,props.email, props.password
-
       Auth.signUp(params)
       .then(data => {
         console.log(data)
-        resolve('success')
+        resolve('success)
       })
       .catch(err => {
         console.log(err)
         resolve(err.message)
       })
-
 /*
       userPool.signUp(email, password, attributeList, null, (err, result) => {
         if (err) {
@@ -87,7 +85,5 @@ export function signup(params:object) {
     )
   }
 }
-
-
 
 
