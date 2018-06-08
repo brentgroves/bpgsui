@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Confirm from '../../../../../../components/aws/cognito/userpool/signup/confirm'
+import ConfirmSignup from '../../../../../../components/aws/cognito/userpool/signup/confirm'
 import * as confirmSignup from '../../../../../../modules/components/aws/cognito/userpool/signup/confirm/actionCreators'
 import * as awsConfirmSignup from '../../../../../../modules/api/aws/cognito/userpool/signup/confirm/actionCreators' 
 import * as errorModal from '../../../../../../modules/components/modal/error/actionCreators'
@@ -73,6 +73,6 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Confirm))
+)(ConfirmSignup))
 
 

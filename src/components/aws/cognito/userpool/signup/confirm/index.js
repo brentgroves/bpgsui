@@ -13,7 +13,7 @@ let jsreport = require('jsreport-browser-client-dist')
 jsreport.serverUrl = 'http://localhost:5488'
 */
 
-const Confirm = props =>(
+const ConfirmSignup = props =>(
   <div className='fullPage'>
       <Grid >
           <Grid.Row centered>
@@ -145,6 +145,6 @@ const Confirm = props =>(
 
     )
 
-export default Confirm
+export default ConfirmSignup
 /*                      disabled={((props.emailStatus === 'success') && (props.confirmationCodeStatus !== 'success')) ? false : true }
 */
