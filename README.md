@@ -5,6 +5,9 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically
 ./node_modules/.bin/prettier --single-quote --write "src/**/*.{js,jsx,json,css}"
+https://nuclide.io/
+yarn flow
+https://flow.org/en/docs/getting-started/
 
 ## Table of Contents
 
