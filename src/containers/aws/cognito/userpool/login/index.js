@@ -1,10 +1,10 @@
-import { withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Login from '../../../../../components/aws/cognito/userpool/login'
-import * as login from '../../../../../modules/components/aws/cognito/userpool/login/actionCreators'
-import * as awsLogin from '../../../../../modules/api/aws/cognito/userpool/login/actionCreators'
-import * as errorModal from '../../../../../modules/components/modal/error/actionCreators'
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Login from '../../../../../components/aws/cognito/userpool/login';
+import * as login from '../../../../../modules/components/aws/cognito/userpool/login/actionCreators';
+import * as awsLogin from '../../../../../modules/api/aws/cognito/userpool/login/actionCreators';
+import * as errorModal from '../../../../../modules/components/modal/error/actionCreators';
 
 //react redux material design
 
@@ -25,14 +25,17 @@ const mapStateToProps = state => ({
   passwordKey: state.login.passwordKey,
   submitKey: state.login.submitKey,
   formKey: state.login.formKey
-})
+});
 
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  ...login,
-  ...awsLogin,
-  ...errorModal
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      ...login,
+      ...awsLogin,
+      ...errorModal
+    },
+    dispatch
+  );
 
 /*
   gotoTCSbyPlant: () => push('/tcsbyplant'),
@@ -50,7 +53,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 */
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Login)
+);

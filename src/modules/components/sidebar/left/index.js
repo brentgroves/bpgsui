@@ -1,24 +1,23 @@
-export const SET_VISIBLE = 'sidebar/SET_VISIBLE'
-export const SET_ACTIVE_ITEM = 'sidebar/SET_ACTIVE_ITEM'
+export const SET_VISIBLE = 'sidebar/SET_VISIBLE';
+export const SET_ACTIVE_ITEM = 'sidebar/SET_ACTIVE_ITEM';
 
 const initialState = {
   visible: false,
-  activeItem:''
-
-}
+  activeItem: ''
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case SET_VISIBLE:
-    return {
-      ...state,
-      visible: action.visible
-    }
-  case SET_ACTIVE_ITEM:
-    return {
-      ...state,
-      activeItem: action.activeItem
-    }
+    case SET_VISIBLE:
+      return {
+        ...state,
+        visible: action.visible
+      };
+    case SET_ACTIVE_ITEM:
+      return {
+        ...state,
+        activeItem: action.activeItem
+      };
     /*
     case INCREMENT:
       return {
@@ -27,26 +26,25 @@ export default (state = initialState, action) => {
         isIncrementing: !state.isIncrementing
       }
 */
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};
 
-
-export const setVisible = (visible) => {
+export const setVisible = visible => {
   return dispatch => {
     dispatch({
       type: SET_VISIBLE,
       visible: visible
-    })
-  }
-}
+    });
+  };
+};
 
-export const setActiveItem = (activeItem) => {
+export const setActiveItem = activeItem => {
   return dispatch => {
     dispatch({
       type: SET_ACTIVE_ITEM,
       activeItem: activeItem
-    })
-  }
-}
+    });
+  };
+};

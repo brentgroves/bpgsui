@@ -1,5 +1,5 @@
-import { AwsSignupActions as AT } from './actionTypes'
-	 
+import { AwsSignupActions as AT } from './actionTypes';
+
 /*
 
 Handling Actions OF AsyncActions
@@ -12,28 +12,27 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 */
 
 const initialState = {
-	pending: false,
-  	error: ''
-}
+  pending: false,
+  error: ''
+};
 
 export default (state = initialState, action) => {
-  	switch (action.type) {
-	    case AT.SIGNUP_REQUEST:
-		    return Object.assign({}, initialState, {
-		      pending: true,
-		      error: ''
-		    })
-	    case AT.SIGNUP_SUCCESS:
-		    return Object.assign({}, state, {
-		      	pending: false
-		    })
-	    case AT.SIGNUP_FAILURE:
-		    return Object.assign({}, initialState, {
-		      pending: false,
-		      error: action.error
-		    })
-  default:
-		    return state
-  	}
-}
-
+  switch (action.type) {
+    case AT.SIGNUP_REQUEST:
+      return Object.assign({}, initialState, {
+        pending: true,
+        error: ''
+      });
+    case AT.SIGNUP_SUCCESS:
+      return Object.assign({}, state, {
+        pending: false
+      });
+    case AT.SIGNUP_FAILURE:
+      return Object.assign({}, initialState, {
+        pending: false,
+        error: action.error
+      });
+    default:
+      return state;
+  }
+};

@@ -1,5 +1,5 @@
-import { AwsConfirmActions as AT } from './actionTypes'
-	 
+import { AwsConfirmActions as AT } from './actionTypes';
+
 /*
 
 Handling Actions OF AsyncActions
@@ -12,42 +12,41 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 */
 
 const initialState = {
-	pending: false,
-	resend: false
-}
+  pending: false,
+  resend: false
+};
 
 export default (state = initialState, action) => {
-  	switch (action.type) {
-	    case AT.CONFIRM_REQUEST:
-		    return Object.assign({}, initialState, {
-		      pending: true,
-		      resend: false
-		    })
-	    case AT.CONFIRM_SUCCESS:
-		    return Object.assign({}, state, {
-		      	pending: false
-		    })
-	    case AT.CONFIRM_FAILURE:
-		    return Object.assign({}, state, {
-		      pending: false
-		    })
-	    case AT.RESEND_REQUEST:
-		    return Object.assign({}, initialState, {
-		      pending: true,
-		      resend: true
-		    })
-	    case AT.RESEND_SUCCESS:
-		    return Object.assign({}, state, {
-		      	pending: false
-		    })
-	    case AT.RESEND_FAILURE:
-		    return Object.assign({}, state, {
-		      pending: false,
-		      resend: false	
-		    })
+  switch (action.type) {
+    case AT.CONFIRM_REQUEST:
+      return Object.assign({}, initialState, {
+        pending: true,
+        resend: false
+      });
+    case AT.CONFIRM_SUCCESS:
+      return Object.assign({}, state, {
+        pending: false
+      });
+    case AT.CONFIRM_FAILURE:
+      return Object.assign({}, state, {
+        pending: false
+      });
+    case AT.RESEND_REQUEST:
+      return Object.assign({}, initialState, {
+        pending: true,
+        resend: true
+      });
+    case AT.RESEND_SUCCESS:
+      return Object.assign({}, state, {
+        pending: false
+      });
+    case AT.RESEND_FAILURE:
+      return Object.assign({}, state, {
+        pending: false,
+        resend: false
+      });
 
-  		default:
-		    return state
-  	}
-}
-
+    default:
+      return state;
+  }
+};

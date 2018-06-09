@@ -12,19 +12,22 @@ import {
 } from './actionTypes'
 */
 
+import { SignupActions as AT } from './actionTypes';
 
-import {SignupActions as AT} from './actionTypes'
-
-export const setFirstNameFormStatus = (firstName, firstNameStatus, formStatus) => {
+export const setFirstNameFormStatus = (
+  firstName,
+  firstNameStatus,
+  formStatus
+) => {
   return dispatch => {
     dispatch({
       type: AT.SET_FIRSTNAME_FORM_STATUS,
       firstName: firstName,
       firstNameStatus: firstNameStatus,
       formStatus: formStatus
-    })
-  }
-}
+    });
+  };
+};
 
 export const setLastNameFormStatus = (lastName, lastNameStatus, formStatus) => {
   return dispatch => {
@@ -33,20 +36,23 @@ export const setLastNameFormStatus = (lastName, lastNameStatus, formStatus) => {
       lastName: lastName,
       lastNameStatus: lastNameStatus,
       formStatus: formStatus
-    })
-  }
-}
-export const setPhoneNumberFormStatus = (phoneNumber, phoneNumberStatus, formStatus) => {
+    });
+  };
+};
+export const setPhoneNumberFormStatus = (
+  phoneNumber,
+  phoneNumberStatus,
+  formStatus
+) => {
   return dispatch => {
     dispatch({
       type: AT.SET_PHONENUMBER_FORM_STATUS,
       phoneNumber: phoneNumber,
       phoneNumberStatus: phoneNumberStatus,
       formStatus: formStatus
-    })
-  }
-}
-
+    });
+  };
+};
 
 export const setUserNameFormStatus = (userName, userNameStatus, formStatus) => {
   return dispatch => {
@@ -55,9 +61,9 @@ export const setUserNameFormStatus = (userName, userNameStatus, formStatus) => {
       userName: userName,
       userNameStatus: userNameStatus,
       formStatus: formStatus
-    })
-  }
-}
+    });
+  };
+};
 
 export const setEmailFormStatus = (email, emailStatus, formStatus) => {
   return dispatch => {
@@ -66,10 +72,9 @@ export const setEmailFormStatus = (email, emailStatus, formStatus) => {
       email: email,
       emailStatus: emailStatus,
       formStatus: formStatus
-    })
-  }
-}
-
+    });
+  };
+};
 
 export const setPasswordFormStatus = (password, passwordStatus, formStatus) => {
   return {
@@ -77,26 +82,26 @@ export const setPasswordFormStatus = (password, passwordStatus, formStatus) => {
     password: password,
     passwordStatus: passwordStatus,
     formStatus: formStatus
-  }
-}
+  };
+};
 
-
-export const setConfirmPasswordFormStatus = (confirmPassword,
-  confirmPasswordStatus, formStatus) => {
+export const setConfirmPasswordFormStatus = (
+  confirmPassword,
+  confirmPasswordStatus,
+  formStatus
+) => {
   return {
     type: AT.SET_CONFIRM_PASSWORD_FORM_STATUS,
     confirmPassword: confirmPassword,
     confirmPasswordStatus: confirmPasswordStatus,
     formStatus: formStatus
-  }
-}
+  };
+};
 
 export const setMFAFormStatus = (mfa, formStatus) => {
   return {
     type: AT.SET_MFA_FORM_STATUS,
     mfa: mfa,
     formStatus: formStatus
-  }
-}
-
-
+  };
+};

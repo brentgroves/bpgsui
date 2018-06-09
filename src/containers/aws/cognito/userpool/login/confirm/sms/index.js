@@ -1,16 +1,16 @@
-import { withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Confirm from '../../../../../../../components/aws/cognito/userpool/login/confirm/sms'
-import * as confirm from '../../../../../../../modules/components/aws/cognito/userpool/login/confirm/sms/actionCreators'
-import * as awsConfirm from '../../../../../../../modules/api/aws/cognito/userpool/login/confirm/sms/actionCreators' 
-import * as errorModal from '../../../../../../../modules/components/modal/error/actionCreators'
-import * as infoModal from '../../../../../../../modules/components/modal/info/actionCreators'
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Confirm from '../../../../../../../components/aws/cognito/userpool/login/confirm/sms';
+import * as confirm from '../../../../../../../modules/components/aws/cognito/userpool/login/confirm/sms/actionCreators';
+import * as awsConfirm from '../../../../../../../modules/api/aws/cognito/userpool/login/confirm/sms/actionCreators';
+import * as errorModal from '../../../../../../../modules/components/modal/error/actionCreators';
+import * as infoModal from '../../../../../../../modules/components/modal/info/actionCreators';
 
 //react redux material design
 
 //https://github.com/TarikHuber/react-most-wanted
-  /*
+/*
   authenticated: state.awsLogin.authenticated,
   showErrorModal: state.errorModal.show,
   error: state.awsLogin.error,
@@ -29,7 +29,6 @@ import * as infoModal from '../../../../../../../modules/components/modal/info/a
   formKey: state.signup.formKey
   */
 
-
 const mapStateToProps = state => ({
   email: state.confirm.email,
   emailStatus: state.confirm.emailStatus,
@@ -43,16 +42,18 @@ const mapStateToProps = state => ({
   submitKey: state.confirm.submitKey,
   resendKey: state.confirm.resendKey,
   formKey: state.confirm.formKey
+});
 
-})
-
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  ...confirm,
-  ...awsConfirm,
-  ...errorModal,
-  ...infoModal
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      ...confirm,
+      ...awsConfirm,
+      ...errorModal,
+      ...infoModal
+    },
+    dispatch
+  );
 
 /*
   gotoTCSbyPlant: () => push('/tcsbyplant'),
@@ -70,9 +71,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 */
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Confirm))
-
-
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Confirm)
+);

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import LoaderButton from "../components/LoaderButton";
-import config from "../config";
-import "./NewNote.css";
+import React, { Component } from 'react';
+import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import LoaderButton from '../components/LoaderButton';
+import config from '../config';
+import './NewNote.css';
 
 export default class NewNote extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class NewNote extends Component {
 
     this.state = {
       isLoading: null,
-      content: ""
+      content: ''
     };
   }
 
@@ -24,24 +24,23 @@ export default class NewNote extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
-  }
+  };
 
   handleFileChange = event => {
     this.file = event.target.files[0];
-  }
-
+  };
 
   handleSubmit = async event => {
     event.preventDefault();
-    let fail=false;
-    if(this.file && this.file.size > config.MAX_ATTACHMENT_SIZE){
-      alert("Please pick a file smaller than 5MB");
-      fail=true;
+    let fail = false;
+    if (this.file && this.file.size > config.MAX_ATTACHMENT_SIZE) {
+      alert('Please pick a file smaller than 5MB');
+      fail = true;
     }
-    if(!fail){
+    if (!fail) {
       this.setState({ isLoading: true });
     }
-  }
+  };
 
   render() {
     return (
@@ -74,4 +73,3 @@ export default class NewNote extends Component {
     );
   }
 }
-

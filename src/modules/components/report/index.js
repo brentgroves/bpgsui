@@ -1,16 +1,16 @@
-export const SET_STEP = 'report/SET_STEP'
+export const SET_STEP = 'report/SET_STEP';
 
 const initialState = {
   step: 1
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case SET_STEP:
-    return {
-      ...state,
-      step: action.step
-    }
+    case SET_STEP:
+      return {
+        ...state,
+        step: action.step
+      };
     /*
     case INCREMENT:
       return {
@@ -20,13 +20,12 @@ export default (state = initialState, action) => {
       }
 */
 
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};
 
-
-export const setStep = (step) => {
+export const setStep = step => {
   /*
     if (rptStep === 1) {
       let detail = document.getElementById('detail')
@@ -38,8 +37,6 @@ export const setStep = (step) => {
     dispatch({
       type: SET_STEP,
       step: step
-    })
-  }
-
-
-  }
+    });
+  };
+};

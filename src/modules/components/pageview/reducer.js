@@ -2,7 +2,7 @@ import {
   SET_LEFT_SIDEBAR_VISIBLE,
   SET_LEFT_SIDEBAR_AI,
   SET_REPORT_STEP
-} from './actionTypes'
+} from './actionTypes';
 
 /*
 
@@ -17,29 +17,29 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 
 const initialState = {
   leftSidebarVisible: false,
-  leftSidebarAI:'tcsbyplant',
+  leftSidebarAI: 'tcsbyplant',
   reportStep: 1
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case SET_LEFT_SIDEBAR_VISIBLE:
-    return {
-      ...state,
-      leftSidebarVisible: action.visible
-    }
-  case SET_LEFT_SIDEBAR_AI:
-    return {
-      ...state,
-      leftSidebarAI: action.activeItem
-    }
-  case SET_REPORT_STEP:
-    return {
-      ...state,
-      reportStep: action.reportStep
-    }
+    case SET_LEFT_SIDEBAR_VISIBLE:
+      return {
+        ...state,
+        leftSidebarVisible: action.visible
+      };
+    case SET_LEFT_SIDEBAR_AI:
+      return {
+        ...state,
+        leftSidebarAI: action.activeItem
+      };
+    case SET_REPORT_STEP:
+      return {
+        ...state,
+        reportStep: action.reportStep
+      };
 
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};

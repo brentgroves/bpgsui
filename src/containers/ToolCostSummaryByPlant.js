@@ -1,27 +1,27 @@
-import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { Grid, Segment, Header, Icon } from 'semantic-ui-react'
-import { Form } from 'semantic-ui-react'
-import 'react-widgets/dist/css/react-widgets.css'
-import Moment from 'moment'
-import momentLocalizer from 'react-widgets-moment'
-import DateTimePicker from 'react-widgets/lib/DateTimePicker'
-let jsreport = require('jsreport-browser-client-dist')
-jsreport.serverUrl = 'http://localhost:5488'
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { Grid, Segment, Header, Icon } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
+import 'react-widgets/dist/css/react-widgets.css';
+import Moment from 'moment';
+import momentLocalizer from 'react-widgets-moment';
+import DateTimePicker from 'react-widgets/lib/DateTimePicker';
+let jsreport = require('jsreport-browser-client-dist');
+jsreport.serverUrl = 'http://localhost:5488';
 
-
-Moment.locale('en')
-momentLocalizer()
-
+Moment.locale('en');
+momentLocalizer();
 
 class ToolCostSummaryByPlant extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       isLoading: false,
       step: 1,
-      defStartDate: Moment().startOf('month').toDate(),
+      defStartDate: Moment()
+        .startOf('month')
+        .toDate(),
       defEndDate: Moment().toDate(),
       startDate: Moment().startOf('month'),
       endDate: new Moment(),
@@ -33,124 +33,129 @@ class ToolCostSummaryByPlant extends React.Component {
       plt8Checked: false,
       plt9Checked: false,
       plt11Checked: false
-
-    }
-
-    // This binding is necessary to make `this` work in the callback
-    this.handleOnResize = this.handleOnResize.bind(this)
+    };
 
     // This binding is necessary to make `this` work in the callback
-    this.handleStartDateChange = this.handleStartDateChange.bind(this)
+    this.handleOnResize = this.handleOnResize.bind(this);
+
     // This binding is necessary to make `this` work in the callback
-    this.handleEndDateChange = this.handleEndDateChange.bind(this)
+    this.handleStartDateChange = this.handleStartDateChange.bind(this);
     // This binding is necessary to make `this` work in the callback
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEndDateChange = this.handleEndDateChange.bind(this);
     // This binding is necessary to make `this` work in the callback
-    this.plt2Change = this.plt2Change.bind(this)
-    this.plt3Change = this.plt3Change.bind(this)
-    this.plt5Change = this.plt5Change.bind(this)
-    this.plt6Change = this.plt6Change.bind(this)
-    this.plt7Change = this.plt7Change.bind(this)
-    this.plt8Change = this.plt8Change.bind(this)
-    this.plt9Change = this.plt9Change.bind(this)
-    this.plt11Change = this.plt11Change.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    // This binding is necessary to make `this` work in the callback
+    this.plt2Change = this.plt2Change.bind(this);
+    this.plt3Change = this.plt3Change.bind(this);
+    this.plt5Change = this.plt5Change.bind(this);
+    this.plt6Change = this.plt6Change.bind(this);
+    this.plt7Change = this.plt7Change.bind(this);
+    this.plt8Change = this.plt8Change.bind(this);
+    this.plt9Change = this.plt9Change.bind(this);
+    this.plt11Change = this.plt11Change.bind(this);
   }
-
 
   /**
-     * Set a new state with an increased counter
-     */
+   * Set a new state with an increased counter
+   */
   increaseCounter() {
-    this.setState(Object.assign({}, this.state, {
-      counter: this.state.counter + 1
-    }))
+    this.setState(
+      Object.assign({}, this.state, {
+        counter: this.state.counter + 1
+      })
+    );
   }
 
-
   validateForm() {
-    return ((this.validateDate() === 'success') && (this.validatePlantList() === 'success'))
+    return (
+      this.validateDate() === 'success' &&
+      this.validatePlantList() === 'success'
+    );
   }
 
   validatePlantList() {
     if (
-      (this.state.plt2Checked === true) || (this.state.plt3Checked === true)
-        || (this.state.plt5Checked === true) || (this.state.plt6Checked === true)
-        || (this.state.plt7Checked === true) || (this.state.plt8Checked === true)
-        || (this.state.plt9Checked === true) || (this.state.plt11Checked === true)
+      this.state.plt2Checked === true ||
+      this.state.plt3Checked === true ||
+      this.state.plt5Checked === true ||
+      this.state.plt6Checked === true ||
+      this.state.plt7Checked === true ||
+      this.state.plt8Checked === true ||
+      this.state.plt9Checked === true ||
+      this.state.plt11Checked === true
     ) {
-      return 'success'
+      return 'success';
     }
-    return 'error'
+    return 'error';
   }
 
   validateDate() {
     if (
-      (undefined === this.state.startDate) || (undefined === this.state.endDate)
-        || (this.state.startDate === '') || (this.state.endDate === '')
+      undefined === this.state.startDate ||
+      undefined === this.state.endDate ||
+      this.state.startDate === '' ||
+      this.state.endDate === ''
     ) {
-      return 'error'
+      return 'error';
     }
     // return true if end date is greater than start date
 
-    //   var startDate = Moment(this.state.startDate);    
+    //   var startDate = Moment(this.state.startDate);
     if (!this.state.startDate.isValid()) {
-      return 'error'
+      return 'error';
     }
 
-    //   var endDate = Moment(this.state.endDate);    
+    //   var endDate = Moment(this.state.endDate);
     if (!this.state.endDate.isValid()) {
-      return 'error'
+      return 'error';
     }
 
     if (!this.state.endDate.isAfter(this.state.startDate)) {
-      return 'error'
+      return 'error';
     }
-    return 'success'
+    return 'success';
   }
 
   validateEndDate() {
     if (undefined === this.state.endDate) {
-      return 'error'
+      return 'error';
     }
     // return true if end date is greater than start date
 
-    let date = Moment(this.state.endDate)
+    let date = Moment(this.state.endDate);
     if (!date.isValid()) {
-      return 'error'
+      return 'error';
     }
-    return 'success'
+    return 'success';
   }
 
-
   handleStartDateChange(value) {
-    let newDate = new Moment(value)
+    let newDate = new Moment(value);
     if (newDate.isValid()) {
-      this.setState({ startDate: newDate })
+      this.setState({ startDate: newDate });
     } else {
-      this.setState({ startDate: '' })
+      this.setState({ startDate: '' });
     }
   }
 
   handleEndDateChange(value) {
-    let newDate = new Moment(value)
+    let newDate = new Moment(value);
     if (newDate.isValid()) {
-      this.setState({ endDate: newDate })
+      this.setState({ endDate: newDate });
     } else {
-      this.setState({ endDate: '' })
+      this.setState({ endDate: '' });
     }
   }
 
-
   handleSubmit = async event => {
-    event.preventDefault()
-    this.setState({ isLoading: true })
+    event.preventDefault();
+    this.setState({ isLoading: true });
     try {
       // add custom headers to ajax calls
-      jsreport.headers.Authorization = 'Basic ' + btoa('admin:password')
-      let dtStart = this.state.startDate.format('MM-DD-YYYY h:mm:ss')
+      jsreport.headers.Authorization = 'Basic ' + btoa('admin:password');
+      let dtStart = this.state.startDate.format('MM-DD-YYYY h:mm:ss');
 
-
-      let dtEnd = this.state.endDate.format('MM-DD-YYYY h:mm:ss')
+      let dtEnd = this.state.endDate.format('MM-DD-YYYY h:mm:ss');
       // var dtStart=this.startDate.format('MM-DD-YYYY HH:MM:SS');
       //
       //
@@ -165,120 +170,118 @@ class ToolCostSummaryByPlant extends React.Component {
           plantList: ',',
           rptName: 'WorkSumByPlant'
         }
-      }
+      };
 
-      request2.data.dtStart = dtStart
-      request2.data.dtEnd = dtEnd
-      request2.data.plantList = ','
+      request2.data.dtStart = dtStart;
+      request2.data.dtEnd = dtEnd;
+      request2.data.plantList = ',';
       if (this.state.plt2Checked === true) {
-        request2.data.plantList += '2,'
+        request2.data.plantList += '2,';
       }
       if (this.state.plt3Checked === true) {
-        request2.data.plantList += '3,'
+        request2.data.plantList += '3,';
       }
       if (this.state.plt5Checked === true) {
-        request2.data.plantList += '5,'
+        request2.data.plantList += '5,';
       }
       if (this.state.plt6Checked === true) {
-        request2.data.plantList += '6,'
+        request2.data.plantList += '6,';
       }
       if (this.state.plt7Checked === true) {
-        request2.data.plantList += '7,'
+        request2.data.plantList += '7,';
       }
       if (this.state.plt8Checked === true) {
-        request2.data.plantList += '8,'
+        request2.data.plantList += '8,';
       }
       if (this.state.plt9Checked === true) {
-        request2.data.plantList += '9,'
+        request2.data.plantList += '9,';
       }
       if (this.state.plt11Checked === true) {
-        request2.data.plantList += '11,'
+        request2.data.plantList += '11,';
       }
 
+      let self = this;
 
-      let self = this
+      jsreport.render('detail', request2);
 
-      jsreport.render('detail', request2)
-
-      setTimeout(function () {
-        //        self.props.setRptStep(2); 
-        let detail = document.getElementById('detail')
-        let childNodes = detail.childNodes
+      setTimeout(function() {
+        //        self.props.setRptStep(2);
+        let detail = document.getElementById('detail');
+        let childNodes = detail.childNodes;
         if (childNodes.length !== 0) {
-          self.setState({ isLoading: false })
+          self.setState({ isLoading: false });
 
-          self.props.setRptStep(2)
+          self.props.setRptStep(2);
         }
-      }, 3000)
+      }, 3000);
     } catch (e) {
-      alert(e)
-      this.setState({ isLoading: false })
+      alert(e);
+      this.setState({ isLoading: false });
     }
-  }
+  };
 
-  handleOnResize = (event) => {
-    let detail = document.getElementById('detail')
-    let pane = detail.parentElement.parentElement
-    let splitPane = pane.parentElement
+  handleOnResize = event => {
+    let detail = document.getElementById('detail');
+    let pane = detail.parentElement.parentElement;
+    let splitPane = pane.parentElement;
 
-    let splitPaneHeight = splitPane.clientHeight
-    let splitPaneWidth = splitPane.clientWidth
-    detail.height = splitPaneHeight
-    detail.width = splitPaneWidth
-  }
+    let splitPaneHeight = splitPane.clientHeight;
+    let splitPaneWidth = splitPane.clientWidth;
+    detail.height = splitPaneHeight;
+    detail.width = splitPaneWidth;
+  };
 
-
-  plt2Change = (event) => {
+  plt2Change = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt2Checked: event.target.checked
-    })
-  }
+    });
+  };
 
-  plt3Change = (event) => {
+  plt3Change = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt3Checked: event.target.checked
-    })
-  }
-  plt5Change = (event) => {
+    });
+  };
+  plt5Change = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt5Checked: event.target.checked
-    })
-  }
-  plt6Change = (event) => {
+    });
+  };
+  plt6Change = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt6Checked: event.target.checked
-    })
-  }
-  plt7Change = (event) => {
+    });
+  };
+  plt7Change = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt7Checked: event.target.checked
-    })
-  }
-  plt8Change = (event) => {
+    });
+  };
+  plt8Change = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt8Checked: event.target.checked
-    })
-  }
-  plt9Change = (event) => {
+    });
+  };
+  plt9Change = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt9Checked: event.target.checked
-    })
-  }
-  plt11Change = (event) => {
+    });
+  };
+  plt11Change = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt11Checked: event.target.checked
-    })
-  }
+    });
+  };
 
-  pltAllChange = (event) => {
+  pltAllChange = event => {
     //    this.setState({ checkboxChecked: evt.target.checked });
     this.setState({
       plt2Checked: event.target.checked,
@@ -289,58 +292,57 @@ class ToolCostSummaryByPlant extends React.Component {
       plt8Checked: event.target.checked,
       plt9Checked: event.target.checked,
       plt11Checked: event.target.checked
-
-    })
-  }
+    });
+  };
   /* Dennis 1 Nov 2017 - 28 Nov  1 Sep - 28 Nov */
   /* Nancy for year */
 
   render() {
     return (
-
-      <Grid >
-
+      <Grid>
         <Grid.Row>
           <Grid.Column width={3} />
           <Grid.Column width={10}>
-                    &nbsp;<br />&nbsp;
-
+            &nbsp;<br />&nbsp;
             <Segment>
-              <Header as='h2'>
-                <Icon name='plug' />
-                <Header.Content>
-              Tool Cost Summary
-                </Header.Content>
+              <Header as="h2">
+                <Icon name="plug" />
+                <Header.Content>Tool Cost Summary</Header.Content>
               </Header>
-              <p><strong>Description:</strong>{' '}This report sums all of the issues from the tool bosses and crib for a part number for a specified date range and department(s).  It also displays the current M2M Job Number, pieces produced, value added sales, total and cunsumable tool costs as well as a Tool Cost / Value Add Sales percentage.</p>
-              <p><strong>Start:</strong>{' '} </p>
+              <p>
+                <strong>Description:</strong> This report sums all of the issues
+                from the tool bosses and crib for a part number for a specified
+                date range and department(s). It also displays the current M2M
+                Job Number, pieces produced, value added sales, total and
+                cunsumable tool costs as well as a Tool Cost / Value Add Sales
+                percentage.
+              </p>
+              <p>
+                <strong>Start:</strong>{' '}
+              </p>
               <DateTimePicker
                 onChange={this.handleStartDateChange}
-                defaultValue={ this.state.defStartDate}
+                defaultValue={this.state.defStartDate}
               />
-              <p><strong>End:</strong>{' '} </p>
+              <p>
+                <strong>End:</strong>{' '}
+              </p>
 
               <DateTimePicker
                 onChange={this.handleEndDateChange}
                 defaultValue={this.state.defEndDate}
               />
               <Form />
-
             </Segment>
           </Grid.Column>
           <Grid.Column width={3} />
         </Grid.Row>
-
-
       </Grid>
-
-
-    )
+    );
   }
 }
 
-export default withRouter(ToolCostSummaryByPlant)
-
+export default withRouter(ToolCostSummaryByPlant);
 
 /*   
     let headerStyle = {
@@ -510,4 +512,4 @@ export default withRouter(ToolCostSummaryByPlant)
       </div>
     )
   }
-*/  
+*/

@@ -1,32 +1,31 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-import './Wait.css'
-import { Loader, Dimmer, Grid } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import './Wait.css';
+import { Loader, Dimmer, Grid } from 'semantic-ui-react';
 
 class ScriptCheck extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       isLoading: false
-    }
+    };
   }
 
-
   async componentDidMount() {
-    let thisLv2 = this
-    setTimeout(function () {
-      //        self.props.setRptStep(2); 
-      let detail = document.getElementById('detail')
-      let childNodes = detail.childNodes
+    let thisLv2 = this;
+    setTimeout(function() {
+      //        self.props.setRptStep(2);
+      let detail = document.getElementById('detail');
+      let childNodes = detail.childNodes;
       if (childNodes.length !== 0) {
-        thisLv2.props.setRptStep(2)
+        thisLv2.props.setRptStep(2);
       }
-    }, 3000)
+    }, 3000);
   }
 
   validateForm() {
-    return 'success'
+    return 'success';
   }
   render() {
     let divStyle = {
@@ -34,8 +33,7 @@ class ScriptCheck extends Component {
       height: '100%',
       padding: '0px !important',
       margin: '0px !important'
-    }
-
+    };
 
     let headerStyle = {
       width: '100%',
@@ -45,32 +43,26 @@ class ScriptCheck extends Component {
 
       background: 'grey'
       //      width: '100%'
-    }
+    };
 
+    return [
+      <Grid basic style={divStyle}>
+        <Grid.Column width={8} style={divStyle}>
+          <Dimmer style={divStyle} active>
+            <Loader style={divStyle}>Loading</Loader>
+          </Dimmer>
+        </Grid.Column>
 
-    return (
-      [
-        <Grid basic style={divStyle}>
-          <Grid.Column width={8} style={divStyle} >
-            <Dimmer style={divStyle} active >
-              <Loader style={divStyle}>Loading</Loader>
-            </Dimmer>
-          </Grid.Column>
-
-          <Grid.Column width={8} >
-            <Dimmer style={headerStyle} active >
-              <Loader >Loading</Loader>
-            </Dimmer>
-
-          </Grid.Column>
-
-
-        </Grid>
-      ]
-    )
+        <Grid.Column width={8}>
+          <Dimmer style={headerStyle} active>
+            <Loader>Loading</Loader>
+          </Dimmer>
+        </Grid.Column>
+      </Grid>
+    ];
   }
 }
-export default withRouter(ScriptCheck)
+export default withRouter(ScriptCheck);
 /*
                 </Grid.Column>
                 <Grid.Column  width={8}>

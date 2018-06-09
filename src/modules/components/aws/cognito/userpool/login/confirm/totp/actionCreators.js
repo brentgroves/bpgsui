@@ -12,28 +12,26 @@ import {
 } from './actionTypes'
 */
 
-
-import {ConfirmActions as AT} from './actionTypes'
-
+import { ConfirmActions as AT } from './actionTypes';
 
 export const setEmailFormStatus = (email, emailStatus, formStatus) => {
   return {
-      type: AT.SET_EMAIL_FORM_STATUS,
-      email: email,
-      emailStatus: emailStatus,
-      formStatus: formStatus
-  }
-}
+    type: AT.SET_EMAIL_FORM_STATUS,
+    email: email,
+    emailStatus: emailStatus,
+    formStatus: formStatus
+  };
+};
 
-
-export const setConfirmationCodeFormStatus = (confirmationCode,
-  confirmationCodeStatus, formStatus) => {
+export const setConfirmationCodeFormStatus = (
+  confirmationCode,
+  confirmationCodeStatus,
+  formStatus
+) => {
   return {
     type: AT.SET_CONFIRMATION_CODE_FORM_STATUS,
     confirmationCode: confirmationCode,
     confirmationCodeStatus: confirmationCodeStatus,
     formStatus: formStatus
-  }
-}
-
-
+  };
+};

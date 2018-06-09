@@ -1,22 +1,24 @@
-import { CognitoUserPool, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
-import config from '../../../config'
+import {
+  CognitoUserPool,
+  CognitoUser,
+  AuthenticationDetails
+} from 'amazon-cognito-identity-js';
+import config from '../../../config';
 
-
-
-export const SET_AUTHENTICATED = 'aws/SET_AUTHENTICATED'
-export const LOGIN_REQUEST = 'aws/cognito/LOGIN_REQUEST'
-export const LOGIN_SUCCESS = 'aws/cognito/LOGIN_SUCCESS'
-export const LOGIN_FAILURE = 'aws/cognito/LOGIN_FAILURE'
+export const SET_AUTHENTICATED = 'aws/SET_AUTHENTICATED';
+export const LOGIN_REQUEST = 'aws/cognito/LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'aws/cognito/LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'aws/cognito/LOGIN_FAILURE';
 
 const initialState = {
   user: {
-    verifying:false,
-    authenticated:false,
-    error:'',
-    name:'',
-    password:''
+    verifying: false,
+    authenticated: false,
+    error: '',
+    name: '',
+    password: ''
   }
-}
+};
 
 /*
 follow https://redux.js.org/docs/advanced/AsyncActions.html
@@ -36,8 +38,7 @@ export default (state = initialState, action) => {
           name: action.name,
           password: action.password
         }
-      })
-
+      });
 
     case LOGIN_REQUEST:
       return Object.assign({}, state, {
@@ -48,7 +49,7 @@ export default (state = initialState, action) => {
           name: action.name,
           password: action.password
         }
-      })
+      });
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
         ...state,
@@ -56,7 +57,7 @@ export default (state = initialState, action) => {
           verifying: false,
           authenticated: true
         }
-      })
+      });
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
         ...state,
@@ -64,12 +65,12 @@ export default (state = initialState, action) => {
           verifying: false,
           error: action.error
         }
-      })
+      });
 
-      default:
-        return state
-    }
-    /*
+    default:
+      return state;
+  }
+  /*
 
     case RECEIVE_POSTS:
       return Object.assign({}, state, {
@@ -95,7 +96,7 @@ return Object.assign({}, state, {
   }
 
 */
-}
+};
 
 //https://redux.js.org/docs/advanced/AsyncActions.html
 //https://hackernoon.com/javascript-functional-composition-for-every-day-use-22421ef65a10
@@ -104,62 +105,59 @@ return Object.assign({}, state, {
 //STARTING AT THE ACTIONS.JS (Asynchronous) section specifically how to
 //handle multiple dispatchs
 export const login = (email, password) => {
-
   return dispatch => {
     dispatch({
-      type:LOGIN_REQUEST,
+      type: LOGIN_REQUEST,
       isVerifying: true,
       name: email,
       password
-    })
+    });
     const userPool = new CognitoUserPool({
       UserPoolId: config.cognito.USER_POOL_ID,
       ClientId: config.cognito.APP_CLIENT_ID
-    })
-    const user = new CognitoUser({ Username: email, Pool: userPool })
-    const authenticationData = { Username: email, Password: password }
-    const authenticationDetails = new AuthenticationDetails(authenticationData)
+    });
+    const user = new CognitoUser({ Username: email, Pool: userPool });
+    const authenticationData = { Username: email, Password: password };
+    const authenticationDetails = new AuthenticationDetails(authenticationData);
 
     return new Promise((resolve, reject) =>
       user.authenticateUser(authenticationDetails, {
-        onSuccess: function (result) {
+        onSuccess: function(result) {
           dispatch({
-            type:LOGIN_REQUEST,
+            type: LOGIN_REQUEST,
             isVerifying: false
-          })
-          resolve()
+          });
+          resolve();
         },
-        onFailure:  function(err) {
+        onFailure: function(err) {
           dispatch({
-            type:LOGIN_REQUEST,
+            type: LOGIN_REQUEST,
             isVerifying: false
-          })
-          reject(err)
+          });
+          reject(err);
         }
-
       })
-    )
-  }
-}
+    );
+  };
+};
 
-export const setAuthenticated = (authenticated) => {
+export const setAuthenticated = authenticated => {
   return dispatch => {
     dispatch({
       type: SET_AUTHENTICATED,
       authenticated: authenticated
-    })
-  }
-}
+    });
+  };
+};
 // //////////////////////////////////////////////////////////
 // AWS Library functions
 // /////////////////////////////////////////////////////////
 export function validateEmail(x) {
-  let atpos = x.indexOf('@')
-  let dotpos = x.lastIndexOf('.')
+  let atpos = x.indexOf('@');
+  let dotpos = x.lastIndexOf('.');
   if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
     //  alert("Not a valid e-mail address");
-    return 'error'
+    return 'error';
   }
-  return 'success'
+  return 'success';
 }
-

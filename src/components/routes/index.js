@@ -1,56 +1,101 @@
-import React from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Home from '../../containers/Home'
-import Login from '../../containers/aws/cognito/userpool/login/'
-import ConfirmLogin from '../../containers/aws/cognito/userpool/login/confirm/sms/'
-import Signup from '../../containers/aws/cognito/userpool/signup/'
-import ConfirmSignup from '../../containers/aws/cognito/userpool/signup/confirm'
-import GetACode from '../../containers/aws/cognito/userpool/signup/getacode/'
-import ChangePassword from '../../containers/ChangePassword'
-import NotFound from '../../containers/NotFound'
-import ToolCostSummaryByPlant from '../../containers/ToolCostSummaryByPlant'
-import Wait from '../../containers/Wait'
-import AppliedRoute from '../../components/AppliedRoute'
-import ScriptCheck from '../../containers/ScriptCheck'
-import ErrorModal from '../../containers/modal/error'
-import InfoModal from '../../containers/modal/info'
+import React from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Home from '../../containers/Home';
+import Login from '../../containers/aws/cognito/userpool/login/';
+import ConfirmLogin from '../../containers/aws/cognito/userpool/login/confirm/sms/';
+import Signup from '../../containers/aws/cognito/userpool/signup/';
+import ConfirmSignup from '../../containers/aws/cognito/userpool/signup/confirm';
+import GetACode from '../../containers/aws/cognito/userpool/signup/getacode/';
+import ChangePassword from '../../containers/ChangePassword';
+import NotFound from '../../containers/NotFound';
+import ToolCostSummaryByPlant from '../../containers/ToolCostSummaryByPlant';
+import Wait from '../../containers/Wait';
+import AppliedRoute from '../../components/AppliedRoute';
+import ScriptCheck from '../../containers/ScriptCheck';
+import ErrorModal from '../../containers/modal/error';
+import InfoModal from '../../containers/modal/info';
 //Use fragments (React v16.2+ only!) https://stackoverflow.com/questions/31284169/parse-error-adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag
 
+const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      authenticated == false ? (
+        <Redirect to="/login" />
+      ) : (
+        <Component {...props} />
+      )
+    }
+  />
+);
 
-const PrivateRoute = ({ component: Component, authenticated, ...rest}) => (
-    <Route {...rest} render={props => authenticated == false
-        ? ( <Redirect to="/login" /> ) : ( <Component {...props} /> )
-    } />
-)
-
-const PublicRoute = ({ component: Component, authenticated, ...rest}) => (
-    <Route {...rest} render={props => authenticated == false
-        ? ( <Component {...props} /> ) : (<Redirect to="/login" />)
-    } />
-)
+const PublicRoute = ({ component: Component, authenticated, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      authenticated == false ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/login" />
+      )
+    }
+  />
+);
 
 /*
 CHANGE TO A COMPONENT AND ADD componentWillMount(),ETC FUNCTIONS THAT SIGNOUT WHEN LEAVING
 AFTER THAT LOOK AT /AUTH/LOGIN.JSX AND MODIFY OUR LOGIN PAGE IF BETTER
 */
 const Routes = props => (
-<Switch>
-  <PublicRoute authenticated={props.authenticated} path='/info' exact component={InfoModal} />
-  <PublicRoute authenticated={props.authenticated} path='/error' exact component={ErrorModal} />
-  <PublicRoute authenticated={props.authenticated} path='/signup' exact component={Signup} />
-  <PublicRoute authenticated={props.authenticated} path='/confirmSignup' exact component={ConfirmSignup} />
-  <PublicRoute authenticated={props.authenticated} path='/getACode' exact component={GetACode} />
-  <PublicRoute authenticated={props.authenticated} path='/login' exact component={Login} />
-  <PrivateRoute authenticated={props.authenticated} path='/info' component={InfoModal} />
-  <Route render={() => (<Redirect to="/login" />)} />
+  <Switch>
+    <PublicRoute
+      authenticated={props.authenticated}
+      path="/info"
+      exact
+      component={InfoModal}
+    />
+    <PublicRoute
+      authenticated={props.authenticated}
+      path="/error"
+      exact
+      component={ErrorModal}
+    />
+    <PublicRoute
+      authenticated={props.authenticated}
+      path="/signup"
+      exact
+      component={Signup}
+    />
+    <PublicRoute
+      authenticated={props.authenticated}
+      path="/confirmSignup"
+      exact
+      component={ConfirmSignup}
+    />
+    <PublicRoute
+      authenticated={props.authenticated}
+      path="/getACode"
+      exact
+      component={GetACode}
+    />
+    <PublicRoute
+      authenticated={props.authenticated}
+      path="/login"
+      exact
+      component={Login}
+    />
+    <PrivateRoute
+      authenticated={props.authenticated}
+      path="/info"
+      component={InfoModal}
+    />
+    <Route render={() => <Redirect to="/login" />} />
+  </Switch>
+);
 
-</Switch>
+export default Routes;
 
-  )
-
-  export default Routes
-
-  /*
+/*
 
 const Routes = props => (
 <Switch>

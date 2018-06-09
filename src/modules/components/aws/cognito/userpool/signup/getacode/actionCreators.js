@@ -12,28 +12,25 @@ import {
 } from './actionTypes'
 */
 
+import { GetACodeActions as AT } from './actionTypes';
 
-import {GetACodeActions as AT} from './actionTypes'
-
-
-export const setWorking = (working) => {
+export const setWorking = working => {
   return dispatch => {
     dispatch({
       type: AT.SET_WORKING,
       working: working
-    })
-  }
-}
+    });
+  };
+};
 
-
-export const setUserName = (userName) => {
+export const setUserName = userName => {
   return dispatch => {
     dispatch({
       type: AT.SET_USERNAME,
       userName: userName
-    })
-  }
-}
+    });
+  };
+};
 
 export const setUserNameFormStatus = (userName, userNameStatus, formStatus) => {
   return dispatch => {
@@ -42,16 +39,16 @@ export const setUserNameFormStatus = (userName, userNameStatus, formStatus) => {
       userName: userName,
       userNameStatus: userNameStatus,
       formStatus: formStatus
-    })
-  }
-}
+    });
+  };
+};
 
-export const setPassword = (password) => {
+export const setPassword = password => {
   return {
     type: AT.SET_PASSWORD,
     password: password
-  }
-}
+  };
+};
 
 export const setPasswordFormStatus = (password, passwordStatus, formStatus) => {
   return {
@@ -59,14 +56,12 @@ export const setPasswordFormStatus = (password, passwordStatus, formStatus) => {
     password: password,
     passwordStatus: passwordStatus,
     formStatus: formStatus
-  }
-}
+  };
+};
 
-export const setFormStatus = (status) => {
+export const setFormStatus = status => {
   return {
     type: AT.SET_FORM_STATUS,
     status: status
-  }
-}
-
-
+  };
+};

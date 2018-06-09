@@ -1,113 +1,135 @@
-import React, { Component } from 'react'
-import { push } from 'react-router-redux'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { Grid, Segment, Header, Icon, Button, Form, Message } from 'semantic-ui-react'
-import shortid from 'shortid'
-import ErrorModal from '../../../../../containers/modal/error'
+import React, { Component } from 'react';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import {
+  Grid,
+  Segment,
+  Header,
+  Icon,
+  Button,
+  Form,
+  Message
+} from 'semantic-ui-react';
+import shortid from 'shortid';
+import ErrorModal from '../../../../../containers/modal/error';
 
-
-
-import { validEmail } from '../../../../../modules/api/aws/cognito/userpool/misc'
+import { validEmail } from '../../../../../modules/api/aws/cognito/userpool/misc';
 
 const GetACode = props => (
-  <div className='fullPage'>
-      <Grid >
-        <Grid.Row centered>
-          <Grid.Column width={6}>
-            <Segment inverted>
-              <Header as='h2'>
-                <Icon name='user outline' />
-                <Header.Content>
-              Get Authentication Code
-                </Header.Content>
-              </Header>
-              <Form
-                inverted
-                key={props.formKey}>
-
-                <Form.Input
-                  key={props.userNameKey}
-                  id='userName'
-                  value={props.userName}
-                  label='username' placeholder='joe@schmoe.com'
-                  type='text'
-                  error={props.userNameStatus === 'error'}
-                  onChange={(event) => {
-                    let userNameStatus
-                    let formStatus
-                    if (event.target.value.length > 4) {
-                      userNameStatus = 'success'
-                    } else {
-                      userNameStatus = 'error'
-                    }
-                    if (props.passwordStatus === 'success' && userNameStatus === 'success') {
-                      formStatus = 'success'
-                    } else {
-                      formStatus = 'error'
-                    }
-                    props.setUserNameFormStatus(event.target.value, userNameStatus, formStatus)
+  <div className="fullPage">
+    <Grid>
+      <Grid.Row centered>
+        <Grid.Column width={6}>
+          <Segment inverted>
+            <Header as="h2">
+              <Icon name="user outline" />
+              <Header.Content>Get Authentication Code</Header.Content>
+            </Header>
+            <Form inverted key={props.formKey}>
+              <Form.Input
+                key={props.userNameKey}
+                id="userName"
+                value={props.userName}
+                label="username"
+                placeholder="joe@schmoe.com"
+                type="text"
+                error={props.userNameStatus === 'error'}
+                onChange={event => {
+                  let userNameStatus;
+                  let formStatus;
+                  if (event.target.value.length > 4) {
+                    userNameStatus = 'success';
+                  } else {
+                    userNameStatus = 'error';
                   }
+                  if (
+                    props.passwordStatus === 'success' &&
+                    userNameStatus === 'success'
+                  ) {
+                    formStatus = 'success';
+                  } else {
+                    formStatus = 'error';
                   }
-
-                />
-                <Form.Input
-                  key={props.passwordKey}
-                  id='password'
-                  value={props.password}
-                  label='Enter Password'
-                  type='password'
-                  error={props.passwordStatus === 'error'}
-                  onChange={(event) => {
-                    let passwordStatus
-                    let formStatus
-                    if (event.target.value.length > 4) {
-                      passwordStatus = 'success'
-                    } else {
-                      passwordStatus = 'error'
-                    }
-                    if (props.userNameStatus === 'success' && passwordStatus === 'success') {
-                      formStatus = 'success'
-                    } else {
-                      formStatus = 'error'
-                    }
-                    props.setPasswordFormStatus(event.target.value, passwordStatus, formStatus)
+                  props.setUserNameFormStatus(
+                    event.target.value,
+                    userNameStatus,
+                    formStatus
+                  );
+                }}
+              />
+              <Form.Input
+                key={props.passwordKey}
+                id="password"
+                value={props.password}
+                label="Enter Password"
+                type="password"
+                error={props.passwordStatus === 'error'}
+                onChange={event => {
+                  let passwordStatus;
+                  let formStatus;
+                  if (event.target.value.length > 4) {
+                    passwordStatus = 'success';
+                  } else {
+                    passwordStatus = 'error';
                   }
+                  if (
+                    props.userNameStatus === 'success' &&
+                    passwordStatus === 'success'
+                  ) {
+                    formStatus = 'success';
+                  } else {
+                    formStatus = 'error';
                   }
-                />
-                  <div className='formButtons'>
-
+                  props.setPasswordFormStatus(
+                    event.target.value,
+                    passwordStatus,
+                    formStatus
+                  );
+                }}
+              />
+              <div className="formButtons">
                 <Button
-                  type='submit'
+                  type="submit"
                   key={props.backKey}
-                  disabled={false }
+                  disabled={false}
                   loading={false}
-                  onClick={ (event) => props.history.push('/signup')}>Back</Button>
+                  onClick={event => props.history.push('/signup')}
+                >
+                  Back
+                </Button>
                 <Button
-                  type='submit'
+                  type="submit"
                   key={props.submitKey}
-                  disabled={props.formStatus === 'success' ? false : true }
+                  disabled={props.formStatus === 'success' ? false : true}
                   loading={props.pending}
-                  onClick={ async (event) =>{
-                    let aCodeResult = await props.getACode(props.userName, props.password)
-                    if (aCodeResult.status === 'success'){
-                      props.history.push('/dispACode')
+                  onClick={async event => {
+                    let aCodeResult = await props.getACode(
+                      props.userName,
+                      props.password
+                    );
+                    if (aCodeResult.status === 'success') {
+                      props.history.push('/dispACode');
                     } else {
-                      props.initErrorModal('Get Authentication Code Failed', aCodeResult.return, '/')
-                      props.history.push('/error')
+                      props.initErrorModal(
+                        'Get Authentication Code Failed',
+                        aCodeResult.return,
+                        '/'
+                      );
+                      props.history.push('/error');
                     }
-                  }}>Submit</Button>
-                  </div>
-              </Form>
-
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-
-
-      </Grid>
-    </div>
-)
+                  }}
+                >
+                  Submit
+                </Button>
+              </div>
+            </Form>
+          </Segment>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
+  </div>
+);
 
 /*
 props.showErrorModal
@@ -256,4 +278,4 @@ props.showErrorModal
                   }
 */
 
-export default Login
+export default Login;

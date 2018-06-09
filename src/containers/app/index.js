@@ -1,17 +1,20 @@
-import { withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import App from '../../components/app'
-import * as awsLogin from '../../modules/api/aws/cognito/userpool/login/actionCreators' 
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import App from '../../components/app';
+import * as awsLogin from '../../modules/api/aws/cognito/userpool/login/actionCreators';
 
 const mapStateToProps = state => ({
   authenticated: state.awsLoginConfirm.authenticated
-})
+});
 
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  ...awsLogin
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      ...awsLogin
+    },
+    dispatch
+  );
 
 /*
   gotoTCSbyPlant: () => push('/tcsbyplant'),
@@ -29,9 +32,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 */
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App))
-
-
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

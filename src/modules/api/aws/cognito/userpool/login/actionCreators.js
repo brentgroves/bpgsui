@@ -1,33 +1,36 @@
-
-import {AwsLoginActions as AT} from './actionTypes'
-import { CognitoUserPool, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js'
+import { AwsLoginActions as AT } from './actionTypes';
+import {
+  CognitoUserPool,
+  CognitoUser,
+  AuthenticationDetails
+} from 'amazon-cognito-identity-js';
 //import config from '../../../../config'
 import awsmobile from '../../../../../../aws-exports';
-import {Auth} from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 
 var jwtDecode = require('jwt-decode');
 
 export function loginRequest() {
   return {
     type: AT.LOGIN_REQUEST
-  }
+  };
 }
 
-export function loginSuccess(email,groups,attributes, primary) {
+export function loginSuccess(email, groups, attributes, primary) {
   return {
     type: AT.LOGIN_SUCCESS,
     email: email,
     groups: groups,
     attributes: attributes,
     primary: primary
-  }
+  };
 }
 
 export function loginFailure(error) {
   return {
     type: AT.LOGIN_FAILURE,
     error: error
-  }
+  };
 }
 
 /*
@@ -51,79 +54,78 @@ export function login(userName, password, enableResend) {
   return dispatch => {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
-    dispatch(loginRequest())
+    dispatch(loginRequest());
     return new Promise((resolve, reject) => {
-      var groups 
-      var attributes = []
-      var primary = 'none'
+      var groups;
+      var attributes = [];
+      var primary = 'none';
       Auth.signIn(userName, password)
-      .then(data => {
-          let cognitoUser = data
-          let t = 1
+        .then(data => {
+          let cognitoUser = data;
+          let t = 1;
           if (!enableResend) {
-//              dispatch(setResendMFA(false, true))
-//              countDownResendVerificationCode();
-t++
+            //              dispatch(setResendMFA(false, true))
+            //              countDownResendVerificationCode();
+            t++;
           }
           cognitoUser.getSession(function(err, session) {
+            if (err) {
+              console.error(err);
+              dispatch(loginFailure(err.message));
+              resolve({
+                return: err.message,
+                primary: ''
+              });
+              return;
+            }
+            console.log('session validity: ' + session.isValid());
+            console.log('jwtToken: ' + session.getIdToken().jwtToken);
+            var sessionIdInfo = jwtDecode(session.getIdToken().jwtToken);
+            console.log(sessionIdInfo['cognito:groups']);
+            groups = sessionIdInfo['cognito:groups'];
+            cognitoUser.getUserAttributes(function(err, result) {
               if (err) {
-                  console.error(err);
-                  dispatch(loginFailure(err.message))
-                  resolve({
-                    return: err.message,
-                    primary: ''
-                  })
-                  return;
+                console.error(err.message);
+                dispatch(loginFailure(err.message));
+                resolve({
+                  return: err.message,
+                  primary: ''
+                });
+                return;
               }
-              console.log('session validity: ' + session.isValid());
-              console.log('jwtToken: ' + session.getIdToken().jwtToken);
-              var sessionIdInfo = jwtDecode(session.getIdToken().jwtToken);
-              console.log(sessionIdInfo['cognito:groups']);
-              groups = sessionIdInfo['cognito:groups']
-                  cognitoUser.getUserAttributes(function(err, result) {
-                      if (err) {
-                          console.error(err.message);
-                          dispatch(loginFailure(err.message))
-                          resolve({
-                            return: err.message,
-                            primary: ''
-                          })
-                          return;
-                      }
-                      var i
-                      for (i = 0; i < result.length; i++) {
-                          let name = result[i].getName()
-                          let value = result[i].getValue()
-                          console.log('attribute ' + name + ' has value ' + value);
-                          attributes.push({name : name, value : value})
-                          if(name==='custom:primary'){
-                            primary = value
-                          }
-                      }
-                    dispatch(loginSuccess(userName,groups,attributes, primary))
-                    resolve({
-                      return: 'success',
-                      primary: primary
-                    })
-                  });
-              });          
-      })
-      .catch(err => console.log(err)); 
-    }
-    )
+              var i;
+              for (i = 0; i < result.length; i++) {
+                let name = result[i].getName();
+                let value = result[i].getValue();
+                console.log('attribute ' + name + ' has value ' + value);
+                attributes.push({ name: name, value: value });
+                if (name === 'custom:primary') {
+                  primary = value;
+                }
+              }
+              dispatch(loginSuccess(userName, groups, attributes, primary));
+              resolve({
+                return: 'success',
+                primary: primary
+              });
+            });
+          });
+        })
+        .catch(err => console.log(err));
+    });
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
 
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-   // Do not use catch, because that will also catch
+    // Do not use catch, because that will also catch
     // any errors in the dispatch and resulting render,
     // causing a loop of 'Unexpected batch number' errors.
     // https://github.com/facebook/react/issues/6895
-   // return 1
+    // return 1
 
-/*
+    /*
     var groups 
     var attributes = []
     var primary = 'none'
@@ -197,10 +199,6 @@ t++
 
       })
     )
-   */ 
-  }
+   */
+  };
 }
-
-
-
-

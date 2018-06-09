@@ -1,5 +1,5 @@
-import { AwsGetACodeActions as AT } from './actionTypes'
-	 
+import { AwsGetACodeActions as AT } from './actionTypes';
+
 /*
 
 Handling Actions OF AsyncActions
@@ -12,33 +12,32 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 */
 
 const initialState = {
-	email: '',
-	password: '',
-	acode:'',
-	pending: false,
-	error: ''
-}
+  email: '',
+  password: '',
+  acode: '',
+  pending: false,
+  error: ''
+};
 
 export default (state = initialState, action) => {
-  	switch (action.type) {
-	    case AT.GETACODE_REQUEST:
-		    return Object.assign({}, initialState, {
-		      pending: true,
-		      error: ''
-		    })
-	    case AT.GETACODE_SUCCESS:
-		    return Object.assign({}, state, {
-		    	email: action.email,
-		    	acode: action.acode,
-		    	pending: false
-		    })
-	    case AT.GETACODE_FAILURE:
-		    return Object.assign({}, initialState, {
-		      pending: false,
-		      error: action.error
-		    })
-  default:
-		    return state
-  	}
-}
-
+  switch (action.type) {
+    case AT.GETACODE_REQUEST:
+      return Object.assign({}, initialState, {
+        pending: true,
+        error: ''
+      });
+    case AT.GETACODE_SUCCESS:
+      return Object.assign({}, state, {
+        email: action.email,
+        acode: action.acode,
+        pending: false
+      });
+    case AT.GETACODE_FAILURE:
+      return Object.assign({}, initialState, {
+        pending: false,
+        error: action.error
+      });
+    default:
+      return state;
+  }
+};

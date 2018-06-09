@@ -1,5 +1,5 @@
-import { AwsLoginActions as AT } from './actionTypes'
-	 
+import { AwsLoginActions as AT } from './actionTypes';
+
 /*
 
 Handling Actions OF AsyncActions
@@ -12,36 +12,35 @@ No surprises. No side effects. No API calls. No mutations. Just a calculation.
 */
 
 const initialState = {
-	email: '',
-	groups: [],
-	attributes: [],
-	primary:'',
-	pending: false,
-	error: ''
-}
+  email: '',
+  groups: [],
+  attributes: [],
+  primary: '',
+  pending: false,
+  error: ''
+};
 
 export default (state = initialState, action) => {
-  	switch (action.type) {
-	    case AT.LOGIN_REQUEST:
-		    return Object.assign({}, initialState, {
-		      pending: true,
-		      error: ''
-		    })
-	    case AT.LOGIN_SUCCESS:
-		    return Object.assign({}, state, {
-		    	email: action.email,
-		    	groups: action.groups,
-		    	attributes: action.attributes,
-		    	primary: action.primary,
-		      pending: false
-		    })
-	    case AT.LOGIN_FAILURE:
-		    return Object.assign({}, initialState, {
-		      pending: false,
-		      error: action.error
-		    })
-  default:
-		    return state
-  	}
-}
-
+  switch (action.type) {
+    case AT.LOGIN_REQUEST:
+      return Object.assign({}, initialState, {
+        pending: true,
+        error: ''
+      });
+    case AT.LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        email: action.email,
+        groups: action.groups,
+        attributes: action.attributes,
+        primary: action.primary,
+        pending: false
+      });
+    case AT.LOGIN_FAILURE:
+      return Object.assign({}, initialState, {
+        pending: false,
+        error: action.error
+      });
+    default:
+      return state;
+  }
+};

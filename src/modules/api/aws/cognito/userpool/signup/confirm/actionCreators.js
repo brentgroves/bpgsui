@@ -1,56 +1,59 @@
 // @flow
-import { AwsConfirmActions as AT } from './actionTypes'
-import { CognitoUserPool, CognitoUser, CognitoUserAttribute, AuthenticationDetails } from 'amazon-cognito-identity-js'
+import { AwsConfirmActions as AT } from './actionTypes';
+import {
+  CognitoUserPool,
+  CognitoUser,
+  CognitoUserAttribute,
+  AuthenticationDetails
+} from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 
-import config from '../../../../../../../config'
+import config from '../../../../../../../config';
 
-function square(x: ? number) {
+function square(x: ?number) {
   if (x) {
     return x * x;
-  }
-  else {
+  } else {
     return NaN;
   }
 }
 export function confirmRequest() {
   return {
     type: AT.CONFIRM_REQUEST
-  }
+  };
 }
 
 export function confirmSuccess() {
   return {
     type: AT.CONFIRM_SUCCESS
-  }
+  };
 }
 
 export function confirmFailure(error) {
   return {
     type: AT.CONFIRM_FAILURE,
     error: error
-  }
+  };
 }
 
 export function resendRequest() {
   return {
     type: AT.RESEND_REQUEST
-  }
+  };
 }
 
 export function resendSuccess() {
   return {
     type: AT.RESEND_SUCCESS
-  }
+  };
 }
 
 export function resendFailure(error) {
   return {
     type: AT.RESEND_FAILURE,
     error: error
-  }
+  };
 }
-
 
 /*
 https://redux.js.org/docs/advanced/AsyncActions.html
@@ -73,16 +76,14 @@ export function confirm(userName, confirmationCode) {
   return dispatch => {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
-    dispatch(confirmRequest())
+    dispatch(confirmRequest());
 
     const userPool = new CognitoUserPool({
       UserPoolId: config.cognito.USER_POOL_ID,
       ClientId: config.cognito.APP_CLIENT_ID
-    })
+    });
 
-    const user = new CognitoUser({ Username: userName, Pool: userPool })
-
-
+    const user = new CognitoUser({ Username: userName, Pool: userPool });
 
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
@@ -95,20 +96,21 @@ export function confirm(userName, confirmationCode) {
     // causing a loop of 'Unexpected batch number' errors.
     // https://github.com/facebook/react/issues/6895
     // return 1
-    return new Promise((resolve, reject) =>
-      // https://aws.github.io/aws-amplify/media/authentication_guide.html#sign-up
-      // Collect confirmation code, then
-      Auth.confirmSignUp(userName, confirmationCode)
-      .then(data => {
-        console.log(data)
-        dispatch(confirmSuccess())
-        resolve('success')
-      })
-      .catch(err => {
-        console.log(err)
-        dispatch(confirmFailure(err.message))
-        resolve(err.message)
-      })
+    return new Promise(
+      (resolve, reject) =>
+        // https://aws.github.io/aws-amplify/media/authentication_guide.html#sign-up
+        // Collect confirmation code, then
+        Auth.confirmSignUp(userName, confirmationCode)
+          .then(data => {
+            console.log(data);
+            dispatch(confirmSuccess());
+            resolve('success');
+          })
+          .catch(err => {
+            console.log(err);
+            dispatch(confirmFailure(err.message));
+            resolve(err.message);
+          })
       /*
             user.confirmRegistration(confirmationCode, true, (err, result) => {
               if (err) {
@@ -120,10 +122,9 @@ export function confirm(userName, confirmationCode) {
               resolve('success')
             })
             */
-    )
-  }
+    );
+  };
 }
-
 
 //https://github.com/aws/aws-amplify/blob/master/packages/aws-amplify/src/Auth/Auth.ts#L261
 export function resend(userName) {
@@ -134,16 +135,14 @@ export function resend(userName) {
   return dispatch => {
     // First dispatch: the app state is updated to inform
     // that the API call is starting.
-    dispatch(resendRequest())
+    dispatch(resendRequest());
 
     const userPool = new CognitoUserPool({
       UserPoolId: config.cognito.USER_POOL_ID,
       ClientId: config.cognito.APP_CLIENT_ID
-    })
+    });
 
-    const user = new CognitoUser({ Username: userName, Pool: userPool })
-
-
+    const user = new CognitoUser({ Username: userName, Pool: userPool });
 
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
@@ -156,19 +155,20 @@ export function resend(userName) {
     // causing a loop of 'Unexpected batch number' errors.
     // https://github.com/facebook/react/issues/6895
     // return 1
-    return new Promise((resolve, reject) =>
-      //https://github.com/aws/aws-amplify/blob/master/packages/aws-amplify/src/Auth/Auth.ts#L261
-      Auth.resendSignUp(userName)
-      .then(data => {
-        console.log(data)
-        dispatch(resendSuccess())
-        resolve('success')
-      })
-      .catch(err => {
-        console.log(err)
-        dispatch(resendFailure(err.message))
-        resolve(err.message)
-      })
+    return new Promise(
+      (resolve, reject) =>
+        //https://github.com/aws/aws-amplify/blob/master/packages/aws-amplify/src/Auth/Auth.ts#L261
+        Auth.resendSignUp(userName)
+          .then(data => {
+            console.log(data);
+            dispatch(resendSuccess());
+            resolve('success');
+          })
+          .catch(err => {
+            console.log(err);
+            dispatch(resendFailure(err.message));
+            resolve(err.message);
+          })
 
       /*
       user.resendConfirmationCode((err, result) => {
@@ -181,6 +181,6 @@ export function resend(userName) {
         resolve('success')
       })
 */
-    )
-  }
+    );
+  };
 }

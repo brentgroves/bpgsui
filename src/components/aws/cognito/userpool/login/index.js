@@ -1,10 +1,18 @@
-import React, { Component } from 'react'
-import { push } from 'react-router-redux'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { Grid, Segment, Header, Icon, Button, Form, Message } from 'semantic-ui-react'
-import shortid from 'shortid'
-import ErrorModal from '../../../../../containers/modal/error'
+import React, { Component } from 'react';
+import { push } from 'react-router-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import {
+  Grid,
+  Segment,
+  Header,
+  Icon,
+  Button,
+  Form,
+  Message
+} from 'semantic-ui-react';
+import shortid from 'shortid';
+import ErrorModal from '../../../../../containers/modal/error';
 
 /*
 follow https://redux.js.org/docs/advanced/AsyncActions.html
@@ -38,112 +46,126 @@ shortid.generate()
 props.showErrorModal
 */
 
-import { validEmail } from '../../../../../modules/api/aws/cognito/userpool/misc'
+import { validEmail } from '../../../../../modules/api/aws/cognito/userpool/misc';
 
 const Login = props => (
-  <div className='fullPage'>
-    {false ? <ErrorModal />
-      :
-      <Grid >
+  <div className="fullPage">
+    {false ? (
+      <ErrorModal />
+    ) : (
+      <Grid>
         <Grid.Row centered>
           <Grid.Column width={6}>
             <Segment inverted>
-              <Header as='h2'>
-                <Icon name='user outline' />
-                <Header.Content>
-              Welcome to the IOT Bridge!
-                </Header.Content>
+              <Header as="h2">
+                <Icon name="user outline" />
+                <Header.Content>Welcome to the IOT Bridge!</Header.Content>
               </Header>
-              <Form
-                inverted
-                key={props.formKey}>
-
+              <Form inverted key={props.formKey}>
                 <Form.Input
                   key={props.emailKey}
-                  id='email'
+                  id="email"
                   value={props.email}
-                  label='Email' placeholder='joe@schmoe.com'
-                  type='text'
+                  label="Email"
+                  placeholder="joe@schmoe.com"
+                  type="text"
                   error={props.emailStatus === 'error'}
-                  onChange={(event) => {
-                    let emailStatus
-                    let formStatus
+                  onChange={event => {
+                    let emailStatus;
+                    let formStatus;
                     if (validEmail(event.target.value)) {
-                      emailStatus = 'success'
+                      emailStatus = 'success';
                     } else {
-                      emailStatus = 'error'
+                      emailStatus = 'error';
                     }
-                    if (props.passwordStatus === 'success' && emailStatus === 'success') {
-                      formStatus = 'success'
+                    if (
+                      props.passwordStatus === 'success' &&
+                      emailStatus === 'success'
+                    ) {
+                      formStatus = 'success';
                     } else {
-                      formStatus = 'error'
+                      formStatus = 'error';
                     }
-                    props.setEmailFormStatus(event.target.value, emailStatus, formStatus)
-                  }
-                  }
-
+                    props.setEmailFormStatus(
+                      event.target.value,
+                      emailStatus,
+                      formStatus
+                    );
+                  }}
                 />
                 <Message
                   success
-                  header='Form Completed'
+                  header="Form Completed"
                   content="You're all signed up for the newslett"
                 />
                 <Form.Input
                   key={props.passwordKey}
-                  id='password'
+                  id="password"
                   value={props.password}
-                  label='Enter Password'
-                  type='password'
+                  label="Enter Password"
+                  type="password"
                   error={props.passwordStatus === 'error'}
-                  onChange={(event) => {
-                    let passwordStatus
-                    let formStatus
+                  onChange={event => {
+                    let passwordStatus;
+                    let formStatus;
                     if (event.target.value.length > 0) {
-                      passwordStatus = 'success'
+                      passwordStatus = 'success';
                     } else {
-                      passwordStatus = 'error'
+                      passwordStatus = 'error';
                     }
-                    if (props.emailStatus === 'success' && passwordStatus === 'success') {
-                      formStatus = 'success'
+                    if (
+                      props.emailStatus === 'success' &&
+                      passwordStatus === 'success'
+                    ) {
+                      formStatus = 'success';
                     } else {
-                      formStatus = 'error'
+                      formStatus = 'error';
                     }
-                    props.setPasswordFormStatus(event.target.value, passwordStatus, formStatus)
-                  }
-                  }
+                    props.setPasswordFormStatus(
+                      event.target.value,
+                      passwordStatus,
+                      formStatus
+                    );
+                  }}
                 />
-                  <div className='formButtons'>
-
-                <Button
-                  type='submit'
-                  key={props.submitKey}
-                  disabled={props.formStatus === 'success' ? false : true }
-                  loading={props.pending}
-                  onClick={ async (event) =>{
-                    let loginResult = await props.login(props.email, props.password)
-                    if (loginResult.return === 'success'){
-                      if(loginResult.primary==='admin'){
-                        alert('admin')
-                      }else{
-                        alert('Not an Admin')
+                <div className="formButtons">
+                  <Button
+                    type="submit"
+                    key={props.submitKey}
+                    disabled={props.formStatus === 'success' ? false : true}
+                    loading={props.pending}
+                    onClick={async event => {
+                      let loginResult = await props.login(
+                        props.email,
+                        props.password
+                      );
+                      if (loginResult.return === 'success') {
+                        if (loginResult.primary === 'admin') {
+                          alert('admin');
+                        } else {
+                          alert('Not an Admin');
+                        }
+                      } else {
+                        props.initErrorModal(
+                          'Login Failed',
+                          loginResult.return,
+                          '/'
+                        );
+                        props.history.push('/error');
                       }
-                    } else {
-                      props.initErrorModal('Login Failed', loginResult.return, '/')
-                      props.history.push('/error')
-                    }
-                  }}>Submit</Button>
-                  </div>
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </div>
               </Form>
-
             </Segment>
           </Grid.Column>
         </Grid.Row>
-
-
       </Grid>
-    }
-    </div>
-)
+    )}
+  </div>
+);
 
 /*
 props.showErrorModal
@@ -292,4 +314,4 @@ props.showErrorModal
                   }
 */
 
-export default Login
+export default Login;

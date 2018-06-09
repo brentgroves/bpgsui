@@ -1,6 +1,6 @@
-import {TopMenuActions as AT} from './actionTypes'
+import { TopMenuActions as AT } from './actionTypes';
 
-import shortid from 'shortid'
+import shortid from 'shortid';
 /*
 
 Handling Actions OF AsyncActions
@@ -20,20 +20,20 @@ const initialState = {
   signupDropdownKey: shortid.generate(),
   signupKey: shortid.generate(),
   confirmKey: shortid.generate()
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case AT.SET_MAIN_AI:
-    return {
-      ...state,
-      mainAI: action.activeItem
-    }
-  case AT.SET_SIGNUP_DROPDOWN_AI:
-    return {
-      ...state,
-      signupDropdownAI: action.activeItem
-    }
+    case AT.SET_MAIN_AI:
+      return {
+        ...state,
+        mainAI: action.activeItem
+      };
+    case AT.SET_SIGNUP_DROPDOWN_AI:
+      return {
+        ...state,
+        signupDropdownAI: action.activeItem
+      };
 
     /*
     case INCREMENT:
@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
       }
 */
 
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};

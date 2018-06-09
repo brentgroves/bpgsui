@@ -1,34 +1,36 @@
-import { CognitoUserPool, CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
-import config from "../config";
+import {
+  CognitoUserPool,
+  CognitoUser,
+  AuthenticationDetails
+} from 'amazon-cognito-identity-js';
+import config from '../config';
 
- export function validateEmail(x) {
-    let atpos = x.indexOf('@')
-    let dotpos = x.lastIndexOf('.')
-    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
-      //  alert("Not a valid e-mail address");
-      return 'error'
-    }
-    return 'success'
+export function validateEmail(x) {
+  let atpos = x.indexOf('@');
+  let dotpos = x.lastIndexOf('.');
+  if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length) {
+    //  alert("Not a valid e-mail address");
+    return 'error';
   }
-
+  return 'success';
+}
 
 export function login(email, password) {
-    const userPool = new CognitoUserPool({
-      UserPoolId: config.cognito.USER_POOL_ID,
-      ClientId: config.cognito.APP_CLIENT_ID
+  const userPool = new CognitoUserPool({
+    UserPoolId: config.cognito.USER_POOL_ID,
+    ClientId: config.cognito.APP_CLIENT_ID
+  });
+  const user = new CognitoUser({ Username: email, Pool: userPool });
+  const authenticationData = { Username: email, Password: password };
+  const authenticationDetails = new AuthenticationDetails(authenticationData);
+
+  return new Promise((resolve, reject) =>
+    user.authenticateUser(authenticationDetails, {
+      onSuccess: result => resolve(user),
+      onFailure: err => reject(err)
     })
-    const user = new CognitoUser({ Username: email, Pool: userPool })
-    const authenticationData = { Username: email, Password: password }
-    const authenticationDetails = new AuthenticationDetails(authenticationData)
-
-    return new Promise((resolve, reject) =>
-      user.authenticateUser(authenticationDetails, {
-        onSuccess: result => resolve(user),
-        onFailure: err => reject(err)
-      })
-    )
-  }
-
+  );
+}
 
 export function signOutUser() {
   const currentUser = getCurrentUser();
@@ -37,8 +39,6 @@ export function signOutUser() {
     currentUser.signOut();
   }
 }
-
-
 
 export async function authUser() {
   const currentUser = getCurrentUser();
@@ -72,4 +72,3 @@ function getCurrentUser() {
   // from local storage
   return userPool.getCurrentUser();
 }
-

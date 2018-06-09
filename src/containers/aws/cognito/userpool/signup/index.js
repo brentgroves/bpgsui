@@ -1,12 +1,12 @@
-import { withRouter } from 'react-router-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Signup from '../../../../../components/aws/cognito/userpool/signup'
-import * as signup from '../../../../../modules/components/aws/cognito/userpool/signup/actionCreators'
-import * as awsSignup from '../../../../../modules/api/aws/cognito/userpool/signup/actionCreators'
-import * as errorModal from '../../../../../modules/components/modal/error/actionCreators'
-import * as infoModal from '../../../../../modules/components/modal/info/actionCreators'
-import { setEmailFormStatus as confSetEmailFormStatus} from '../../../../../modules/components/aws/cognito/userpool/signup/confirm/sms/actionCreators'
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import Signup from '../../../../../components/aws/cognito/userpool/signup';
+import * as signup from '../../../../../modules/components/aws/cognito/userpool/signup/actionCreators';
+import * as awsSignup from '../../../../../modules/api/aws/cognito/userpool/signup/actionCreators';
+import * as errorModal from '../../../../../modules/components/modal/error/actionCreators';
+import * as infoModal from '../../../../../modules/components/modal/info/actionCreators';
+import { setEmailFormStatus as confSetEmailFormStatus } from '../../../../../modules/components/aws/cognito/userpool/signup/confirm/sms/actionCreators';
 
 //react redux material design
 
@@ -42,15 +42,18 @@ const mapStateToProps = state => ({
   totpKey: state.signup.totpKey,
   submitKey: state.signup.submitKey,
   formKey: state.signup.formKey
-})
+});
 
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  ...signup,
-  ...awsSignup,
-  ...errorModal,
-  ...infoModal
-}, dispatch)
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      ...signup,
+      ...awsSignup,
+      ...errorModal,
+      ...infoModal
+    },
+    dispatch
+  );
 
 /*
   gotoTCSbyPlant: () => push('/tcsbyplant'),
@@ -68,7 +71,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 */
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Signup))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Signup)
+);

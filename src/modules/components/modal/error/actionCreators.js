@@ -1,6 +1,4 @@
-import {ErrorModalActions as AT} from './actionTypes'
-
-
+import { ErrorModalActions as AT } from './actionTypes';
 
 export const initErrorModal = (messageHeader, message, next) => {
   return dispatch => {
@@ -9,7 +7,6 @@ export const initErrorModal = (messageHeader, message, next) => {
       messageHeader: messageHeader,
       message: message,
       next: next
-    })
-  }
-}
-
+    });
+  };
+};
