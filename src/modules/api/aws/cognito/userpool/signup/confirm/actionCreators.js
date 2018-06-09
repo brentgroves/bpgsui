@@ -29,7 +29,7 @@ export function confirmSuccess() {
   };
 }
 
-export function confirmFailure(error) {
+export function confirmFailure(error: string) {
   return {
     type: AT.CONFIRM_FAILURE,
     error: error
