@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Segment, Header, Icon, Button, Form, Message,Popup } from 'semantic-ui-react'
+import { Grid, Segment, Header, Icon, Button, Form, Message, Popup } from 'semantic-ui-react'
 import { validEmail } from '../../../../../..//modules/aws/cognito/misc'
 
 /*
@@ -13,9 +13,9 @@ let jsreport = require('jsreport-browser-client-dist')
 jsreport.serverUrl = 'http://localhost:5488'
 */
 
-const ConfirmSignup = props =>(
+const ConfirmSignup = props => (
   <div className='fullPage'>
-      <Grid >
+        <Grid >
           <Grid.Row centered>
             <Grid.Column width={6} >
               <Segment inverted>
@@ -76,75 +76,74 @@ const ConfirmSignup = props =>(
                     }}
                   />
                   <div className='formButtons'>
-  <Popup
-    trigger={
-      <div>
+                    <Popup
+                      trigger={
+                        <div>
+                          <Button
+                            key={props.submitKey}
+                            disabled={props.formStatus === 'success' ? false : true }
+                            onClick={ async (event) =>{
+                              let confirmResult = await props.confirm(props.userName, props.confirmationCode)
+                              if (confirmResult === 'success'){
+                                props.initInfoModal('User Verified', 'User verified. You may now login.','/getacode')
+                                props.history.push('/info')
+                              } else {
+                                props.initErrorModal('Confirm Failed', confirmResult,'/confirmSignup')
+                                props.history.push('/error')
+                              } 
+                            }}>Submit</Button>
+                          </div>
+                        }
+                      content='Send confirmation code.'
+                    
+                    />
+                    
+                    <Popup
+                      trigger={
+                               <div>
+                                  <Button   
+                                    className='formButtonRight'
+                                    key={props.resendKey}
+                                    disabled={((props.emailStatus === 'success') && (props.formStatus !== 'success')) ? false : true }
+                                    onClick={ async (event) =>{
+                                      let resendResult = await props.resend(props.userName)
+                                      if (resendResult === 'success'){
+                                        props.initInfoModal('Code Resent', 'Your confirmation code should arrive shortly.  Please check your email.','/confirmSignup')
+                                        props.history.push('/info')
+                                      } else {
+                                        props.initErrorModal('Resend Failed', resendResult, '/confirmSignup')
+                                        props.history.push('/error')
+                                      } 
+                                    }}>Resend</Button>
+                                </div>
+                              }
+                              content = 'Enter email and remove confirmation code to enable.'
 
-                    <Button
-                      key={props.submitKey}
-                      disabled={props.formStatus === 'success' ? false : true }
-                      onClick={ async (event) =>{
-                        let confirmResult = await props.confirm(props.userName, props.confirmationCode)
-                        if (confirmResult === 'success'){
-                          props.initInfoModal('User Verified', 'User verified. You may now login.','/getacode')
-                          props.history.push('/info')
-                        } else {
-                          props.initErrorModal('Confirm Failed', confirmResult,'/confirmSignup')
-                          props.history.push('/error')
-                        } 
-                      }}>Submit</Button>
-                      </div>
-                    }
-    content='Send confirmation code.'
+                    />
 
-  />
-
-  <Popup
-    trigger={
-      <div>
-                    <Button   
-                    className='formButtonRight'
-                      key={props.resendKey}
-                      disabled={((props.emailStatus === 'success') && (props.formStatus !== 'success')) ? false : true }
-                      onClick={ async (event) =>{
-                        let resendResult = await props.resend(props.userName)
-                        if (resendResult === 'success'){
-                          props.initInfoModal('Code Resent', 'Your confirmation code should arrive shortly.  Please check your email.','/confirmSignup')
-                          props.history.push('/info')
-                        } else {
-                          props.initErrorModal('Resend Failed', resendResult, '/confirmSignup')
-                          props.history.push('/error')
-                        } 
-                      }}>Resend</Button>
-                      </div>
-                    }
-    content='Enter email and remove confirmation code to enable.'
-
-  />
-
-                      </div>
-                </Form>
-                { (props.resend === true) ?
-                  <Message
+  </div >
+  </Form > 
+  {
+    (props.resend === true) ?
+    <Message
                     icon='inbox'
                     header='Confirmation Code'
                     content='Check your email for new confirmation code.'
-                  />
-                  :
-                  <Message
+                  /> :
+      <Message
                     icon='inbox'
                     content='If you have not received confirmation code within 15 minutes press 
                       resend otherwise press submit.'
                   />
-                }
-              </Segment>
-            </Grid.Column>
-          </Grid.Row>
-      </Grid>
-      </div>
+  } 
+  </Segment> 
+  </Grid.Column> 
+  </Grid.Row> 
+  </Grid> 
+  </div>
 
-    )
+)
 
 export default ConfirmSignup
 /*                      disabled={((props.emailStatus === 'success') && (props.confirmationCodeStatus !== 'success')) ? false : true }
-*/
+ */

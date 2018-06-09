@@ -115,9 +115,9 @@ amazon-cognito-identity-js@^1.21.0:
     aws-sdk "2.177.0"
     js-cookie "^2.1.4"
 
-amazon-cognito-identity-js@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-2.0.3.tgz#38fb50f9c509be6d4aba491f8a901d8dd45f3a13"
+amazon-cognito-identity-js@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-2.0.9.tgz#5a8fd6e97c513d753c14cc9e17091b105fb65d22"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -364,22 +364,22 @@ autoprefixer@^6.3.1:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-aws-amplify-react@^0.1.46:
-  version "0.1.46"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-0.1.46.tgz#ff8b720eb41006ca52ef2910bfac62ce652ed291"
+aws-amplify-react@^0.1.47:
+  version "0.1.50"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react/-/aws-amplify-react-0.1.50.tgz#e2fbeff9506125e18f7e6bc0b05b5134dd404580"
   dependencies:
-    aws-amplify "^0.4.x"
+    aws-amplify "^0.4.4"
     qrcode.react "^0.8.0"
     regenerator-runtime "^0.11.1"
 
-aws-amplify@^0.4.0, aws-amplify@^0.4.x:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.4.0.tgz#d0fc1f86037811014c229ece0ec7fa7a16034c9f"
+aws-amplify@^0.4.1, aws-amplify@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.4.4.tgz#b1839c07dd2bcc93adbf9c53050650551154db85"
   dependencies:
     "@types/paho-mqtt" "^1.0.3"
     "@types/zen-observable" "^0.5.3"
     amazon-cognito-auth-js "^1.1.9"
-    amazon-cognito-identity-js "^2.0.0"
+    amazon-cognito-identity-js "^2.0.9"
     aws-sdk "2.198.0"
     axios "^0.17.0"
     graphql "0.13.0"
@@ -2984,6 +2984,10 @@ flat-cache@^1.2.1:
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
+
+flow-bin@^0.74.0:
+  version "0.74.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.74.0.tgz#8017bb00efb37cbe8d81fbb7f464038bde06adc9"
 
 follow-redirects@^1.2.5:
   version "1.4.1"

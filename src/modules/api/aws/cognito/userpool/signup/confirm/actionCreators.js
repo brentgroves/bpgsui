@@ -1,10 +1,18 @@
-
-import {AwsConfirmActions as AT} from './actionTypes'
+// @flow
+import { AwsConfirmActions as AT } from './actionTypes'
 import { CognitoUserPool, CognitoUser, CognitoUserAttribute, AuthenticationDetails } from 'amazon-cognito-identity-js'
 import { Auth } from 'aws-amplify';
 
 import config from '../../../../../../../config'
 
+function square(x: ? number) {
+  if (x) {
+    return x * x;
+  }
+  else {
+    return NaN;
+  }
+}
 export function confirmRequest() {
   return {
     type: AT.CONFIRM_REQUEST
@@ -82,36 +90,36 @@ export function confirm(userName, confirmationCode) {
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-   // Do not use catch, because that will also catch
+    // Do not use catch, because that will also catch
     // any errors in the dispatch and resulting render,
     // causing a loop of 'Unexpected batch number' errors.
     // https://github.com/facebook/react/issues/6895
-   // return 1
+    // return 1
     return new Promise((resolve, reject) =>
-// https://aws.github.io/aws-amplify/media/authentication_guide.html#sign-up
-// Collect confirmation code, then
-    Auth.confirmSignUp(userName, confirmationCode)
-    .then(data => {
-      console.log(data)
-      dispatch(confirmSuccess())
-      resolve('success')
-    })
-    .catch(err => {
-      console.log(err)
-      dispatch(confirmFailure(err.message))
-      resolve(err.message)
-    })
-/*
-      user.confirmRegistration(confirmationCode, true, (err, result) => {
-        if (err) {
-          dispatch(confirmFailure(err.message))
-          resolve(err.message)
-          return
-        }
+      // https://aws.github.io/aws-amplify/media/authentication_guide.html#sign-up
+      // Collect confirmation code, then
+      Auth.confirmSignUp(userName, confirmationCode)
+      .then(data => {
+        console.log(data)
         dispatch(confirmSuccess())
         resolve('success')
       })
-      */
+      .catch(err => {
+        console.log(err)
+        dispatch(confirmFailure(err.message))
+        resolve(err.message)
+      })
+      /*
+            user.confirmRegistration(confirmationCode, true, (err, result) => {
+              if (err) {
+                dispatch(confirmFailure(err.message))
+                resolve(err.message)
+                return
+              }
+              dispatch(confirmSuccess())
+              resolve('success')
+            })
+            */
     )
   }
 }
@@ -143,13 +151,13 @@ export function resend(userName) {
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-   // Do not use catch, because that will also catch
+    // Do not use catch, because that will also catch
     // any errors in the dispatch and resulting render,
     // causing a loop of 'Unexpected batch number' errors.
     // https://github.com/facebook/react/issues/6895
-   // return 1
+    // return 1
     return new Promise((resolve, reject) =>
-//https://github.com/aws/aws-amplify/blob/master/packages/aws-amplify/src/Auth/Auth.ts#L261
+      //https://github.com/aws/aws-amplify/blob/master/packages/aws-amplify/src/Auth/Auth.ts#L261
       Auth.resendSignUp(userName)
       .then(data => {
         console.log(data)
@@ -162,7 +170,7 @@ export function resend(userName) {
         resolve(err.message)
       })
 
-    /*
+      /*
       user.resendConfirmationCode((err, result) => {
         if (err) {
           dispatch(resendFailure(err.message))
@@ -172,11 +180,7 @@ export function resend(userName) {
         dispatch(resendSuccess())
         resolve('success')
       })
-*/      
+*/
     )
   }
 }
-
-
-
-
