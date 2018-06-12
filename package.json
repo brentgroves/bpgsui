@@ -7,6 +7,7 @@
     "aws-amplify": "^0.4.1",
     "aws-amplify-react": "^0.1.47",
     "dateformat": "^3.0.2",
+    "flow-bin": "^0.74.0",
     "history": "^4.7.2",
     "husky": "^0.14.3",
     "iframe": "^1.0.0",
@@ -34,10 +35,10 @@
     "shortid": "^2.2.8"
   },
   "lint-staged": {
-   "src/**/*.{js,jsx,json,css}": [
-   "prettier --single-quote --write",
-   "git add"
-   ]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "scripts": {
     "precommit": "lint-staged",
@@ -48,6 +49,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "flow-bin": "^0.74.0"
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-plugin-flowtype": "^2.49.3"
   }
 }

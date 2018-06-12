@@ -10,13 +10,6 @@ import { Auth } from 'aws-amplify';
 
 import config from '../../../../../../../config';
 
-function square(x: ?number) {
-  if (x) {
-    return x * x;
-  } else {
-    return NaN;
-  }
-}
 export function confirmRequest() {
   return {
     type: AT.CONFIRM_REQUEST
