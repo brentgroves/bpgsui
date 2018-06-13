@@ -25,7 +25,7 @@ export function signupSuccess() {
 export function signupFailure(error) {
   return {
     type: AT.SIGNUP_FAILURE,
-    error: error
+    error
   };
 }
 
@@ -33,6 +33,7 @@ export function signupFailure(error) {
 https://redux.js.org/docs/advanced/AsyncActions.html
  an action creator can return a function instead of an action object.
  This way, the action creator becomes a thunk.
+
  When an action creator returns a function, that function will get executed by the Redux Thunk middleware.
  This function doesn't need to be pure; it is thus allowed to have side effects, including executing asynchronous API calls.
  The function can also dispatch actions—like those synchronous actions we defined earlier.
