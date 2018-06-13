@@ -28,7 +28,7 @@ import config from '../config'
 import './Signup.css'
 
 let jsreport = require('jsreport-browser-client-dist')
-jsreport.serverUrl = 'http://localhost:5488'
+jsreport.serverUrl = 'http://localhost:5488' test
 */
 
 const Signup = props => (
