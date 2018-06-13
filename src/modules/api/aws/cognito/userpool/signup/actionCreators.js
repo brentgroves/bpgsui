@@ -1,3 +1,4 @@
+// @flow
 import { AwsSignupActions as AT } from './actionTypes';
 import {
   CognitoUserPool,
@@ -7,7 +8,7 @@ import {
 } from 'amazon-cognito-identity-js';
 import { Auth } from 'aws-amplify';
 
-//import config from '../../../../config'
+// import config from '../../../../config'
 
 export function signupRequest() {
   return {
@@ -24,16 +25,17 @@ export function signupSuccess() {
 export function signupFailure(error) {
   return {
     type: AT.SIGNUP_FAILURE,
+
     error: error
   };
 }
 
 /*
 https://redux.js.org/docs/advanced/AsyncActions.html
- an action creator can return a function instead of an action object. 
+ an action creator can return a function instead of an action object.
  This way, the action creator becomes a thunk.
- When an action creator returns a function, that function will get executed by the Redux Thunk middleware. 
- This function doesn't need to be pure; it is thus allowed to have side effects, including executing asynchronous API calls. 
+ When an action creator returns a function, that function will get executed by the Redux Thunk middleware.
+ This function doesn't need to be pure; it is thus allowed to have side effects, including executing asynchronous API calls.
  The function can also dispatch actions—like those synchronous actions we defined earlier.
 */
 
@@ -42,7 +44,7 @@ https://redux.js.org/docs/advanced/AsyncActions.html
 // store.dispatch(fetchPosts('reactjs'))
 
 //https://github.com/aws/aws-amplify/blob/257a41a/packages/aws-amplify/src/Auth/Auth.ts#L176
-export function signup(params: object) {
+export function signup(params: Object) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
