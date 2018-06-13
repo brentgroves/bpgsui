@@ -1,31 +1,31 @@
 // @flow
-import { AwsSignupActions as AT } from './actionTypes';
+import {AwsSignupActions as AT} from './actionTypes';
 import {
   CognitoUserPool,
   CognitoUser,
   CognitoUserAttribute,
-  AuthenticationDetails
+  AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
-import { Auth } from 'aws-amplify';
+import {Auth} from 'aws-amplify';
 
 // import config from '../../../../config'
 
 export function signupRequest() {
   return {
-    type: AT.SIGNUP_REQUEST
+    type: AT.SIGNUP_REQUEST,
   };
 }
 
 export function signupSuccess() {
   return {
-    type: AT.SIGNUP_SUCCESS
+    type: AT.SIGNUP_SUCCESS,
   };
 }
 
 export function signupFailure(error) {
   return {
     type: AT.SIGNUP_FAILURE,
-    error
+    error,
   };
 }
 
@@ -43,14 +43,14 @@ https://redux.js.org/docs/advanced/AsyncActions.html
 // Though its insides are different, you would use it just like any other action creator:
 // store.dispatch(fetchPosts('reactjs'))
 
-//https://github.com/aws/aws-amplify/blob/257a41a/packages/aws-amplify/src/Auth/Auth.ts#L176
+// https://github.com/aws/aws-amplify/blob/257a41a/packages/aws-amplify/src/Auth/Auth.ts#L176
 export function signup(params: Object) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
 
   return dispatch => {
-    // First dispatch: the app state is updated to inform
+    // First dispatch: te app state is updated to inform
     // that the API call is starting.
     dispatch(signupRequest());
 
@@ -67,7 +67,7 @@ export function signup(params: Object) {
     // return 1
     return new Promise(
       (resolve, reject) =>
-        //props.firstName,props.lastName,props.userName,props.email, props.password
+        // props.firstName,props.lastName,props.userName,props.email, props.password
         Auth.signUp(params)
           .then(data => {
             console.log(data);
@@ -76,7 +76,7 @@ export function signup(params: Object) {
           .catch(err => {
             console.log(err);
             resolve(err.message);
-          })
+          }),
       /*
       userPool.signUp(email, password, attributeList, null, (err, result) => {
         if (err) {

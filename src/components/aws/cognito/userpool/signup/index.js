@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Grid,
   Radio,
@@ -9,14 +9,14 @@ import {
   Icon,
   Button,
   Form,
-  Checkbox
+  Checkbox,
 } from 'semantic-ui-react';
 import {
   validEmail,
   validUserName,
   validFirstName,
   validLastName,
-  validPhoneNumber
+  validPhoneNumber,
 } from '../../../../../modules/api/aws/cognito/userpool/misc';
 import MaskedInput from 'react-text-mask';
 
@@ -75,7 +75,7 @@ const Signup = props => (
                   props.setFirstNameFormStatus(
                     event.target.value,
                     firstNameStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -112,7 +112,7 @@ const Signup = props => (
                   props.setLastNameFormStatus(
                     event.target.value,
                     lastNameStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -149,7 +149,7 @@ const Signup = props => (
                   props.setUserNameFormStatus(
                     event.target.value,
                     userNameStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -192,7 +192,7 @@ const Signup = props => (
                   props.setPasswordFormStatus(
                     event.target.value,
                     passwordStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -227,7 +227,7 @@ const Signup = props => (
                   props.setConfirmPasswordFormStatus(
                     event.target.value,
                     confirmPasswordStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -264,7 +264,7 @@ const Signup = props => (
                   props.setEmailFormStatus(
                     event.target.value,
                     emailStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -295,15 +295,15 @@ const Signup = props => (
                       /\d/,
                       /\d/,
                       /\d/,
-                      /\d/
+                      /\d/,
                     ]}
                     placeholder="+1(123)456-7890"
                     onChange={event => {
                       let phoneNumberStatus;
                       let formStatus;
-                      let valueWithoutMaskChars = event.target.value.replace(
+                      const valueWithoutMaskChars = event.target.value.replace(
                         /[^0-9+]/g,
-                        ''
+                        '',
                       );
                       if (validPhoneNumber(valueWithoutMaskChars)) {
                         phoneNumberStatus = 'success';
@@ -326,7 +326,7 @@ const Signup = props => (
                       props.setPhoneNumberFormStatus(
                         valueWithoutMaskChars,
                         phoneNumberStatus,
-                        formStatus
+                        formStatus,
                       );
                     }}
                   />
@@ -395,10 +395,10 @@ const Signup = props => (
                 <Button
                   type="submit"
                   key={props.submitKey}
-                  disabled={props.formStatus === 'success' ? false : true}
+                  disabled={props.formStatus !== 'success'}
                   loading={props.pending}
                   onClick={async event => {
-                    let params = {
+                    const params = {
                       username: props.userName,
                       password: props.password,
                       attributes: {
@@ -406,32 +406,31 @@ const Signup = props => (
                         phone_number: props.phoneNumber,
                         'custom:firstName': props.firstName,
                         'custom:lastName': props.lastName,
-                        'custom:primary': props.primary
-                      }
+                        'custom:primary': props.primary,
+                      },
                     };
-                    let signupResult = await props.signup(params);
+                    const signupResult = await props.signup(params);
                     if (props.mfa === 'sms') {
                       if (signupResult === 'success') {
                         props.initInfoModal(
                           'Signup Succeeded',
                           'Your confirmation code should arrive shortly.  Please check your email.',
-                          '/confirmSignup'
+                          '/confirmSignup',
                         );
                         props.history.push('/info');
                       } else {
                         props.initErrorModal(
                           'Signup Failed',
                           signupResult,
-                          '/signup'
+                          '/signup',
                         );
                         props.history.push('/error');
                       }
                     } else {
-                      //totp
+                      // totp
                       props.history.push('/getACode');
                     }
-                  }}
-                >
+                  }}>
                   Submit
                 </Button>
               </div>
