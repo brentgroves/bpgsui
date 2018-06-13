@@ -25,7 +25,6 @@ export function signupSuccess() {
 export function signupFailure(error) {
   return {
     type: AT.SIGNUP_FAILURE,
-
     error: error
   };
 }
