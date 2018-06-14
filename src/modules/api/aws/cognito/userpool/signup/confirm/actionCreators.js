@@ -1,59 +1,59 @@
 // @flow
-import { AwsConfirmActions as AT } from './actionTypes';
+import {AwsConfirmActions as AT} from './actionTypes';
 import {
   CognitoUserPool,
   CognitoUser,
   CognitoUserAttribute,
-  AuthenticationDetails
+  AuthenticationDetails,
 } from 'amazon-cognito-identity-js';
-import { Auth } from 'aws-amplify';
+import {Auth} from 'aws-amplify';
 
 import config from '../../../../../../../config';
 
 export function confirmRequest() {
   return {
-    type: AT.CONFIRM_REQUEST
+    type: AT.CONFIRM_REQUEST,
   };
 }
 
 export function confirmSuccess() {
   return {
-    type: AT.CONFIRM_SUCCESS
+    type: AT.CONFIRM_SUCCESS,
   };
 }
 
 export function confirmFailure(error: string) {
   return {
     type: AT.CONFIRM_FAILURE,
-    error: error
+    error: error,
   };
 }
 
 export function resendRequest() {
   return {
-    type: AT.RESEND_REQUEST
+    type: AT.RESEND_REQUEST,
   };
 }
 
 export function resendSuccess() {
   return {
-    type: AT.RESEND_SUCCESS
+    type: AT.RESEND_SUCCESS,
   };
 }
 
-export function resendFailure(error) {
+export function resendFailure(error: string) {
   return {
     type: AT.RESEND_FAILURE,
-    error: error
+    error: error,
   };
 }
 
 /*
 https://redux.js.org/docs/advanced/AsyncActions.html
- an action creator can return a function instead of an action object. 
+ an action creator can return a function instead of an action object.
  This way, the action creator becomes a thunk.
- When an action creator returns a function, that function will get executed by the Redux Thunk middleware. 
- This function doesn't need to be pure; it is thus allowed to have side effects, including executing asynchronous API calls. 
+ When an action creator returns a function, that function will get executed by the Redux Thunk middleware.
+ This function doesn't need to be pure; it is thus allowed to have side effects, including executing asynchronous API calls.
  The function can also dispatch actions—like those synchronous actions we defined earlier.
 */
 
@@ -61,7 +61,7 @@ https://redux.js.org/docs/advanced/AsyncActions.html
 // Though its insides are different, you would use it just like any other action creator:
 // store.dispatch(fetchPosts('reactjs'))
 
-export function confirm(userName, confirmationCode) {
+export function confirm(userName: string, confirmationCode) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
@@ -73,10 +73,10 @@ export function confirm(userName, confirmationCode) {
 
     const userPool = new CognitoUserPool({
       UserPoolId: config.cognito.USER_POOL_ID,
-      ClientId: config.cognito.APP_CLIENT_ID
+      ClientId: config.cognito.APP_CLIENT_ID,
     });
 
-    const user = new CognitoUser({ Username: userName, Pool: userPool });
+    const user = new CognitoUser({Username: userName, Pool: userPool});
 
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
@@ -103,7 +103,7 @@ export function confirm(userName, confirmationCode) {
             console.log(err);
             dispatch(confirmFailure(err.message));
             resolve(err.message);
-          })
+          }),
       /*
             user.confirmRegistration(confirmationCode, true, (err, result) => {
               if (err) {
@@ -120,7 +120,7 @@ export function confirm(userName, confirmationCode) {
 }
 
 //https://github.com/aws/aws-amplify/blob/master/packages/aws-amplify/src/Auth/Auth.ts#L261
-export function resend(userName) {
+export function resend(userName: string) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
@@ -132,10 +132,10 @@ export function resend(userName) {
 
     const userPool = new CognitoUserPool({
       UserPoolId: config.cognito.USER_POOL_ID,
-      ClientId: config.cognito.APP_CLIENT_ID
+      ClientId: config.cognito.APP_CLIENT_ID,
     });
 
-    const user = new CognitoUser({ Username: userName, Pool: userPool });
+    const user = new CognitoUser({Username: userName, Pool: userPool});
 
     // The function called by the thunk middleware can return a value,
     // that is passed on as the return value of the dispatch method.
@@ -161,7 +161,7 @@ export function resend(userName) {
             console.log(err);
             dispatch(resendFailure(err.message));
             resolve(err.message);
-          })
+          }),
 
       /*
       user.resendConfirmationCode((err, result) => {

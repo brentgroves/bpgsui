@@ -22,13 +22,12 @@ export function signupSuccess() {
   };
 }
 
-export function signupFailure(error) {
+export function signupFailure(error: String) {
   return {
     type: AT.SIGNUP_FAILURE,
     error,
   };
 }
-
 /*
 https://redux.js.org/docs/advanced/AsyncActions.html
  an action creator can return a function instead of an action object.
@@ -44,7 +43,7 @@ https://redux.js.org/docs/advanced/AsyncActions.html
 // store.dispatch(fetchPosts('reactjs'))
 
 // https://github.com/aws/aws-amplify/blob/257a41a/packages/aws-amplify/src/Auth/Auth.ts#L176
-export function signup(params: Object) {
+export function signup(params: t) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
