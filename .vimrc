@@ -1,4 +1,9 @@
-nnoremap <C-J> <C-W><C-W>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
