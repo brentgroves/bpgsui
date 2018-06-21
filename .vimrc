@@ -26,7 +26,7 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'https://github.com/wesQ3/vim-windowswap'
 Plug 'w0rp/ale'
 Plug 'vim-airline/vim-airline'
-
+Plug 'vim-airline/vim-airline-themes'
 
 " Initialize plugin system
 call plug#end()
@@ -43,5 +43,3 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeShowHidden=1
-
-set statusline+=%F
