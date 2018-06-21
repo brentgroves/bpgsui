@@ -25,6 +25,9 @@ Plug 'prettier/vim-prettier', {
 Plug 'chrisbra/NrrwRgn'
 Plug 'https://github.com/wesQ3/vim-windowswap'
 Plug 'w0rp/ale'
+Plug 'vim-airline/vim-airline'
+
+
 " Initialize plugin system
 call plug#end()
 execute pathogen#infect()
@@ -39,3 +42,6 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+let NERDTreeShowHidden=1
+
+set statusline+=%F
