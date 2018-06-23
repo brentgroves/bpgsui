@@ -12,19 +12,19 @@ import {
 } from './actionTypes'
 */
 
-import { SignupActions as AT } from './actionTypes';
+import {SignupActions as AT} from './actionTypes';
 
 export const setFirstNameFormStatus = (
   firstName,
   firstNameStatus,
-  formStatus
+  formStatus,
 ) => {
   return dispatch => {
     dispatch({
       type: AT.SET_FIRSTNAME_FORM_STATUS,
       firstName: firstName,
       firstNameStatus: firstNameStatus,
-      formStatus: formStatus
+      formStatus: formStatus,
     });
   };
 };
@@ -35,21 +35,21 @@ export const setLastNameFormStatus = (lastName, lastNameStatus, formStatus) => {
       type: AT.SET_LASTNAME_FORM_STATUS,
       lastName: lastName,
       lastNameStatus: lastNameStatus,
-      formStatus: formStatus
+      formStatus: formStatus,
     });
   };
 };
 export const setPhoneNumberFormStatus = (
   phoneNumber,
   phoneNumberStatus,
-  formStatus
+  formStatus,
 ) => {
   return dispatch => {
     dispatch({
       type: AT.SET_PHONENUMBER_FORM_STATUS,
       phoneNumber: phoneNumber,
       phoneNumberStatus: phoneNumberStatus,
-      formStatus: formStatus
+      formStatus: formStatus,
     });
   };
 };
@@ -60,7 +60,7 @@ export const setUserNameFormStatus = (userName, userNameStatus, formStatus) => {
       type: AT.SET_USERNAME_FORM_STATUS,
       userName: userName,
       userNameStatus: userNameStatus,
-      formStatus: formStatus
+      formStatus: formStatus,
     });
   };
 };
@@ -71,7 +71,7 @@ export const setEmailFormStatus = (email, emailStatus, formStatus) => {
       type: AT.SET_EMAIL_FORM_STATUS,
       email: email,
       emailStatus: emailStatus,
-      formStatus: formStatus
+      formStatus: formStatus,
     });
   };
 };
@@ -81,20 +81,20 @@ export const setPasswordFormStatus = (password, passwordStatus, formStatus) => {
     type: AT.SET_PASSWORD_FORM_STATUS,
     password: password,
     passwordStatus: passwordStatus,
-    formStatus: formStatus
+    formStatus: formStatus,
   };
 };
 
 export const setConfirmPasswordFormStatus = (
   confirmPassword,
   confirmPasswordStatus,
-  formStatus
+  formStatus,
 ) => {
   return {
     type: AT.SET_CONFIRM_PASSWORD_FORM_STATUS,
     confirmPassword: confirmPassword,
     confirmPasswordStatus: confirmPasswordStatus,
-    formStatus: formStatus
+    formStatus: formStatus,
   };
 };
 
@@ -102,6 +102,6 @@ export const setMFAFormStatus = (mfa, formStatus) => {
   return {
     type: AT.SET_MFA_FORM_STATUS,
     mfa: mfa,
-    formStatus: formStatus
+    formStatus: formStatus,
   };
 };

@@ -1,12 +1,17 @@
 {
     "env": {
-        "browser": true,
+        "node": true,
         "es6": true
     },
     "extends": [
-	"eslint:recommended",
+	"standard",	    
+	"plugin:flowtype/recommended",
+        "flowtype-essential",	
 	"plugin:react/recommended",
-	"prettier"
+	"prettier",
+	"prettier/flowtype",
+	"prettier/react",
+	"prettier/standard"
     ],
     "parserOptions": {
 	"ecmaVersion":6,
@@ -17,24 +22,12 @@
         }
     },
     "plugins": [
+	"flowtype",    
         "react",
-	"prettier"
+	"prettier",
+	"standard"
     ],
     "rules": {
-	"prettier/prettier": "error",
-	"react/jsx-uses-react": "error",
-	"react/jsx-uses-vars": "error",
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+	"prettier/prettier": "error"
     }
 }
