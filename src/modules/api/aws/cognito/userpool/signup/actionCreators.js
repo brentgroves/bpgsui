@@ -22,7 +22,7 @@ export function signupSuccess() {
   };
 }
 
-export function signupFailure(error: String) {
+export function signupFailure(error: string) {
   return {
     type: AT.SIGNUP_FAILURE,
     error,
@@ -43,7 +43,7 @@ https://redux.js.org/docs/advanced/AsyncActions.html
 // store.dispatch(fetchPosts('reactjs'))
 
 // https://github.com/aws/aws-amplify/blob/257a41a/packages/aws-amplify/src/Auth/Auth.ts#L176
-export function signup(params: t) {
+export function signup(params: string) {
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
