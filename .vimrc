@@ -3,8 +3,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 nnoremap <C-g> <C-w>=
-
-
 "Normalize all split sizes, which is very handy when resizing terminal
 "ctrl + w =
 
