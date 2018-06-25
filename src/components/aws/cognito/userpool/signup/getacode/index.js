@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { push } from 'react-router-redux';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {push} from 'react-router-redux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {
   Grid,
   Segment,
@@ -9,12 +9,12 @@ import {
   Icon,
   Button,
   Form,
-  Message
+  Message,
 } from 'semantic-ui-react';
 import shortid from 'shortid';
 import ErrorModal from '../../../../../containers/modal/error';
 
-import { validEmail } from '../../../../../modules/api/aws/cognito/userpool/misc';
+import {validEmail} from '../../../../../modules/api/aws/cognito/userpool/misc';
 
 const GetACode = props => (
   <div className="fullPage">
@@ -54,7 +54,7 @@ const GetACode = props => (
                   props.setUserNameFormStatus(
                     event.target.value,
                     userNameStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -84,7 +84,7 @@ const GetACode = props => (
                   props.setPasswordFormStatus(
                     event.target.value,
                     passwordStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -94,8 +94,7 @@ const GetACode = props => (
                   key={props.backKey}
                   disabled={false}
                   loading={false}
-                  onClick={event => props.history.push('/signup')}
-                >
+                  onClick={event => props.history.push('/signup')}>
                   Back
                 </Button>
                 <Button
@@ -106,7 +105,7 @@ const GetACode = props => (
                   onClick={async event => {
                     let aCodeResult = await props.getACode(
                       props.userName,
-                      props.password
+                      props.password,
                     );
                     if (aCodeResult.status === 'success') {
                       props.history.push('/dispACode');
@@ -114,12 +113,11 @@ const GetACode = props => (
                       props.initErrorModal(
                         'Get Authentication Code Failed',
                         aCodeResult.return,
-                        '/'
+                        '/',
                       );
                       props.history.push('/error');
                     }
-                  }}
-                >
+                  }}>
                   Submit
                 </Button>
               </div>
@@ -278,4 +276,4 @@ props.showErrorModal
                   }
 */
 
-export default Login;
+export default GetACode;

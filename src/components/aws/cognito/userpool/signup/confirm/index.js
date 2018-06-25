@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Grid,
   Segment,
@@ -7,9 +7,9 @@ import {
   Button,
   Form,
   Message,
-  Popup
+  Popup,
 } from 'semantic-ui-react';
-import { validEmail } from '../../../../../..//modules/aws/cognito/misc';
+import {validEmail} from '../../../../../../../modules/aws/cognito/misc';
 
 /*
 import {
@@ -60,7 +60,7 @@ const ConfirmSignup = props => (
                   props.setEmailFormStatus(
                     event.target.value,
                     emailStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -88,7 +88,7 @@ const ConfirmSignup = props => (
                   props.setConfirmationCodeFormStatus(
                     event.target.value,
                     confirmationCodeStatus,
-                    formStatus
+                    formStatus,
                   );
                 }}
               />
@@ -102,25 +102,24 @@ const ConfirmSignup = props => (
                         onClick={async event => {
                           let confirmResult = await props.confirm(
                             props.userName,
-                            props.confirmationCode
+                            props.confirmationCode,
                           );
                           if (confirmResult === 'success') {
                             props.initInfoModal(
                               'User Verified',
                               'User verified. You may now login.',
-                              '/getacode'
+                              '/getacode',
                             );
                             props.history.push('/info');
                           } else {
                             props.initErrorModal(
                               'Confirm Failed',
                               confirmResult,
-                              '/confirmSignup'
+                              '/confirmSignup',
                             );
                             props.history.push('/error');
                           }
-                        }}
-                      >
+                        }}>
                         Submit
                       </Button>
                     </div>
@@ -146,19 +145,18 @@ const ConfirmSignup = props => (
                             props.initInfoModal(
                               'Code Resent',
                               'Your confirmation code should arrive shortly.  Please check your email.',
-                              '/confirmSignup'
+                              '/confirmSignup',
                             );
                             props.history.push('/info');
                           } else {
                             props.initErrorModal(
                               'Resend Failed',
                               resendResult,
-                              '/confirmSignup'
+                              '/confirmSignup',
                             );
                             props.history.push('/error');
                           }
-                        }}
-                      >
+                        }}>
                         Resend
                       </Button>
                     </div>
