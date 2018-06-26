@@ -428,7 +428,21 @@ const Signup = props => (
                       }
                     } else {
                       // totp
-                      props.history.push('/getACode');
+                      if (signupResult === 'success') {
+                        const getACode = await props.getACode(
+                          props.userName,
+                          props.password,
+                        );
+                        const signupResult = await props.signup(params);
+                        props.history.push('/dispACode');
+                      } else {
+                        props.initErrorModal(
+                          'Signup Failed',
+                          signupResult,
+                          '/signup',
+                        );
+                        props.history.push('/error');
+                      }
                     }
                   }}>
                   Submit
@@ -439,7 +453,6 @@ const Signup = props => (
         </Grid.Column>
       </Grid.Row>
     </Grid>
-    }
   </div>
 );
 

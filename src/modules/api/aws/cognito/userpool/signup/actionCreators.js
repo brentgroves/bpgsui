@@ -70,17 +70,18 @@ export function signup(params: string) {
         Auth.signUp(params)
           .then(data => {
             console.log(data);
+            dispatch(signupSuccess());
             resolve('success');
           })
           .catch(err => {
             console.log(err);
+            dispatch(signupFailure(err.message));
             resolve(err.message);
           }),
       /*
       userPool.signUp(email, password, attributeList, null, (err, result) => {
         if (err) {
-          dispatch(signupFailure(err.message))
-          resolve(err.message)
+         resolve(err.message)
           return
         }
         dispatch(signupSuccess())
