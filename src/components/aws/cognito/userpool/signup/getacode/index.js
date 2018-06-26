@@ -12,9 +12,9 @@ import {
   Message,
 } from 'semantic-ui-react';
 import shortid from 'shortid';
-import ErrorModal from '../../../../../containers/modal/error';
+import ErrorModal from '../../../../../../containers/modal/error';
 
-import {validEmail} from '../../../../../modules/api/aws/cognito/userpool/misc';
+import {validEmail} from '../../../../../../modules/api/aws/cognito/userpool/misc';
 
 const GetACode = props => (
   <div className="fullPage">
