@@ -9,7 +9,7 @@ import {
   Message,
   Popup,
 } from 'semantic-ui-react';
-import {validEmail} from '../../../../../../../modules/aws/cognito/misc';
+import {validEmail} from '../../../../../../modules/api/aws/cognito/userpool/misc';
 
 /*
 import {
