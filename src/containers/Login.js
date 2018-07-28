@@ -1,5 +1,7 @@
 // @format
 import React, {Component} from 'react';
+sdfsdaf;
+
 import {withRouter} from 'react-router-dom';
 import {
   Grid,
@@ -72,7 +74,7 @@ class Login extends Component {
   }
 
   // cant combine change functions because of async nature of setState
-  emailChange = event => {
+  emailChange(event) {
     let emailStatus = this.validateEmail(event.target.value);
     this.setState({
       [event.target.id]: event.target.value,
@@ -86,9 +88,9 @@ class Login extends Component {
     this.setState({
       formStatus: formStatus,
     }); // async so be careful
-  };
+  }
 
-  passwordChange = event => {
+  passwordChange(event) {
     let passwordStatus;
     if (event.target.value.length > 0) {
       passwordStatus = 'success';
@@ -108,7 +110,7 @@ class Login extends Component {
     this.setState({
       formStatus: formStatus,
     }); // async so be careful
-  };
+  }
 
   login(email, password) {
     const userPool = new CognitoUserPool({
@@ -127,7 +129,7 @@ class Login extends Component {
     );
   }
 
-  handleSubmit = async event => {
+  async handleSubmit(event) {
     event.preventDefault();
     this.setState({loading: true});
     let thisLv1 = this;
@@ -200,7 +202,7 @@ class Login extends Component {
           modalMessage: e.message,
         });
       });
-  };
+  }
 
   render() {
     const {

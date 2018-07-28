@@ -53,12 +53,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" post install (yarn install | npm install) then load plugin only for editing
-" supported files
-Plug 'prettier/vim-prettier', {
-   \ 'do': 'yarn install',
-     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json','graphql', 'markdown', 'vue'] }
-
 Plug 'chrisbra/NrrwRgn'
 Plug 'https://github.com/wesQ3/vim-windowswap'
 Plug 'w0rp/ale'
@@ -83,6 +77,10 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let NERDTreeShowHidden=1
 set laststatus=2
+let g:ale_fixers = {
+\   'javascript': ['prettier','eslint'],
+\}
+
 let g:lightline = {
       \ 'component_function': {
       \   'filename': 'LightLineFilename'
